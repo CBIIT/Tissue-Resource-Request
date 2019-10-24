@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="task" label="Tissue Resource Request" max_length="40" name="x_naci_tissue_requ_tissue_resource_request" type="collection">
+        <element label="Approval Action" max_length="100" name="approval_action" type="string"/>
+        <element label="Local Staff" max_length="32" name="local_staff" reference="sys_user" type="reference"/>
+        <element label="Principal Investigator" max_length="32" name="principal_investigator" reference="sys_user" type="reference"/>
+        <element label="Stage" max_length="100" name="stage" type="string"/>
+        <element label="Submitted By" max_length="32" name="submitted_by" reference="sys_user" type="reference"/>
+        <element label="Supervisor" max_length="32" name="supervisor" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="principal_investigator"/>
+        </index>
+        <index name="index2">
+            <element name="local_staff"/>
+        </index>
+        <index name="index3">
+            <element name="submitted_by"/>
+        </index>
+        <index name="index4">
+            <element name="supervisor"/>
+        </index>
+    </element>
+</database>

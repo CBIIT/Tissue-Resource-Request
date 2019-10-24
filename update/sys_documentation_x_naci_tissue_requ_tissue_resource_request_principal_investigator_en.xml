@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="principal_investigator" label="Principal Investigator" language="en" table="x_naci_tissue_requ_tissue_resource_request">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>principal_investigator</element>
+            <help/>
+            <hint/>
+            <label>Principal Investigator</label>
+            <language>en</language>
+            <name>x_naci_tissue_requ_tissue_resource_request</name>
+            <plural>Principal Investigators</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-10-24 20:55:51</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>e78be88cdbf08c1054d8ff621f9619e3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Principal Investigator</sys_name>
+            <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+            <sys_update_name>sys_documentation_x_naci_tissue_requ_tissue_resource_request_principal_investigator_en</sys_update_name>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-10-24 20:55:51</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>
