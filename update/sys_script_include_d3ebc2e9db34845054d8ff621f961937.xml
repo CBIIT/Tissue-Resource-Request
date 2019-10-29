@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_naci_tissue_requ.NCI_User_Ajax</api_name>
+        <client_callable>true</client_callable>
+        <description>Ajax Function to request fields from a user record&#13;
+getUser()&#13;
+Set: 'sysparm_user_sys_id' to the sys_id of a user.&#13;
+Returns: XML containing a user item with the following attributes:&#13;
+user_sys_id,institution, branch, building, Room, phone, email&#13;
+&#13;
+&#13;
+&#13;
+</description>
+        <name>NCI_User_Ajax</name>
+        <script><![CDATA[var NCI_User_Ajax = Class.create();
+NCI_User_Ajax.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+    getUser: function() {
+		var user_sys_id = this.getParameter('sysparm_user_sys_id');
+		var gr_user = new GlideRecord('sys_user');
+		if (gr_user.get(user_sys_id)) {
+			var institution = gr_user.getValue('u_org_');
+			var branch = gr_user.department.name.toString();
+			var building = gr_user.getValue('u_building_name');
+			var room = gr_user.getValue('u_room');
+			var phone = gr_user.getValue('phone');
+			var email = gr_user.getValue('email');
+			this._addUser(user_sys_id, institution, branch, building, room, phone, email);
+		}
+	},
+	
+	_addUser: function(user_sys_id, institution, branch, building, room, phone, email) {
+		var user = this.newItem('user');
+		user.setAttribute('user_sys_id', user_sys_id);
+		user.setAttribute('institution', institution);
+		user.setAttribute('branch', branch);
+		user.setAttribute('building', building);
+		user.setAttribute('room', room);
+		user.setAttribute('phone', phone);
+		user.setAttribute('email', email);
+	},
+    type: 'NCI_User_Ajax'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-10-29 20:01:41</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>d3ebc2e9db34845054d8ff621f961937</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>NCI_User_Ajax</sys_name>
+        <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+        <sys_update_name>sys_script_include_d3ebc2e9db34845054d8ff621f961937</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-10-29 20:17:12</sys_updated_on>
+    </sys_script_include>
+</record_update>
