@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element extends="task" label="Tissue Resource Request" max_length="40" name="x_naci_tissue_requ_tissue_resource_request" type="collection">
+    <element audit="true" extends="task" label="Tissue Resource Request" max_length="40" name="x_naci_tissue_requ_tissue_resource_request" sizeclass="1" type="collection">
         <element label="Alternative Contact" max_length="200" name="alternative_contact" type="string"/>
         <element label="Alternative Phone" max_length="200" name="alternative_phone" type="string"/>
         <element label="Approval Action" max_length="100" name="approval_action" type="string"/>
         <element label="CAN Number" max_length="200" name="can_number" type="string"/>
+        <element label="Case Block 1" max_length="200" name="case_block_1" type="string"/>
+        <element label="Case Block 2" max_length="200" name="case_block_2" type="string"/>
+        <element label="Case Block 3" max_length="200" name="case_block_3" type="string"/>
+        <element label="Case Block 4" max_length="200" name="case_block_4" type="string"/>
+        <element label="Case Block 5" max_length="200" name="case_block_5" type="string"/>
+        <element label="HE" max_length="40" name="he" type="boolean"/>
+        <element label="IRB Protocol Number" mandatory="true" max_length="100" name="irb_protocol_number" type="string"/>
         <element label="Local Staff" max_length="32" name="local_staff" reference="sys_user" type="reference"/>
+        <element label="Material Being Requested" max_length="100" name="material_being_requested" type="string"/>
+        <element label="Number of Recuts per Slide" max_length="50" name="number_of_recuts" type="string"/>
+        <element label="Other Material" max_length="40" name="other_material" type="boolean"/>
+        <element label="Other Material Specify" max_length="300" name="other_material_specify" type="string"/>
+        <element label="Patient Name" max_length="2000" name="patient_name" type="string"/>
         <element label="Principal Investigator" max_length="32" name="principal_investigator" reference="sys_user" type="reference"/>
+        <element label="Requested Thickness" max_length="50" name="requested_thickness" type="string"/>
+        <element label="Slide Signout from LP " max_length="40" name="slide_signout_from_lp" type="boolean"/>
+        <element label="Slide Signout from LP Text" max_length="300" name="slide_signout_from_lp_text" type="string"/>
+        <element label="Special Stains" max_length="40" name="special_stains" type="boolean"/>
         <element label="Stage" max_length="100" name="stage" type="string"/>
         <element label="Submitted By" max_length="32" name="submitted_by" reference="sys_user" type="reference"/>
         <element label="Supervisor" max_length="32" name="supervisor" reference="sys_user" type="reference"/>
+        <element label="Tissue Shavings" max_length="40" name="tissue_shavings" type="boolean"/>
+        <element label="Tissue Shaving Text" max_length="300" name="tissue_shaving_text" type="string"/>
+        <element choice="1" label="Type" mandatory="true" max_length="200" name="type" type="string">
+            <choice/>
+        </element>
         <index name="index">
             <element name="principal_investigator"/>
         </index>

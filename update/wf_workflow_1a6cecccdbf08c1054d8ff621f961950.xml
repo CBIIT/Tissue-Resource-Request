@@ -31,12 +31,12 @@
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
         <sys_created_on>2019-10-24 20:59:35</sys_created_on>
         <sys_id>0b2ca8ccdbf08c1054d8ff621f961967</sys_id>
-        <sys_mod_count>351</sys_mod_count>
+        <sys_mod_count>352</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-24 21:44:27</sys_updated_on>
+        <sys_updated_on>2019-10-30 16:15:57</sys_updated_on>
         <table>x_naci_tissue_requ_tissue_resource_request</table>
         <timezone/>
-        <validated>false</validated>
+        <validated>true</validated>
         <workflow display_value="Tissue Resource Request Workflow">1a6cecccdbf08c1054d8ff621f961950</workflow>
     </wf_workflow_version>
     <wf_workflow action="INSERT_OR_UPDATE">
