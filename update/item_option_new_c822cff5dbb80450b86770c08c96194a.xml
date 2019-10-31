@@ -31,7 +31,7 @@
         <lookup_table/>
         <lookup_unique>false</lookup_unique>
         <lookup_value/>
-        <macro display_value="tissue_case_upload_button">de544f79dbb80450b86770c08c9619da</macro>
+        <macro display_value="tissue_request_upload_button">71a26416dbf08450b86770c08c961983</macro>
         <mandatory>false</mandatory>
         <map_to_field>false</map_to_field>
         <mask_use_confirmation>false</mask_use_confirmation>
@@ -60,7 +60,7 @@
         <sys_created_on>2019-10-30 18:24:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>c822cff5dbb80450b86770c08c96194a</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>If there are more than 5 blocks, use attachment</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -68,10 +68,10 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>item_option_new_c822cff5dbb80450b86770c08c96194a</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 18:34:06</sys_updated_on>
+        <sys_updated_on>2019-10-31 20:12:42</sys_updated_on>
         <table/>
         <tooltip/>
-        <type>14</type>
+        <type>17</type>
         <ui_page/>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>

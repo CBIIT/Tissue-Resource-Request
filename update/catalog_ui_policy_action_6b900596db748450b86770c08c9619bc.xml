@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action">
     <catalog_ui_policy_action action="INSERT_OR_UPDATE">
         <catalog_item display_value="Tissue Resource Request">6db2ededdbbc445054d8ff621f9619d9</catalog_item>
-        <catalog_variable>IO:bb54f275db780450b86770c08c9619e3</catalog_variable>
+        <catalog_variable>IO:c822cff5dbb80450b86770c08c96194a</catalog_variable>
         <cleared>false</cleared>
         <disabled>ignore</disabled>
         <field/>
         <mandatory>ignore</mandatory>
-        <order>400</order>
+        <order>900</order>
         <sys_class_name>catalog_ui_policy_action</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 18:04:05</sys_created_on>
+        <sys_created_on>2019-10-31 22:14:23</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>eabd76b1dbb80450b86770c08c961922</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>case_block_1</sys_name>
+        <sys_id>6b900596db748450b86770c08c9619bc</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>If_there_are_more_than__blocks_use_at</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-        <sys_update_name>catalog_ui_policy_action_eabd76b1dbb80450b86770c08c961922</sys_update_name>
+        <sys_update_name>catalog_ui_policy_action_6b900596db748450b86770c08c9619bc</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 18:04:05</sys_updated_on>
+        <sys_updated_on>2019-10-31 22:20:04</sys_updated_on>
         <table/>
         <ui_policy display_value="Type - Clinical Archives linked to protocol">f5c21e7ddbb40450b86770c08c961992</ui_policy>
-        <variable>case_block_1</variable>
+        <variable>If_there_are_more_than__blocks_use_at</variable>
         <variable_set/>
         <visible>true</visible>
     </catalog_ui_policy_action>

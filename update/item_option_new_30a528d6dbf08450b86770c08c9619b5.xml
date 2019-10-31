@@ -20,10 +20,10 @@
         <example_text/>
         <field/>
         <global>false</global>
-        <help_tag>More information</help_tag>
+        <help_tag>Note</help_tag>
         <help_text/>
         <include_none>false</include_none>
-        <instructions/>
+        <instructions><![CDATA[<p style="margin-bottom: 0;">If requesting material from a case with multiple blocks, the requester must specify which block is being requested (e.g. SI-xx-1234, block 1A) Note: if needed, schedule a meeting with the LP Hotseat Resident or collaborating pathologist to select the most appropriate block(s).</p>]]></instructions>
         <layout>normal</layout>
         <list_table/>
         <lookup_label/>
@@ -36,11 +36,11 @@
         <map_to_field>false</map_to_field>
         <mask_use_confirmation>false</mask_use_confirmation>
         <mask_use_encryption>false</mask_use_encryption>
-        <name>formatter8</name>
-        <order>321</order>
+        <name>surgical_pathology_label2</name>
+        <order>480</order>
         <price_if_checked>0</price_if_checked>
         <pricing_implications>false</pricing_implications>
-        <question_text/>
+        <question_text>Surgical Pathology or Cytology Case #(s)</question_text>
         <read_roles/>
         <rec_lookup_price/>
         <rec_price_if_checked>0</rec_price_if_checked>
@@ -51,27 +51,27 @@
         <reference_qual_condition/>
         <scale_max>5</scale_max>
         <scale_min>0</scale_min>
-        <show_help>false</show_help>
-        <show_help_on_load>false</show_help_on_load>
+        <show_help>true</show_help>
+        <show_help_on_load>true</show_help_on_load>
         <sp_widget/>
         <summary_macro/>
         <sys_class_name>item_option_new</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 20:56:13</sys_created_on>
+        <sys_created_on>2019-10-31 20:16:19</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>93152335db7c0450b86770c08c9619c1</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>formatter8</sys_name>
+        <sys_id>30a528d6dbf08450b86770c08c9619b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Surgical Pathology or Cytology Case #(s)</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-        <sys_update_name>item_option_new_93152335db7c0450b86770c08c9619c1</sys_update_name>
+        <sys_update_name>item_option_new_30a528d6dbf08450b86770c08c9619b5</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-31 14:00:37</sys_updated_on>
+        <sys_updated_on>2019-10-31 20:16:19</sys_updated_on>
         <table/>
         <tooltip/>
-        <type>20</type>
+        <type>11</type>
         <ui_page/>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
@@ -86,22 +86,22 @@
         <visible_summary>true</visible_summary>
         <write_roles/>
     </item_option_new>
-    <sys_translated_text action="delete_multiple" query="documentkey=93152335db7c0450b86770c08c9619c1"/>
-    <fx_price action="delete_multiple" query="id=93152335db7c0450b86770c08c9619c1"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=30a528d6dbf08450b86770c08c9619b5"/>
+    <fx_price action="delete_multiple" query="id=30a528d6dbf08450b86770c08c9619b5"/>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>price_if_checked</field>
-        <id>93152335db7c0450b86770c08c9619c1</id>
+        <id>30a528d6dbf08450b86770c08c9619b5</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 20:56:13</sys_created_on>
-        <sys_id>e325abf1db7c0450b86770c08c961934</sys_id>
+        <sys_created_on>2019-10-31 20:16:19</sys_created_on>
+        <sys_id>74a5a01adbf08450b86770c08c961918</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 20:56:13</sys_updated_on>
+        <sys_updated_on>2019-10-31 20:16:19</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
@@ -109,16 +109,16 @@
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>rec_price_if_checked</field>
-        <id>93152335db7c0450b86770c08c9619c1</id>
+        <id>30a528d6dbf08450b86770c08c9619b5</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 20:56:13</sys_created_on>
-        <sys_id>ab25abf1db7c0450b86770c08c961933</sys_id>
+        <sys_created_on>2019-10-31 20:16:19</sys_created_on>
+        <sys_id>74a528d6dbf08450b86770c08c9619b7</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 20:56:13</sys_updated_on>
+        <sys_updated_on>2019-10-31 20:16:19</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>

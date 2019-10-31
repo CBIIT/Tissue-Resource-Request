@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="INSERT_OR_UPDATE">
+        <misc>0</misc>
+        <order>300</order>
+        <question display_value="Clinical Archives unlinked or Autopsy">c7163702db308450b86770c08c9619ba</question>
+        <rec_misc>0</rec_misc>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-10-31 16:52:37</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>78e67742db308450b86770c08c96194e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Clinical laboratory validation material does not require IRB approval</sys_name>
+        <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+        <sys_update_name>question_choice_78e67742db308450b86770c08c96194e</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-10-31 20:25:04</sys_updated_on>
+        <text>Clinical laboratory validation material does not require IRB approval</text>
+        <value>Clinical laboratory validation material does not require IRB approval</value>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=78e67742db308450b86770c08c96194e"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>misc</field>
+        <id>78e67742db308450b86770c08c96194e</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-10-31 16:52:37</sys_created_on>
+        <sys_id>78073742db308450b86770c08c9619d3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-10-31 16:52:37</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>rec_misc</field>
+        <id>78e67742db308450b86770c08c96194e</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-10-31 16:52:37</sys_created_on>
+        <sys_id>30073742db308450b86770c08c9619d3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-10-31 16:52:37</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+</record_update>

@@ -4,31 +4,29 @@
         <category>general</category>
         <description/>
         <media_type/>
-        <name>tissue_case_upload_button</name>
-        <scoped_name>x_naci_tissue_requ_tissue_case_upload_button</scoped_name>
+        <name>tissue_request_upload_button</name>
+        <scoped_name>x_naci_tissue_requ_tissue_request_upload_button</scoped_name>
         <sys_class_name>sys_ui_macro</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 18:32:46</sys_created_on>
+        <sys_created_on>2019-10-31 20:03:17</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>de544f79dbb80450b86770c08c9619da</sys_id>
+        <sys_id>71a26416dbf08450b86770c08c961983</sys_id>
         <sys_mod_count>3</sys_mod_count>
-        <sys_name>tissue_case_upload_button</sys_name>
+        <sys_name>tissue_request_upload_button</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-        <sys_update_name>sys_ui_macro_de544f79dbb80450b86770c08c9619da</sys_update_name>
+        <sys_update_name>sys_ui_macro_71a26416dbf08450b86770c08c961983</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 18:35:49</sys_updated_on>
+        <sys_updated_on>2019-10-31 20:12:31</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="true" xmlns:j="jelly:core" xmlns:g="glide">
-	<div style="display: flex; align-items: center">
-		<span style="color: red">*</span>
-		If there are more 5 blocks, use attachment
-		<button onclick="saveCatAttachment(gel('sysparm_item_guid').value, 'x_naci_tissue_requ_tissue_resource_request')" class="btn btn-default" style="margin-left: 20px">
-			Upload Attachment
-		</button>
-	</div>
+
+	<button onclick="saveCatAttachment(gel('sysparm_item_guid').value, 'x_naci_tissue_requ_tissue_resource_request')" class="btn btn-default">
+		Upload Attachment
+	</button>
+
 </j:jelly>]]></xml>
     </sys_ui_macro>
 </record_update>
