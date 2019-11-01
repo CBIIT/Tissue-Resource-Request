@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action">
     <catalog_ui_policy_action action="INSERT_OR_UPDATE">
         <catalog_item display_value="Tissue Resource Request">6db2ededdbbc445054d8ff621f9619d9</catalog_item>
-        <catalog_variable>IO:9902ffb5dbbc0450b86770c08c9619d4</catalog_variable>
+        <catalog_variable>IO:4fe19706db7c4450b86770c08c96197b</catalog_variable>
         <cleared>false</cleared>
         <disabled>ignore</disabled>
         <field/>
@@ -9,21 +9,21 @@
         <order>100</order>
         <sys_class_name>catalog_ui_policy_action</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 22:01:42</sys_created_on>
+        <sys_created_on>2019-11-01 22:20:35</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>771477f9dbbc0450b86770c08c9619e2</sys_id>
+        <sys_id>54abceeedbf4c85054d8ff621f961932</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>other_material_specify</sys_name>
+        <sys_name>ffpe_tissue_block_text</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-        <sys_update_name>catalog_ui_policy_action_771477f9dbbc0450b86770c08c9619e2</sys_update_name>
+        <sys_update_name>catalog_ui_policy_action_54abceeedbf4c85054d8ff621f961932</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 22:01:42</sys_updated_on>
+        <sys_updated_on>2019-11-01 22:20:35</sys_updated_on>
         <table/>
-        <ui_policy display_value="Other Material Control">d0f3b3f9dbbc0450b86770c08c9619d0</ui_policy>
-        <variable>other_material_specify</variable>
+        <ui_policy display_value="Requested Material - FFPE Tissue block">927bcaeedbf4c85054d8ff621f961958</ui_policy>
+        <variable>ffpe_tissue_block_text</variable>
         <variable_set/>
         <visible>true</visible>
     </catalog_ui_policy_action>

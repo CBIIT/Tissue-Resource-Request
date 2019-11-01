@@ -18,7 +18,7 @@
         <dynamic_default_value/>
         <dynamic_ref_qual/>
         <example_text/>
-        <field>slide_signout_from_lp</field>
+        <field/>
         <global>false</global>
         <help_tag>More information</help_tag>
         <help_text/>
@@ -33,14 +33,14 @@
         <lookup_value/>
         <macro/>
         <mandatory>false</mandatory>
-        <map_to_field>true</map_to_field>
+        <map_to_field>false</map_to_field>
         <mask_use_confirmation>false</mask_use_confirmation>
         <mask_use_encryption>false</mask_use_encryption>
-        <name>slide_signout_from_lp</name>
-        <order>350</order>
+        <name>formatter7</name>
+        <order>270</order>
         <price_if_checked>0</price_if_checked>
         <pricing_implications>false</pricing_implications>
-        <question_text>Slide Signout From LP</question_text>
+        <question_text/>
         <read_roles/>
         <rec_lookup_price/>
         <rec_price_if_checked>0</rec_price_if_checked>
@@ -57,21 +57,21 @@
         <summary_macro/>
         <sys_class_name>item_option_new</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 21:49:27</sys_created_on>
+        <sys_created_on>2019-11-01 19:10:48</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>2c2133b5dbbc0450b86770c08c96193e</sys_id>
+        <sys_id>8220a1a2dbf0c85054d8ff621f9619b3</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Slide Signout From LP</sys_name>
+        <sys_name>formatter7</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-        <sys_update_name>item_option_new_2c2133b5dbbc0450b86770c08c96193e</sys_update_name>
+        <sys_update_name>item_option_new_8220a1a2dbf0c85054d8ff621f9619b3</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 21:49:27</sys_updated_on>
+        <sys_updated_on>2019-11-01 19:10:48</sys_updated_on>
         <table/>
         <tooltip/>
-        <type>7</type>
+        <type>20</type>
         <ui_page/>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
@@ -86,22 +86,22 @@
         <visible_summary>true</visible_summary>
         <write_roles/>
     </item_option_new>
-    <sys_translated_text action="delete_multiple" query="documentkey=2c2133b5dbbc0450b86770c08c96193e"/>
-    <fx_price action="delete_multiple" query="id=2c2133b5dbbc0450b86770c08c96193e"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=8220a1a2dbf0c85054d8ff621f9619b3"/>
+    <fx_price action="delete_multiple" query="id=8220a1a2dbf0c85054d8ff621f9619b3"/>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>price_if_checked</field>
-        <id>2c2133b5dbbc0450b86770c08c96193e</id>
+        <id>8220a1a2dbf0c85054d8ff621f9619b3</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 21:49:27</sys_created_on>
-        <sys_id>eb517775dbbc0450b86770c08c96192e</sys_id>
+        <sys_created_on>2019-11-01 19:10:48</sys_created_on>
+        <sys_id>7630a162dbf0c85054d8ff621f961979</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 21:49:27</sys_updated_on>
+        <sys_updated_on>2019-11-01 19:10:48</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
@@ -109,16 +109,16 @@
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>rec_price_if_checked</field>
-        <id>2c2133b5dbbc0450b86770c08c96193e</id>
+        <id>8220a1a2dbf0c85054d8ff621f9619b3</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 21:49:27</sys_created_on>
-        <sys_id>a3517775dbbc0450b86770c08c96192e</sys_id>
+        <sys_created_on>2019-11-01 19:10:48</sys_created_on>
+        <sys_id>3a30a162dbf0c85054d8ff621f961978</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 21:49:27</sys_updated_on>
+        <sys_updated_on>2019-11-01 19:10:48</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>

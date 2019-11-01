@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_dictionary action="INSERT_OR_UPDATE" element="ffpe_tissue_block" table="x_naci_tissue_requ_tissue_resource_request">
+    <sys_dictionary action="INSERT_OR_UPDATE" element="material_being_requested_2" table="x_naci_tissue_requ_tissue_resource_request">
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
@@ -14,7 +14,7 @@
         <choice/>
         <choice_field/>
         <choice_table/>
-        <column_label>FFPE Tissue Block</column_label>
+        <column_label>Material Being Requested 2</column_label>
         <comments/>
         <create_roles/>
         <default_value/>
@@ -27,14 +27,14 @@
         <dynamic_creation_script/>
         <dynamic_default_value/>
         <dynamic_ref_qual/>
-        <element>ffpe_tissue_block</element>
+        <element>material_being_requested_2</element>
         <element_reference>false</element_reference>
         <foreign_database/>
         <function_definition/>
         <function_field>false</function_field>
-        <internal_type display_value="">boolean</internal_type>
+        <internal_type display_value="String">string</internal_type>
         <mandatory>false</mandatory>
-        <max_length>40</max_length>
+        <max_length>200</max_length>
         <name>x_naci_tissue_requ_tissue_resource_request</name>
         <next_element/>
         <primary>false</primary>
@@ -52,18 +52,18 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-31 14:08:04</sys_created_on>
+        <sys_created_on>2019-11-01 20:55:28</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>4b3197c2db7c4450b86770c08c9619a4</sys_id>
+        <sys_id>811831eedb74c85054d8ff621f9619d6</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>FFPE Tissue Block</sys_name>
+        <sys_name>Material Being Requested 2</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-        <sys_update_name>sys_dictionary_x_naci_tissue_requ_tissue_resource_request_ffpe_tissue_block</sys_update_name>
+        <sys_update_name>sys_dictionary_x_naci_tissue_requ_tissue_resource_request_material_being_requested_2</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-31 14:08:04</sys_updated_on>
+        <sys_updated_on>2019-11-01 20:55:28</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <u_model_id/>

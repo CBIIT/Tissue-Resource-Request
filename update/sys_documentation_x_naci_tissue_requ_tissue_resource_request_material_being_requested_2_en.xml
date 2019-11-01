@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_documentation element="slide_signout_from_lp" label="Slide Signout from LP " language="en" table="x_naci_tissue_requ_tissue_resource_request">
+    <sys_documentation element="material_being_requested_2" label="Material Being Requested 2" language="en" table="x_naci_tissue_requ_tissue_resource_request">
         <sys_documentation action="INSERT_OR_UPDATE">
-            <element>slide_signout_from_lp</element>
+            <element>material_being_requested_2</element>
             <help/>
             <hint/>
-            <label>Slide Signout from LP </label>
+            <label>Material Being Requested 2</label>
             <language>en</language>
             <name>x_naci_tissue_requ_tissue_resource_request</name>
-            <plural>Slide Signout from LP s</plural>
+            <plural>Material Being Requested 2s</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>zhoujim@nih.gov</sys_created_by>
-            <sys_created_on>2019-10-30 21:33:32</sys_created_on>
+            <sys_created_on>2019-11-01 20:55:29</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
-            <sys_id>0ebdabbddb7c0450b86770c08c961991</sys_id>
+            <sys_id>d838f1eedb74c85054d8ff621f961972</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_name>Slide Signout from LP</sys_name>
+            <sys_name>Material Being Requested 2</sys_name>
             <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
             <sys_policy/>
             <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
             <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-            <sys_update_name>sys_documentation_x_naci_tissue_requ_tissue_resource_request_slide_signout_from_lp_en</sys_update_name>
+            <sys_update_name>sys_documentation_x_naci_tissue_requ_tissue_resource_request_material_being_requested_2_en</sys_update_name>
             <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-            <sys_updated_on>2019-10-30 21:33:32</sys_updated_on>
+            <sys_updated_on>2019-11-01 20:55:29</sys_updated_on>
             <url/>
             <url_target/>
         </sys_documentation>

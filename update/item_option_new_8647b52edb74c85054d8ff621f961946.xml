@@ -23,7 +23,7 @@
         <help_tag>More information</help_tag>
         <help_text/>
         <include_none>false</include_none>
-        <instructions><![CDATA[<p>Charges will only be applied for external tissue processes outside of NCI</p>]]></instructions>
+        <instructions/>
         <layout>normal</layout>
         <list_table/>
         <lookup_label/>
@@ -36,11 +36,11 @@
         <map_to_field>false</map_to_field>
         <mask_use_confirmation>false</mask_use_confirmation>
         <mask_use_encryption>false</mask_use_encryption>
-        <name>note</name>
-        <order>105</order>
+        <name>formatter14</name>
+        <order>1600</order>
         <price_if_checked>0</price_if_checked>
         <pricing_implications>false</pricing_implications>
-        <question_text>Charges will only be applied for external tissue processes outside of NCI</question_text>
+        <question_text/>
         <read_roles/>
         <rec_lookup_price/>
         <rec_price_if_checked>0</rec_price_if_checked>
@@ -52,26 +52,26 @@
         <scale_max>5</scale_max>
         <scale_min>0</scale_min>
         <show_help>false</show_help>
-        <show_help_on_load>true</show_help_on_load>
+        <show_help_on_load>false</show_help_on_load>
         <sp_widget/>
         <summary_macro/>
         <sys_class_name>item_option_new</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 17:58:58</sys_created_on>
+        <sys_created_on>2019-11-01 20:51:48</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>bf0c3e31dbb80450b86770c08c96196b</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>Charges will only be applied for external tissue processes outside of NCI</sys_name>
+        <sys_id>8647b52edb74c85054d8ff621f961946</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>formatter14</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-        <sys_update_name>item_option_new_bf0c3e31dbb80450b86770c08c96196b</sys_update_name>
+        <sys_update_name>item_option_new_8647b52edb74c85054d8ff621f961946</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 17:59:42</sys_updated_on>
+        <sys_updated_on>2019-11-01 20:51:48</sys_updated_on>
         <table/>
         <tooltip/>
-        <type>11</type>
+        <type>20</type>
         <ui_page/>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
@@ -86,22 +86,22 @@
         <visible_summary>true</visible_summary>
         <write_roles/>
     </item_option_new>
-    <sys_translated_text action="delete_multiple" query="documentkey=bf0c3e31dbb80450b86770c08c96196b"/>
-    <fx_price action="delete_multiple" query="id=bf0c3e31dbb80450b86770c08c96196b"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=8647b52edb74c85054d8ff621f961946"/>
+    <fx_price action="delete_multiple" query="id=8647b52edb74c85054d8ff621f961946"/>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>price_if_checked</field>
-        <id>bf0c3e31dbb80450b86770c08c96196b</id>
+        <id>8647b52edb74c85054d8ff621f961946</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 17:58:59</sys_created_on>
-        <sys_id>9f9cbefddb780450b86770c08c96198c</sys_id>
+        <sys_created_on>2019-11-01 20:51:48</sys_created_on>
+        <sys_id>9a57752edb74c85054d8ff621f961961</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 17:58:59</sys_updated_on>
+        <sys_updated_on>2019-11-01 20:51:48</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
@@ -109,16 +109,16 @@
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>rec_price_if_checked</field>
-        <id>bf0c3e31dbb80450b86770c08c96196b</id>
+        <id>8647b52edb74c85054d8ff621f961946</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 17:58:58</sys_created_on>
-        <sys_id>539cbefddb780450b86770c08c96198c</sys_id>
+        <sys_created_on>2019-11-01 20:51:48</sys_created_on>
+        <sys_id>4257752edb74c85054d8ff621f961961</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 17:58:58</sys_updated_on>
+        <sys_updated_on>2019-11-01 20:51:48</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>

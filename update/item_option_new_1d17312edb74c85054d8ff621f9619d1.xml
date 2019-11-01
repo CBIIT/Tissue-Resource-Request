@@ -24,7 +24,7 @@
         <help_text/>
         <include_none>false</include_none>
         <instructions/>
-        <layout>2across</layout>
+        <layout>normal</layout>
         <list_table/>
         <lookup_label/>
         <lookup_price/>
@@ -36,11 +36,11 @@
         <map_to_field>false</map_to_field>
         <mask_use_confirmation>false</mask_use_confirmation>
         <mask_use_encryption>false</mask_use_encryption>
-        <name>pi_container</name>
-        <order>12</order>
+        <name>container_section_6</name>
+        <order>580</order>
         <price_if_checked>0</price_if_checked>
         <pricing_implications>false</pricing_implications>
-        <question_text>PI container</question_text>
+        <question_text/>
         <read_roles/>
         <rec_lookup_price/>
         <rec_price_if_checked>0</rec_price_if_checked>
@@ -57,18 +57,18 @@
         <summary_macro/>
         <sys_class_name>item_option_new</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-29 21:08:02</sys_created_on>
+        <sys_created_on>2019-11-01 20:51:06</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>d22e5665dbf4845054d8ff621f9619cb</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_name>PI container</sys_name>
+        <sys_id>1d17312edb74c85054d8ff621f9619d1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>container_section_6</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-        <sys_update_name>item_option_new_d22e5665dbf4845054d8ff621f9619cb</sys_update_name>
+        <sys_update_name>item_option_new_1d17312edb74c85054d8ff621f9619d1</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-29 21:15:15</sys_updated_on>
+        <sys_updated_on>2019-11-01 20:51:06</sys_updated_on>
         <table/>
         <tooltip/>
         <type>19</type>
@@ -86,22 +86,22 @@
         <visible_summary>true</visible_summary>
         <write_roles/>
     </item_option_new>
-    <sys_translated_text action="delete_multiple" query="documentkey=d22e5665dbf4845054d8ff621f9619cb"/>
-    <fx_price action="delete_multiple" query="id=d22e5665dbf4845054d8ff621f9619cb"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=1d17312edb74c85054d8ff621f9619d1"/>
+    <fx_price action="delete_multiple" query="id=1d17312edb74c85054d8ff621f9619d1"/>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>price_if_checked</field>
-        <id>d22e5665dbf4845054d8ff621f9619cb</id>
+        <id>1d17312edb74c85054d8ff621f9619d1</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-29 21:08:02</sys_created_on>
-        <sys_id>7a4e1a65dbf4845054d8ff621f961939</sys_id>
+        <sys_created_on>2019-11-01 20:51:06</sys_created_on>
+        <sys_id>8437352edb74c85054d8ff621f961964</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-29 21:08:02</sys_updated_on>
+        <sys_updated_on>2019-11-01 20:51:06</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
@@ -109,16 +109,16 @@
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>rec_price_if_checked</field>
-        <id>d22e5665dbf4845054d8ff621f9619cb</id>
+        <id>1d17312edb74c85054d8ff621f9619d1</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-29 21:08:02</sys_created_on>
-        <sys_id>324e1a65dbf4845054d8ff621f961939</sys_id>
+        <sys_created_on>2019-11-01 20:51:06</sys_created_on>
+        <sys_id>c037352edb74c85054d8ff621f961963</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-29 21:08:02</sys_updated_on>
+        <sys_updated_on>2019-11-01 20:51:06</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
