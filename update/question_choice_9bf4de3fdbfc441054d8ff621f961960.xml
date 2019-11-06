@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="INSERT_OR_UPDATE">
+        <misc>0</misc>
+        <order>200</order>
+        <question display_value="Material Being Requested  ">2d845a7fdbfc441054d8ff621f961953</question>
+        <rec_misc>0</rec_misc>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-11-05 20:13:53</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>9bf4de3fdbfc441054d8ff621f961960</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Stained Slides</sys_name>
+        <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+        <sys_update_name>question_choice_9bf4de3fdbfc441054d8ff621f961960</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-11-05 20:36:46</sys_updated_on>
+        <text>Stained Slides</text>
+        <value>Stained Slides</value>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=9bf4de3fdbfc441054d8ff621f961960"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>misc</field>
+        <id>9bf4de3fdbfc441054d8ff621f961960</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-11-05 20:13:53</sys_created_on>
+        <sys_id>b105d2bfdbfc441054d8ff621f961938</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-11-05 20:13:53</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>rec_misc</field>
+        <id>9bf4de3fdbfc441054d8ff621f961960</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-11-05 20:13:53</sys_created_on>
+        <sys_id>7905d2bfdbfc441054d8ff621f961937</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-11-05 20:13:53</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+</record_update>

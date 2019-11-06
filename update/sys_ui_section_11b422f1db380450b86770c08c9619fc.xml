@@ -476,6 +476,398 @@
             <sys_user/>
             <type/>
         </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>number_of_recuts2</element>
+            <position>34</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 15:17:37</sys_created_on>
+            <sys_id>1e3115b3dbf4441054d8ff621f961906</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 15:17:37</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>requested_thinkness2</element>
+            <position>35</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 15:19:45</sys_created_on>
+            <sys_id>65b155f3dbf4441054d8ff621f96198e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 15:19:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>he2</element>
+            <position>36</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 15:36:31</sys_created_on>
+            <sys_id>fe8519bfdbf4441054d8ff621f96190b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 15:36:31</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>special_stains2</element>
+            <position>37</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 15:37:18</sys_created_on>
+            <sys_id>66b55133db38441054d8ff621f9619a2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 15:37:18</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>tissue_shaving_text_2</element>
+            <position>38</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 16:00:24</sys_created_on>
+            <sys_id>fc0b5d3bdb38441054d8ff621f96195b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 16:00:24</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>slide_signout_from_lp_text_2</element>
+            <position>39</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 16:01:20</sys_created_on>
+            <sys_id>6e3bd17bdb38441054d8ff621f9619f7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 16:01:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>other_material_specify_2</element>
+            <position>40</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 16:01:59</sys_created_on>
+            <sys_id>0c6b197bdb38441054d8ff621f96195f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 16:01:59</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>ffpe_tissue_block_text_2</element>
+            <position>41</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 16:02:36</sys_created_on>
+            <sys_id>018b5dbbdb38441054d8ff621f96197c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 16:02:36</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>special_processing_or_handling_2</element>
+            <position>42</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 16:17:54</sys_created_on>
+            <sys_id>810fd1f3db78441054d8ff621f9619c7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 16:17:54</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>intent_to_use_2</element>
+            <position>43</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 16:18:29</sys_created_on>
+            <sys_id>652f11f3db78441054d8ff621f9619a0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 16:18:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>case_tissue_type</element>
+            <position>44</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 20:02:41</sys_created_on>
+            <sys_id>4a7252bbdbfc441054d8ff621f9619a3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 20:02:41</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>intent_to_use_3</element>
+            <position>45</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 20:06:46</sys_created_on>
+            <sys_id>31639efbdbfc441054d8ff621f9619b1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 20:06:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>material_being_requested_3</element>
+            <position>46</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 20:10:58</sys_created_on>
+            <sys_id>1354167fdbfc441054d8ff621f9619ff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 20:10:58</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>number_of_recuts_per_slide_3</element>
+            <position>47</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 20:23:40</sys_created_on>
+            <sys_id>0d471273db30841054d8ff621f9619d3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 20:23:40</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>requested_thickness_3</element>
+            <position>48</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 20:24:53</sys_created_on>
+            <sys_id>0f871a73db30841054d8ff621f96197a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 20:24:53</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>he3</element>
+            <position>49</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 20:57:22</sys_created_on>
+            <sys_id>4ffe927fdb30841054d8ff621f961942</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 20:57:22</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>special_stains3</element>
+            <position>50</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 20:58:00</sys_created_on>
+            <sys_id>1c2f567fdb30841054d8ff621f9619e2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 20:58:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>tissue_shaving_text_3</element>
+            <position>51</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 21:11:08</sys_created_on>
+            <sys_id>2422eaf3db70841054d8ff621f961973</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 21:11:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>other_material_specify_3</element>
+            <position>52</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-05 21:14:48</sys_created_on>
+            <sys_id>12f22a37db70841054d8ff621f961931</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-05 21:14:48</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>ffpe_tissue_block_text_3</element>
+            <position>53</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-06 18:23:34</sys_created_on>
+            <sys_id>ff55c3c8db09c41054d8ff621f961940</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-06 18:23:34</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>special_processing_or_handling_3</element>
+            <position>54</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-06 18:27:32</sys_created_on>
+            <sys_id>7546430cdb09c41054d8ff621f9619d7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-06 18:27:32</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>case_tissue_type_4_1</element>
+            <position>55</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-06 18:41:27</sys_created_on>
+            <sys_id>65798340db49c41054d8ff621f961990</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-06 18:41:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>case_tissue_type_4_2</element>
+            <position>56</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-06 18:41:58</sys_created_on>
+            <sys_id>9999c340db49c41054d8ff621f9619d6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-06 18:41:58</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>case_tissue_type_4_3</element>
+            <position>57</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-06 18:42:28</sys_created_on>
+            <sys_id>acb98b40db49c41054d8ff621f9619f3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-06 18:42:28</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>case_tissue_type_4_4</element>
+            <position>58</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-06 18:43:08</sys_created_on>
+            <sys_id>96d9cf40db49c41054d8ff621f9619e0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-06 18:43:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>case_tissue_type_4_5</element>
+            <position>59</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-06 18:43:37</sys_created_on>
+            <sys_id>6df98380db49c41054d8ff621f9619d8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-06 18:43:37</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>material_being_requested_4</element>
+            <position>60</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-06 22:27:49</sys_created_on>
+            <sys_id>ed4d738cdb8dc41054d8ff621f9619d6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-06 22:27:49</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>intend_to_use_4</element>
+            <position>61</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-11-06 22:38:00</sys_created_on>
+            <sys_id>3a9f3304dbcdc41054d8ff621f961973</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_resource_request" sys_domain="global" view="Default view">11b422f1db380450b86770c08c9619fc</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-11-06 22:38:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
         <sys_ui_section action="INSERT_OR_UPDATE">
             <caption/>
             <header>false</header>
