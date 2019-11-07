@@ -20,6 +20,11 @@
         <element label="Case Tissue Type 4 3" max_length="200" name="case_tissue_type_4_3" type="string"/>
         <element label="Case Tissue Type 4 4" max_length="200" name="case_tissue_type_4_4" type="string"/>
         <element label="Case Tissue Type 4 5" max_length="200" name="case_tissue_type_4_5" type="string"/>
+        <element label="Case Tissue Type 5 1" max_length="200" name="case_tissue_type_5_1" type="string"/>
+        <element label="Case Tissue Type 5 2" max_length="200" name="case_tissue_type_5_2" type="string"/>
+        <element label="Case Tissue Type 5 3" max_length="200" name="case_tissue_type_5_3" type="string"/>
+        <element label="Case Tissue Type 5 4" max_length="200" name="case_tissue_type_5_4" type="string"/>
+        <element label="Case Tissue Type 5 5" max_length="200" name="case_tissue_type_5_5" type="string"/>
         <element label="Clinic Archives" max_length="200" name="clinic_archives" type="string"/>
         <element label="FFPE Tissue Block Text" max_length="500" name="ffpe_tissue_block_text" type="string"/>
         <element label="FFPE Tissue Block Text 2" max_length="500" name="ffpe_tissue_block_text_2" type="string"/>
@@ -28,22 +33,29 @@
         <element label="HE2" max_length="40" name="he2" type="boolean"/>
         <element label="HE3" max_length="40" name="he3" type="boolean"/>
         <element label="Intend to Use 4" max_length="1000" name="intend_to_use_4" type="string"/>
-        <element label="Intent to Use" max_length="1000" name="intent_to_use" type="string"/>
-        <element label="Intent to Use 2" max_length="1000" name="intent_to_use_2" type="string"/>
-        <element label="Intent to Use 3" max_length="1000" name="intent_to_use_3" type="string"/>
+        <element label="Intend to Use 5" max_length="1000" name="intend_to_use_5" type="string"/>
+        <element label="Intend to Use" max_length="1000" name="intent_to_use" type="string"/>
+        <element label="Intend to Use 2" max_length="1000" name="intent_to_use_2" type="string"/>
+        <element label="Intend to Use 3" max_length="1000" name="intent_to_use_3" type="string"/>
         <element label="IRB Protocol Number" mandatory="true" max_length="100" name="irb_protocol_number" type="string"/>
         <element label="Local Staff" max_length="32" name="local_staff" reference="sys_user" type="reference"/>
         <element label="Material Being Requested" max_length="200" name="material_being_requested" type="string"/>
         <element label="Material Being Requested 2" max_length="200" name="material_being_requested_2" type="string"/>
         <element label="Material Being Requested 3" max_length="200" name="material_being_requested_3" type="string"/>
         <element label="Material Being Requested 4" max_length="500" name="material_being_requested_4" type="string"/>
+        <element label="Material Being Requested 5" max_length="500" name="material_being_requested_5" type="string"/>
         <element label="Number of Recuts per Slide" max_length="100" name="number_of_recuts" type="string"/>
         <element label="Number of Recuts per Slide2" max_length="100" name="number_of_recuts2" type="string"/>
         <element label="Number of Recuts per Slide 3" max_length="100" name="number_of_recuts_per_slide_3" type="string"/>
         <element label="Other Material Specify" max_length="300" name="other_material_specify" type="string"/>
         <element label="Other Material Specify 2" max_length="300" name="other_material_specify_2" type="string"/>
         <element label="Other Material Specify 3" max_length="300" name="other_material_specify_3" type="string"/>
-        <element label="Patient Name" max_length="2000" name="patient_name" type="string"/>
+        <element label="Patient Name" max_length="1000" name="patient_name" type="string"/>
+        <element label="Patient Name 1" max_length="500" name="patient_name_1" type="string"/>
+        <element label="Patient Name 2" max_length="500" name="patient_name_2" type="string"/>
+        <element label="Patient Name 3" max_length="500" name="patient_name_3" type="string"/>
+        <element label="Patient Name 4" max_length="500" name="patient_name_4" type="string"/>
+        <element label="Patient Name 5" max_length="500" name="patient_name_5" type="string"/>
         <element label="Principal Investigator" max_length="32" name="principal_investigator" reference="sys_user" type="reference"/>
         <element label="Requested Thickness" max_length="100" name="requested_thickness" type="string"/>
         <element label="Requested Thickness 3" max_length="100" name="requested_thickness_3" type="string"/>

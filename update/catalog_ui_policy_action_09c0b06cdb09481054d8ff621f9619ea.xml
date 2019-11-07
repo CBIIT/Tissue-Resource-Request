@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action">
+    <catalog_ui_policy_action action="INSERT_OR_UPDATE">
+        <catalog_item display_value="Tissue Resource Request">6db2ededdbbc445054d8ff621f9619d9</catalog_item>
+        <catalog_variable>IO:ab1fe0e8db09481054d8ff621f961905</catalog_variable>
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field/>
+        <mandatory>ignore</mandatory>
+        <order>400</order>
+        <sys_class_name>catalog_ui_policy_action</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-11-07 20:51:26</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>09c0b06cdb09481054d8ff621f9619ea</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>case_tissue_type_5_3</sys_name>
+        <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+        <sys_update_name>catalog_ui_policy_action_09c0b06cdb09481054d8ff621f9619ea</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-11-07 20:51:26</sys_updated_on>
+        <table/>
+        <ui_policy display_value="Type - Fresh Post-Mortem Collection">c03eac68db09481054d8ff621f961993</ui_policy>
+        <variable>case_tissue_type_5_3</variable>
+        <variable_set/>
+        <visible>true</visible>
+    </catalog_ui_policy_action>
+</record_update>
