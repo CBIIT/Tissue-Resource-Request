@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element audit="true" extends="task" label="Tissue Resource Request" max_length="40" name="x_naci_tissue_requ_tissue_resource_request" sizeclass="2" type="collection">
+        <element label="Abstract or Summary" max_length="2000" name="abstract_or_summary" type="string"/>
         <element label="Alternative Contact" max_length="200" name="alternative_contact" type="string"/>
         <element label="Alternative Phone" max_length="200" name="alternative_phone" type="string"/>
         <element label="Approval Action" max_length="100" name="approval_action" type="string"/>
@@ -25,15 +26,23 @@
         <element label="Case Tissue Type 5 3" max_length="200" name="case_tissue_type_5_3" type="string"/>
         <element label="Case Tissue Type 5 4" max_length="200" name="case_tissue_type_5_4" type="string"/>
         <element label="Case Tissue Type 5 5" max_length="200" name="case_tissue_type_5_5" type="string"/>
+        <element label="Case Tissue Type 6 1" max_length="200" name="case_tissue_type_6_1" type="string"/>
+        <element label="Case Tissue Type 6 2" max_length="200" name="case_tissue_type_6_2" type="string"/>
+        <element label="Case Tissue Type 6 3" max_length="200" name="case_tissue_type_6_3" type="string"/>
+        <element label="Case Tissue Type 6 4" max_length="200" name="case_tissue_type_6_4" type="string"/>
+        <element label="Case Tissue Type 6 5" max_length="200" name="case_tissue_type_6_5" type="string"/>
         <element label="Clinic Archives" max_length="200" name="clinic_archives" type="string"/>
+        <element label="Disease or Site" max_length="200" name="disease_or_site" type="string"/>
         <element label="FFPE Tissue Block Text" max_length="500" name="ffpe_tissue_block_text" type="string"/>
         <element label="FFPE Tissue Block Text 2" max_length="500" name="ffpe_tissue_block_text_2" type="string"/>
         <element label="FFPE Tissue Block Text 3" max_length="500" name="ffpe_tissue_block_text_3" type="string"/>
+        <element label="Five Key Word" max_length="300" name="five_key_word" type="string"/>
         <element label="HE" max_length="40" name="he" type="boolean"/>
         <element label="HE2" max_length="40" name="he2" type="boolean"/>
         <element label="HE3" max_length="40" name="he3" type="boolean"/>
         <element label="Intend to Use 4" max_length="1000" name="intend_to_use_4" type="string"/>
         <element label="Intend to Use 5" max_length="1000" name="intend_to_use_5" type="string"/>
+        <element label="Intend to Use 6" max_length="1000" name="intend_to_use_6" type="string"/>
         <element label="Intend to Use" max_length="1000" name="intent_to_use" type="string"/>
         <element label="Intend to Use 2" max_length="1000" name="intent_to_use_2" type="string"/>
         <element label="Intend to Use 3" max_length="1000" name="intent_to_use_3" type="string"/>
@@ -44,12 +53,15 @@
         <element label="Material Being Requested 3" max_length="200" name="material_being_requested_3" type="string"/>
         <element label="Material Being Requested 4" max_length="500" name="material_being_requested_4" type="string"/>
         <element label="Material Being Requested 5" max_length="500" name="material_being_requested_5" type="string"/>
+        <element label="Material Being Requested 6" max_length="500" name="material_being_requested_6" type="string"/>
         <element label="Number of Recuts per Slide" max_length="100" name="number_of_recuts" type="string"/>
         <element label="Number of Recuts per Slide2" max_length="100" name="number_of_recuts2" type="string"/>
         <element label="Number of Recuts per Slide 3" max_length="100" name="number_of_recuts_per_slide_3" type="string"/>
+        <element label="Other Disease or site" max_length="200" name="other_disease_or_site" type="string"/>
         <element label="Other Material Specify" max_length="300" name="other_material_specify" type="string"/>
         <element label="Other Material Specify 2" max_length="300" name="other_material_specify_2" type="string"/>
         <element label="Other Material Specify 3" max_length="300" name="other_material_specify_3" type="string"/>
+        <element label="Other Type of Research" max_length="200" name="other_type_of_research" type="string"/>
         <element label="Patient Name" max_length="1000" name="patient_name" type="string"/>
         <element label="Patient Name 1" max_length="500" name="patient_name_1" type="string"/>
         <element label="Patient Name 2" max_length="500" name="patient_name_2" type="string"/>
@@ -57,6 +69,9 @@
         <element label="Patient Name 4" max_length="500" name="patient_name_4" type="string"/>
         <element label="Patient Name 5" max_length="500" name="patient_name_5" type="string"/>
         <element label="Principal Investigator" max_length="32" name="principal_investigator" reference="sys_user" type="reference"/>
+        <element label="Project End Date" max_length="40" name="project_end_date" type="glide_date"/>
+        <element label="Project Start Date" max_length="40" name="project_start_date" type="glide_date"/>
+        <element label="Project Title" max_length="500" name="project_title" type="string"/>
         <element label="Requested Thickness" max_length="100" name="requested_thickness" type="string"/>
         <element label="Requested Thickness 3" max_length="100" name="requested_thickness_3" type="string"/>
         <element label="Requested Thickness2" max_length="100" name="requested_thinkness2" type="string"/>
@@ -77,6 +92,7 @@
         <element choice="1" label="Type" mandatory="true" max_length="200" name="type" type="string">
             <choice/>
         </element>
+        <element label="Type of Research" max_length="200" name="type_of_research" type="string"/>
         <index name="index">
             <element name="principal_investigator"/>
         </index>

@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
     <question_choice action="INSERT_OR_UPDATE">
         <misc>0</misc>
-        <order>600</order>
-        <question display_value="Type">ea080a31dbb40450b86770c08c961979</question>
+        <order>200</order>
+        <question display_value="What Type of Research Collaboration is Rquested">92bebd74dbc54810b86770c08c96193a</question>
         <rec_misc>0</rec_misc>
         <sys_class_name>question_choice</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 15:16:25</sys_created_on>
+        <sys_created_on>2019-11-08 21:15:02</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>8a475235dbf40450b86770c08c9619a5</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_name>FFPE &amp; Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration</sys_name>
+        <sys_id>bf8f3d74dbc54810b86770c08c961944</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Pathologic Evaluation of Stained Tissue</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-        <sys_update_name>question_choice_8a475235dbf40450b86770c08c9619a5</sys_update_name>
+        <sys_update_name>question_choice_bf8f3d74dbc54810b86770c08c961944</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-08 15:09:17</sys_updated_on>
-        <text>FFPE &amp; Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration</text>
-        <value>FFPE &amp; Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration</value>
+        <sys_updated_on>2019-11-08 21:15:02</sys_updated_on>
+        <text>Pathologic Evaluation of Stained Tissue</text>
+        <value>Pathologic Evaluation of Stained Tissue</value>
     </question_choice>
-    <fx_price action="delete_multiple" query="id=8a475235dbf40450b86770c08c9619a5"/>
+    <fx_price action="delete_multiple" query="id=bf8f3d74dbc54810b86770c08c961944"/>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>misc</field>
-        <id>8a475235dbf40450b86770c08c9619a5</id>
+        <id>bf8f3d74dbc54810b86770c08c961944</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 15:16:25</sys_created_on>
-        <sys_id>866792f1dbf40450b86770c08c9619f5</sys_id>
+        <sys_created_on>2019-11-08 21:15:03</sys_created_on>
+        <sys_id>3ecfbdb4dbc54810b86770c08c9619ac</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 15:16:25</sys_updated_on>
+        <sys_updated_on>2019-11-08 21:15:03</sys_updated_on>
         <table>question_choice</table>
         <type>calculated</type>
     </fx_price>
@@ -43,16 +43,16 @@
         <amount>0</amount>
         <currency display_value="USD">USD</currency>
         <field>rec_misc</field>
-        <id>8a475235dbf40450b86770c08c9619a5</id>
+        <id>bf8f3d74dbc54810b86770c08c961944</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2019-10-30 15:16:25</sys_created_on>
-        <sys_id>4e6792f1dbf40450b86770c08c9619f4</sys_id>
+        <sys_created_on>2019-11-08 21:15:02</sys_created_on>
+        <sys_id>f2cfbdb4dbc54810b86770c08c9619ac</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 15:16:25</sys_updated_on>
+        <sys_updated_on>2019-11-08 21:15:02</sys_updated_on>
         <table>question_choice</table>
         <type>calculated</type>
     </fx_price>
