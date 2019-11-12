@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element audit="true" extends="task" label="Tissue Resource Request" max_length="40" name="x_naci_tissue_requ_tissue_resource_request" sizeclass="2" type="collection">
+    <element audit="true" extends="task" label="Tissue Resource Request" max_length="40" name="x_naci_tissue_requ_tissue_resource_request" sizeclass="1" type="collection">
         <element label="Abstract or Summary" max_length="2000" name="abstract_or_summary" type="string"/>
         <element label="Alternative Contact" max_length="200" name="alternative_contact" type="string"/>
         <element label="Alternative Phone" max_length="200" name="alternative_phone" type="string"/>
@@ -89,10 +89,9 @@
         <element label="Tissue Shaving Text" max_length="300" name="tissue_shaving_text" type="string"/>
         <element label="Tissue Shaving Text 2" max_length="300" name="tissue_shaving_text_2" type="string"/>
         <element label="Tissue Shaving Text 3" max_length="300" name="tissue_shaving_text_3" type="string"/>
-        <element choice="1" label="Type" mandatory="true" max_length="200" name="type" type="string">
-            <choice/>
-        </element>
+        <element label="Type" mandatory="true" max_length="200" name="type" type="string"/>
         <element label="Type of Research" max_length="200" name="type_of_research" type="string"/>
+        <element label="New File Attachment" max_length="40" name="u_file_attachment_2" type="file_attachment"/>
         <index name="index">
             <element name="principal_investigator"/>
         </index>

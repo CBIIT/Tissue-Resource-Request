@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+  console.log(c.data);
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.label-bold {
+  font-weight: bold;
+  margin-top:20px;
+  display: block;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.p-5 {
+  padding: 2.5rem;
+}
+
+
+.mr-5 {
+  margin-right: 2.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-20 {
+ 	margin-top: 20px; 
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>review_tissue_request_submission</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Review Tissue Request Submission</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	var str = gs.action.getGlideURI();
+	var sys_id = str.get('sys_id');
+	data.item = {};
+	
+	var tissue = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
+	    tissue.get(sys_id);
+	    //set up common section
+			data.item.number = tissue.number.toString();
+			data.item.piName = tissue.principal_investigator.name.toString();
+	    //get user information
+			var gr_user = new GlideRecord('sys_user');
+			if (gr_user.get(tissue.principal_investigator.toString())) {
+				data.item.institution = gr_user.getValue('u_org_');
+				data.item.branch = gr_user.department.name.toString();
+				data.item.building = gr_user.getValue('u_building_name');
+				data.item.room = gr_user.getValue('u_room');
+				data.item.phone = gr_user.getValue('phone');
+				data.item.email = gr_user.getValue('email');
+			}
+	    data.item.alternative_contact = tissue.alternative_contact.toString();
+			data.item.alternative_phone = tissue.alternative_phone.toString();
+			data.item.can_number = tissue.can_number.toString();
+			data.item.type = tissue.type.toString();
+	    var type = tissue.type;
+	    if(type == 'Clinical Archives linked to protocol'){
+					data.item.irb_protocol = tissue.irb_protocol_number.toString();
+					data.item.patient_name = tissue.patient_name.toString();
+					data.item.caseBlock1 = tissue.case_block_1.toString();
+					data.item.caseBlock2 = tissue.case_block_2.toString(); 
+					data.item.caseBlock3 = tissue.case_block_3.toString();				
+					data.item.caseBlock4 = tissue.case_block_4.toString();
+					data.item.caseBlock5 = tissue.case_block_5.toString();
+					data.item.material_requested = tissue.material_being_requested.toString();
+				  if(data.item.material_requested == 'Unstained Slides'){
+						data.item.number_recuts = tissue.number_of_recuts.toString();
+						data.item.thickness = tissue.requested_thickness.toString();
+					}else if(data.item.material_requested == 'Stained Slides'){
+						data.item.he = tissue.he.toString() == 'true';
+						data.item.special_stains = tissue.special_stains.toString() == 'true';
+					}else if(data.item.material_requested == 'Tissue Shavings'){
+						data.item.tissue_shaving_text = tissue.tissue_shaving_text.toString();
+					}else if(data.item.material_requested == 'Slide Signout From LP'){
+						data.item.slide_signout_from_lp_text = tissue.slide_signout_from_lp_text.toString();
+					}else if(data.item.material_requested == 'Other Material'){
+						data.item.other_material_specify = tissue.other_material_specify.toString();
+					}else if(data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
+						data.item.ffpe_tissue_block_text = tissue.ffpe_tissue_block_text.toString();
+					}
+					data.item.special_processing_or_handling = tissue.special_processing_or_handling.toString();
+					data.item.intent_to_use = tissue.intent_to_use.toString();
+			}else if(type=='Clinical Archives unlinked'){
+				
+			}else if(type=='Formalin - Fixed Paraffin - Embedded Biomedical Waste - Unlinked / Anonymized'){
+				
+			}else if(type=='Fresh Frozen normal non-tumor'){
+				
+			}else if(type=='Fresh Post-Mortem collection'){
+				
+			}else if(type=='FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration'){
+				
+			}else if(type=='Facilitated fresh tissue collection via CCR / WRNMMC Collaboration'){
+				
+			}
+	    data.files = [];
+			//find all attachments
+			var attach = new GlideRecord('sys_attachment');
+			attach.addQuery('table_name', 'x_naci_tissue_requ_tissue_resource_request');
+			attach.addQuery('table_sys_id', sys_id);
+			attach.orderByDesc('sys_created_on');
+			attach.query();
+			while(attach.next()){
+				data.files.push(attach.file_name.toString());
+			}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-11-12 15:53:36</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>559cd946dbc58c10b86770c08c961919</sys_id>
+        <sys_mod_count>144</sys_mod_count>
+        <sys_name>Review Tissue Request Submission</sys_name>
+        <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+        <sys_update_name>sp_widget_559cd946dbc58c10b86770c08c961919</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-11-12 22:46:47</sys_updated_on>
+        <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
+  <div class="text-success mb-3">Your Request has been submitted successfully</div>
+  <h2>Tissue Resource Request</h2>  
+  <hr>
+  <div class="mt-5">
+      <b class="mr-5">Tissue Resource Request Item Number</b>{{c.data.item.number}}   
+  </div>
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-md-12">
+      <label class="label-bold">Principal Investigator</label>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      {{c.data.item.piName}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-bold">Institution</label>
+      {{data.item.institution}}
+    </div>  
+    <div class="col-md-6">
+      <label class="label-bold">Branch</label>
+      {{data.item.branch}}		
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-bold">Building</label>
+      {{data.item.building}}
+    </div>  
+    <div class="col-md-6">
+      <label class="label-bold">Room</label>
+      {{data.item.room}}
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-bold">Phone</label>
+      {{data.item.phone}}
+    </div>  
+    <div class="col-md-6">
+      <label class="label-bold">Email</label>
+      {{data.item.email}}
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-bold">Alternative Contact</label>
+      {{data.item.alternative_contact}}
+    </div>  
+    <div class="col-md-6">
+      <label class="label-bold">Alternative Phone</label>
+      {{data.item.alternative_phone}}
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="label-bold">CAN Number</label>
+      {{c.data.item.can_number}}
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-12">
+      <label class="label-bold">Type</label>
+      {{c.data.item.type}}
+    </div>
+  </div>  
+  <!-- end of common part-->
+  <!-- type 1 Clinical Archives linked to protocol -->
+  <div ng-show = 'c.data.item.type == "Clinical Archives linked to protocol"'>
+  	<div class="row">
+			<div class="col-md-6">
+        <label class="label-bold">Provide IRB Protocol #</label>
+        {{c.data.item.irb_protocol}}
+      </div>      
+			<div class="col-md-6">
+        <label class="label-bold">Patient Name</label>
+        {{c.data.item.patient_name}}
+      </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Surgical Pathology or Cytology Case #(s)</label>
+        <span>If requesting material from a case with multiple blocks, the requester must specify which block is being requested (e.g. SI-xx-1234, block 1A) Note: if needed, schedule a meeting with the LP Hotseat Resident or collaborating pathologist to select the most appropriate block(s).</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock1}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock2}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock3}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock4}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock5}}
+      </div>
+    </div>
+		<div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.data.item.material_requested}}
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Unstained Slides'">
+      <div class="col-md-6">
+        <label class="label-bold">Number of recuts per slide</label>
+        {{c.data.item.number_recuts}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Requested thickness</label>
+        {{c.data.item.thickness}}
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'" style="margin-top: 20px;">
+      <div class="col-md-12">
+        <input type="checkbox" ng-model="c.data.item.he" disabled='disabled'> H&E 
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'">
+      <div class="col-md-12">
+        <input type="checkbox" ng-model="c.data.item.special_stains" disabled='disabled'> If Special stains or IHC, must be via collaboration with an LP Pathlogist
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Tissue Shavings'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.tissue_shaving_text}}
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Slide Signout From LP'">
+       <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.slide_signout_from_lp_text}}
+      </div>     
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Other Material'">
+       <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.other_material_specify}}
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        <span>LP does not typically release tissue blocks from the clinical archived biomaterial. On a rare occasion, the LP Medical Director can authorize the temporary release of a clinical tissue block for additional non-LP clinical testing.</span>
+      </div>       
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.ffpe_tissue_block_text}}
+      </div>       
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Specify any special processing or handling request (e.g. charged, RNAse free, etc)</label>
+        {{c.data.item.special_processing_or_handling}}
+      </div>
+    </div>
+		<div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Intended use</label>
+        {{c.data.item.intent_to_use}}
+      </div>
+    </div>    
+  </div>
+  <!-- type 2  -->
+  <!-- type 3  -->
+  <!-- type 4  -->
+  <!-- type 5  -->
+  <!-- type 6  -->
+  <!-- type 7  -->
+  
+  <!-- show attachments -->
+  <div class="row" ng-show='c.data.files.length > 0'>
+    <div class="col-md-12">
+      <label class="label-bold">Attachment(s)</label>
+      	<div ng-repeat='item in c.data.files'>{{item}}</div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>
