@@ -4,7 +4,9 @@
         <client_script><![CDATA[function() {
   /* widget controller */
   var c = this;
-  console.log(c.data);
+	console.log("=====" + c.data.item.type);
+  console.log("=====" + c.data.item.material_requested);
+	//console.log("=====" + c.data.item.ffpe_tissue_block_text);
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>.label-bold {
@@ -100,17 +102,85 @@
 					data.item.special_processing_or_handling = tissue.special_processing_or_handling.toString();
 					data.item.intent_to_use = tissue.intent_to_use.toString();
 			}else if(type=='Clinical Archives unlinked'){
-				
+				  data.item.clinic_archives = tissue.clinic_archives.toString();
+					data.item.caseBlock1 = tissue.case_block_2_1.toString();
+					data.item.caseBlock2 = tissue.case_block_2_2.toString(); 
+					data.item.caseBlock3 = tissue.case_block_2_3.toString();				
+					data.item.caseBlock4 = tissue.case_block_2_4.toString();
+					data.item.caseBlock5 = tissue.case_block_2_5.toString();
+					data.item.material_requested = tissue.material_being_requested_2.toString();
+					if(data.item.material_requested == 'Unstained Slides'){
+						data.item.number_recuts = tissue.number_of_recuts2.toString();
+						data.item.thickness = tissue.requested_thinkness2.toString();
+					}else if(data.item.material_requested == 'Stained Slides'){
+						data.item.he = tissue.he2.toString() == 'true';
+						data.item.special_stains = tissue.special_stains2.toString() == 'true';
+					}else if(data.item.material_requested == 'Tissue Shavings'){
+						data.item.tissue_shaving_text = tissue.tissue_shaving_text_2.toString();
+					}else if(data.item.material_requested == 'Slide Signout from LP'){
+						data.item.slide_signout_from_lp_text = tissue.slide_signout_from_lp_text_2.toString();
+					}else if(data.item.material_requested == 'Other Material'){
+						data.item.other_material_specify = tissue.other_material_specify_2.toString();
+					}else if(data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
+						data.item.ffpe_tissue_block_text = tissue.ffpe_tissue_block_text_2.toString();
+					}
+					data.item.special_processing_or_handling = tissue.special_processing_or_handling_2.toString();
+					data.item.intent_to_use = tissue.intent_to_use_2.toString();				
 			}else if(type=='Formalin - Fixed Paraffin - Embedded Biomedical Waste - Unlinked / Anonymized'){
-				
+					data.item.case_tissue_type = tissue.case_tissue_type.toString();
+				  data.item.material_requested = tissue.material_being_requested_3.toString();
+					if(data.item.material_requested == 'Unstained Slides'){
+						data.item.number_recuts = tissue.number_of_recuts_per_slide_3.toString();
+						data.item.thickness = tissue.requested_thickness_3.toString();
+					}else if(data.item.material_requested == 'Stained Slides'){
+						data.item.he = tissue.he3.toString() == 'true';
+						data.item.special_stains = tissue.special_stains3.toString() == 'true';
+					}else if(data.item.material_requested == 'Tissue Shavings'){
+						data.item.tissue_shaving_text = tissue.tissue_shaving_text_3.toString();
+					}else if(data.item.material_requested == 'Other Material'){
+						data.item.other_material_specify = tissue.other_material_specify_3.toString();
+					}else if(data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
+						data.item.ffpe_tissue_block_text = tissue.ffpe_tissue_block_text_3.toString();
+					}				
+					data.item.special_processing_or_handling = tissue.special_processing_or_handling_3.toString();
+					data.item.intent_to_use = tissue.intent_to_use_3.toString();
 			}else if(type=='Fresh Frozen normal non-tumor'){
-				
+					data.item.caseBlock1 = tissue.case_tissue_type_4_1.toString();
+					data.item.caseBlock2 = tissue.case_tissue_type_4_2.toString(); 
+					data.item.caseBlock3 = tissue.case_tissue_type_4_3.toString();				
+					data.item.caseBlock4 = tissue.case_tissue_type_4_4.toString();
+					data.item.caseBlock5 = tissue.case_tissue_type_4_5.toString();
+				  data.item.material_requested = tissue.material_being_requested_4.toString();
+				  data.item.intent_to_use = tissue.intend_to_use_4.toString();
 			}else if(type=='Fresh Post-Mortem collection'){
-				
+					data.item.caseBlock1 = tissue.case_tissue_type_5_1.toString();
+					data.item.caseBlock2 = tissue.case_tissue_type_5_2.toString(); 
+					data.item.caseBlock3 = tissue.case_tissue_type_5_3.toString();				
+					data.item.caseBlock4 = tissue.case_tissue_type_5_4.toString();
+					data.item.caseBlock5 = tissue.case_tissue_type_5_5.toString();	
+				  data.item.patient_name1 = tissue.patient_name_1.toString();
+					data.item.patient_name2 = tissue.patient_name_2.toString();
+					data.item.patient_name3 = tissue.patient_name_3.toString();
+					data.item.patient_name4 = tissue.patient_name_4.toString();
+					data.item.patient_name5 = tissue.patient_name_5.toString();
+				  data.item.material_requested = tissue.material_being_requested_5.toString();
+				  data.item.intent_to_use = tissue.intend_to_use_5.toString();
 			}else if(type=='FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration'){
-				
+					data.item.caseBlock1 = tissue.case_tissue_type_6_1.toString();
+					data.item.caseBlock2 = tissue.case_tissue_type_6_2.toString(); 
+					data.item.caseBlock3 = tissue.case_tissue_type_6_3.toString();				
+					data.item.caseBlock4 = tissue.case_tissue_type_6_4.toString();
+					data.item.caseBlock5 = tissue.case_tissue_type_6_5.toString();			
+					data.item.material_requested = tissue.material_being_requested_6.toString();
+				  data.item.intent_to_use = tissue.intend_to_use_6.toString();
 			}else if(type=='Facilitated fresh tissue collection via CCR / WRNMMC Collaboration'){
-				
+				  data.item.project_title = tissue.project_title.toString();
+				  data.item.project_start_date = tissue.project_start_date.toString();
+				  data.item.project_complete_date = tissue.project_end_date.toString();
+				  data.item.five_words = tissue.five_key_word.toString();
+				  data.item.type_research = tissue.type_of_research.toString();
+					data.item.disease_site = tissue.disease_or_site.toString();
+				  data.item.summary = tissue.abstract_or_summary.toString();
 			}
 	    data.files = [];
 			//find all attachments
@@ -120,7 +190,10 @@
 			attach.orderByDesc('sys_created_on');
 			attach.query();
 			while(attach.next()){
-				data.files.push(attach.file_name.toString());
+				var file ={};
+				file.name = attach.file_name.toString();
+				file.sys_id = attach.sys_id.toString();
+				data.files.push(file);
 			}
 })();]]></script>
         <servicenow>false</servicenow>
@@ -129,7 +202,7 @@
         <sys_created_on>2019-11-12 15:53:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>559cd946dbc58c10b86770c08c961919</sys_id>
-        <sys_mod_count>144</sys_mod_count>
+        <sys_mod_count>232</sys_mod_count>
         <sys_name>Review Tissue Request Submission</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -137,13 +210,13 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_559cd946dbc58c10b86770c08c961919</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-12 22:46:47</sys_updated_on>
+        <sys_updated_on>2019-11-13 21:48:27</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <div class="text-success mb-3">Your Request has been submitted successfully</div>
   <h2>Tissue Resource Request</h2>  
   <hr>
   <div class="mt-5">
-      <b class="mr-5">Tissue Resource Request Item Number</b>{{c.data.item.number}}   
+    <b class="mr-5">Tissue Resource Request Item Number</b>{{c.data.item.number}}   
   </div>
   <div class="row" style="margin-top: 20px;">
     <div class="col-md-12">
@@ -210,13 +283,13 @@
   </div>  
   <!-- end of common part-->
   <!-- type 1 Clinical Archives linked to protocol -->
-  <div ng-show = 'c.data.item.type == "Clinical Archives linked to protocol"'>
-  	<div class="row">
-			<div class="col-md-6">
+  <div id="type1" ng-show = 'c.data.item.type == "Clinical Archives linked to protocol"'>
+    <div class="row">
+      <div class="col-md-6">
         <label class="label-bold">Provide IRB Protocol #</label>
         {{c.data.item.irb_protocol}}
       </div>      
-			<div class="col-md-6">
+      <div class="col-md-6">
         <label class="label-bold">Patient Name</label>
         {{c.data.item.patient_name}}
       </div>      
@@ -253,7 +326,7 @@
         {{c.data.item.caseBlock5}}
       </div>
     </div>
-		<div class="row">
+    <div class="row">
       <div class="col-md-12">
         <label class="label-bold">Material Being Requested</label>
         {{c.data.item.material_requested}}
@@ -286,13 +359,13 @@
       </div>      
     </div>
     <div class="row" ng-show="c.data.item.material_requested == 'Slide Signout From LP'">
-       <div class="col-md-12">
+      <div class="col-md-12">
         <label class="label-bold">Specify</label>
         {{c.data.item.slide_signout_from_lp_text}}
       </div>     
     </div>
     <div class="row" ng-show="c.data.item.material_requested == 'Other Material'">
-       <div class="col-md-12">
+      <div class="col-md-12">
         <label class="label-bold">Specify</label>
         {{c.data.item.other_material_specify}}
       </div>      
@@ -315,7 +388,7 @@
         {{c.data.item.special_processing_or_handling}}
       </div>
     </div>
-		<div class="row">
+    <div class="row">
       <div class="col-md-12">
         <label class="label-bold">Intended use</label>
         {{c.data.item.intent_to_use}}
@@ -323,17 +396,430 @@
     </div>    
   </div>
   <!-- type 2  -->
+  <div id="type2" ng-show = 'c.data.item.type == "Clinical Archives unlinked"'>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Clinical Archives unlinked or Autopsy</label>
+        {{c.data.item.clinic_archives}}
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.clinic_archives == 'Clinical Archives'">
+      <div class="col-md-12">
+        <label class="label-bold">Clinic Archives Note</label>
+        <ul>
+          <li>Can be email or formal form from IRB for exemption</li>
+          <li>All slides and/or containers will be deidentified for unlinked clinical archived material.</li>
+          <li>There will be no link available</li>
+        </ul>
+      </div>
+    </div>    
+    <div class="row" ng-show="c.data.item.clinic_archives == 'Clinical Archives'">
+      <div class="col-md-12">
+        <label class="label-bold">Provide IRB Exception</label>
+        Please see Attachment(s) section
+      </div>
+    </div>    
+    <div class="row" ng-show="c.data.item.clinic_archives == 'Clinical laboratory validation material does not require IRB approval'">
+      <div class="col-md-12">
+        <label class="label-bold">Laboratory Validation Note</label>
+        Clinical validation material (must provide clinical test being validated in intended use)
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock1}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock2}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock3}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock4}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock5}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.data.item.material_requested}}
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Unstained Slides'">
+      <div class="col-md-6">
+        <label class="label-bold">Number of recuts per slide</label>
+        {{c.data.item.number_recuts}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Requested thickness</label>
+        {{c.data.item.thickness}}
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'" style="margin-top: 20px;">
+      <div class="col-md-12">
+        <input type="checkbox" ng-model="c.data.item.he" disabled='disabled'> H&E 
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'">
+      <div class="col-md-12">
+        <input type="checkbox" ng-model="c.data.item.special_stains" disabled='disabled'> If Special stains or IHC, must be via collaboration with an LP Pathlogist
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Tissue Shavings'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.tissue_shaving_text}}
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Slide Signout from LP'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.slide_signout_from_lp_text}}
+      </div>     
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Other Material'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.other_material_specify}}
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        <span>LP does not typically release tissue blocks from the clinical archived biomaterial. On a rare occasion, the LP Medical Director can authorize the temporary release of a clinical tissue block for additional non-LP clinical testing.</span>
+      </div>       
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.ffpe_tissue_block_text}}
+      </div>       
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Specify any special processing or handling request (e.g. charged, RNAse free, etc)</label>
+        {{c.data.item.special_processing_or_handling}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Intended use</label>
+        {{c.data.item.intent_to_use}}
+      </div>
+    </div>    
+  </div>
   <!-- type 3  -->
+  <div id="type3" ng-show = 'c.data.item.type == "Formalin - Fixed Paraffin - Embedded Biomedical Waste - Unlinked / Anonymized"'>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        <ul>
+          <li>All slides and/or containers will be deidentified for unlinked clinical archived material.</li>
+          <li>There will be no link available or kept on file in LP.</li>
+          <li>Complete one request per tissue type.</li>
+        </ul>
+      </div>       
+    </div>  
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Case / Tissue Type Being Requested</label>
+        {{c.data.item.case_tissue_type}}
+      </div>       
+    </div> 
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.data.item.material_requested}}
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Unstained Slides'">
+      <div class="col-md-6">
+        <label class="label-bold">Number of recuts per slide</label>
+        {{c.data.item.number_recuts}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Requested thickness</label>
+        {{c.data.item.thickness}}
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'" style="margin-top: 20px;">
+      <div class="col-md-12">
+        <input type="checkbox" ng-model="c.data.item.he" disabled='disabled'> H&E 
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'">
+      <div class="col-md-12">
+        <input type="checkbox" ng-model="c.data.item.special_stains" disabled='disabled'> If Special stains or IHC, must be via collaboration with an LP Pathlogist
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Tissue Shavings'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.tissue_shaving_text}}
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Other Material'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.other_material_specify}}
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.ffpe_tissue_block_text}}
+      </div>       
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Specify any special processing or handling request (e.g. charged, RNAse free, etc)</label>
+        {{c.data.item.special_processing_or_handling}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Intended use</label>
+        {{c.data.item.intent_to_use}}
+      </div>
+    </div>    
+  </div>
   <!-- type 4  -->
+  <div id="type4" ng-show = 'c.data.item.type == "Fresh Frozen normal non-tumor"'>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock1}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock2}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock3}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock4}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock5}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.data.item.material_requested}}
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Intended use</label>
+        {{c.data.item.intent_to_use}}
+      </div>
+    </div>      
+  </div>
   <!-- type 5  -->
+  <div id="type5" ng-show = 'c.data.item.type == "Fresh Post-Mortem collection"'>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        requesting PI will identify processing/storage media and transport, LP will notify PI when an appropriate case is scheduled, most often short-notice
+      </div>
+    </div>     
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock1}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock2}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock3}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock4}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock5}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        Specify patient name(s) and medical record number(s) If specific Case(s) being requested
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.data.item.patient_name1}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.data.item.patient_name2}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.data.item.patient_name3}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.data.item.patient_name4}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.data.item.patient_name5}}
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.data.item.material_requested}}
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Intended use</label>
+        {{c.data.item.intent_to_use}}
+      </div>
+    </div>     
+  </div>
   <!-- type 6  -->
+  <div id="type6" ng-show = 'c.data.item.type == "FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration"'>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        <ul>
+          <li>These tissues are collected via a research collaboration between NCI and WRNMMC.</li>
+          <li>All biomaterial are unlinked and anonymized, issued as FFPE tissue block and/or snap frozen.</li>
+          <li>Clinical information might include: Age, Sex, Ethnicity, Demongraphics, Clinical History and Diagnostic/Laboratory Data.</li>
+        </ul>
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock1}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock2}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock3}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock4}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock5}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.data.item.material_requested}}
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Intended use</label>
+        {{c.data.item.intent_to_use}}
+      </div>
+    </div>     
+  </div>
   <!-- type 7  -->
-  
+  <div id="type7" ng-show = 'c.data.item.type == "Facilitated fresh tissue collection via CCR / WRNMMC Collaboration"'>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        can be fresh collection, LP will facilitate through CCR medical liaison to link NIH PI with WR clinicians.
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Title of Project</label>
+        {{c.data.item.project_title}}
+      </div>
+    </div>        
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Estimated Project Start Date</label>
+        {{c.data.item.project_start_date}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Estimated Project Complete Date</label>
+        {{c.data.item.project_complete_date}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Provide up to 5 Key Words that Identify the Broad Topic(s)/Expertise of Your Study</label>
+        {{c.data.item.five_words}}
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">What Type of Research Collaboration is Rquested</label>
+        {{c.data.item.type_research}}
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">What is the Disease/Site</label>
+        {{c.data.item.disease_site}}
+      </div>
+    </div>     
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Abstract/Summary (Briefly Describe the Purpose, Subject Population, Study's Design Type and Procedures)</label>
+        {{c.data.item.summary}}
+      </div>
+    </div>     
+  </div>
   <!-- show attachments -->
   <div class="row" ng-show='c.data.files.length > 0'>
     <div class="col-md-12">
       <label class="label-bold">Attachment(s)</label>
-      	<div ng-repeat='item in c.data.files'>{{item}}</div>
+      <div ng-repeat='item in c.data.files'><a href='/api/naci/attachment_util/attachment/v1/{{item.sys_id}}' target="_BLANK">{{item.name}}</a></div>
     </div>
   </div>
 </div>]]></template>
