@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_grid_canvas_pane">
+    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+        <grid_canvas display_value="PA New Tab">c951d8b2dbc18010b86770c08c961953</grid_canvas>
+        <height>35</height>
+        <portal_widget display_value="Created Nov 14, 2019 13:36:56">1d25d0f6dbc18010b86770c08c9619a9</portal_widget>
+        <posx>0</posx>
+        <posy>0</posy>
+        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-11-14 18:36:56</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>5925d0f6dbc18010b86770c08c9619ac</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>c951d8b2dbc18010b86770c08c961953</sys_name>
+        <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+        <sys_update_name>sys_grid_canvas_pane_5925d0f6dbc18010b86770c08c9619ac</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-11-14 18:43:12</sys_updated_on>
+        <width>12</width>
+    </sys_grid_canvas_pane>
+</record_update>
