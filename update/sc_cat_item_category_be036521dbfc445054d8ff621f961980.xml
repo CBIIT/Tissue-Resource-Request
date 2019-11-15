@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_category">
     <sc_cat_item_category action="INSERT_OR_UPDATE">
-        <sc_cat_item display_value="Tissue Resource Request">6db2ededdbbc445054d8ff621f9619d9</sc_cat_item>
+        <sc_cat_item display_value="Submit Tissue Request">6db2ededdbbc445054d8ff621f9619d9</sc_cat_item>
         <sc_category display_value="General">a3afbf21dbc30b0004e574131f961918</sc_category>
         <sys_class_name>sc_cat_item_category</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>

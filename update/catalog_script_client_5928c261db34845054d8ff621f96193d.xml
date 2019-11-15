@@ -7,7 +7,7 @@
         <applies_sc_task>false</applies_sc_task>
         <applies_target_record>false</applies_target_record>
         <applies_to>item</applies_to>
-        <cat_item display_value="Tissue Resource Request">6db2ededdbbc445054d8ff621f9619d9</cat_item>
+        <cat_item display_value="Submit Tissue Request">6db2ededdbbc445054d8ff621f9619d9</cat_item>
         <cat_variable>IO:8355a5e1dbfc445054d8ff621f961954</cat_variable>
         <condition/>
         <description/>

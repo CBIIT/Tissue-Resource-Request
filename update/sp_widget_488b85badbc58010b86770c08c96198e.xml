@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function() {
-  /* widget controller */
-  var c = this;
-	$('header,footer').hide();
+        <client_script><![CDATA[function($scope, $location, snAttachmentHandler, cabrillo) {
+	/* widget controller */
+	var c = this;	
+
+	addStyle('@media (min-width: 1200px){ .container { width: 60% !important; }}')
+	function addStyle(styleText) {
+		var style = document.createElement('style');
+		style.innerHTML = styleText;
+		document.head.appendChild(style);
+	}
 }]]></client_script>
         <controller_as>c</controller_as>
-        <css/>
+        <css>.panel-title{
+ background-color: #12416f;
+ color:white; 
+}</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
         <description/>
@@ -21,14 +30,55 @@
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	var userId = gs.getUserID().toString();
+	var isAdmin = gs.getUser().isMemberOf('Tissue Resource Request LP Committee');
+  var isLocalStaff = gs.getUser().isMemberOf('Tissue Resource Request Local Staff');
+	
+	data.needMore = [];
+	data.supervideApproval = [];
+	data.committeeApproval = [];
+	data.localStaffApproval = [];
+	data.completed = [];
+	data.completedForAdmin = []
+	
+	var item = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
+			item.orderByDesc('number');
+			item.query();
+	while(item.next()){
+		var needm = {};
+		var spApproval = {};
+		var commApproval = {};
+		var localApproval = {};
+		var complete = {};
+		var completeAdmin = {};
+		
+		if(item.assigned_to.toString() == userId && stage == 'More Infromation'){
+			
+		}else if(item.assgined_to.toString() == userId && stage == 'Waiting for Supervisor Approval'){
+			
+		}else if(isAdmin && stage == 'Waiting for Committee Approval'){
+		
+		}else if(isLocalStaff && stage == 'Assigned to Local Staff'){
+		
+		}else if(stage == 'Completed'){
+			if(item.submitted_by.toString() == userId){
+				
+			}
+		}
+		
+	}
+
+})();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
         <sys_created_on>2019-11-14 22:34:25</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>488b85badbc58010b86770c08c96198e</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>74</sys_mod_count>
         <sys_name>Manager Tissue Resource Request </sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -36,9 +86,31 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_488b85badbc58010b86770c08c96198e</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-14 22:51:33</sys_updated_on>
+        <sys_updated_on>2019-11-15 22:50:48</sys_updated_on>
         <template><![CDATA[<div>
-This is a manage tissue resource request page
+	<div class="row">
+		<div class="col-md-12">
+      <h3>
+        Manage Tissue Resource Request(s)
+      </h3>
+    </div>
+  </div>
+  <hr/>
+  <!-- for need more information -->
+  <div class="row panel panel-default" id="moreInfo">
+		<div class="col-md-12 panel-title">
+      Need More Information
+    </div>
+  </div>
+  
+
+  
+
+  <!-- for wait for Supervisor approval-->
+  <!-- for wait for Commmittee approval-->
+  <!-- for wait for Assign to local staff-->
+  <!-- complete request -->
+  
 </div>]]></template>
     </sp_widget>
 </record_update>
