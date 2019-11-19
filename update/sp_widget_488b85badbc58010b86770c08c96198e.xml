@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope, $location, snAttachmentHandler, cabrillo) {
+        <client_script><![CDATA[function($scope, $location, snAttachmentHandler, cabrillo, spUtil) {
 	/* widget controller */
 	var c = this;	
 
-	addStyle('@media (min-width: 1200px){ .container { width: 60% !important; }}')
+	addStyle('@media (min-width: 1200px){ .container { width: 65% !important; }}')
 	function addStyle(styleText) {
 		var style = document.createElement('style');
 		style.innerHTML = styleText;
 		document.head.appendChild(style);
 	}
+	
+	c.data.table_label = [
+		{
+			key: 'principal_investigator',
+			label: 'Principal Investigator'
+		},
+		{
+			key: 'alternative_contact',
+			label: 'Alternative Contact'
+		}, 
+		{
+			key: 'alternative_phone',
+			label: 'Alternative Phone'
+		}, 
+		{
+			key: 'can_number',
+			label: 'CAN Number'
+		}, 
+		{
+			key: 'type',
+			label: 'Resource Type'
+		}
+	];
+	$scope.pagination = [5, 10, 15, 20, 25];
+	$scope.sortKey = null;
+	$scope.reverse = false;	
+	$scope.sort = function(keyname){
+    /*console.log($scope.sortKey);*/
+		/*console.log();*/
+		$scope.sortKey = keyname;   //set the sortKey to the param passed
+		$scope.reverse = !$scope.reverse; //if true make it false and vice versa
+	}	
+	spUtil.recordWatch($scope, "x_naci_tissue_requ_tissue_resource_request", "", function(name, data) {  
+			spUtil.update($scope);
+	});	
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>.panel-title{
  background-color: #12416f;
  color:white; 
-}</css>
+}
+</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
         <description/>
@@ -55,20 +91,55 @@
 		var complete = {};
 		var completeAdmin = {};
 		
-		if(item.assigned_to.toString() == userId && stage == 'More Infromation'){
-			
-		}else if(item.assgined_to.toString() == userId && stage == 'Waiting for Supervisor Approval'){
-			
-		}else if(isAdmin && stage == 'Waiting for Committee Approval'){
-		
-		}else if(isLocalStaff && stage == 'Assigned to Local Staff'){
-		
-		}else if(stage == 'Completed'){
-			if(item.submitted_by.toString() == userId){
-				
-			}
+		if(item.assigned_to.toString() == userId && item.stage.toString() == 'More Infromation'){
+			needm.sys_id = item.sys_id.toString();
+			needm.principal_investigator = item.principal_investigator.name.toString();
+			needm.alternative_contact = item.alternative_contact.toString();
+			needm.alternative_phone = item.alternative_phone.toString();
+			needm.can_number = item.can_number.toString();
+			needm.type = item.type.toString();
+			data.needMore.push(needm);
+		}else if(item.assigned_to.toString() == userId && item.stage.toString() == 'Waiting for Supervisor Approval'){
+			spApproval.sys_id = item.sys_id.toString();
+			spApproval.principal_investigator = item.principal_investigator.name.toString();
+			spApproval.alternative_contact = item.alternative_contact.toString();
+			spApproval.alternative_phone = item.alternative_phone.toString();
+			spApproval.can_number = item.can_number.toString();
+			spApproval.type = item.type.toString();
+			data.supervideApproval.push(spApproval);
+		}else if(isAdmin && item.stage.toString() == 'Waiting for Committee Approval'){
+			commApproval.sys_id = item.sys_id.toString();
+			commApproval.principal_investigator = item.principal_investigator.name.toString();
+			commApproval.alternative_contact = item.alternative_contact.toString();
+			commApproval.alternative_phone = item.alternative_phone.toString();
+			commApproval.can_number = item.can_number.toString();
+			commApproval.type = item.type.toString();
+			committeeApproval.push(commApproval)
+		}else if(isLocalStaff && item.stage.toString() == 'Assigned to Local Staff'){
+			localApproval.sys_id = item.sys_id.toString();
+			localApproval.principal_investigator = item.principal_investigator.name.toString();
+			localApproval.alternative_contact = item.alternative_contact.toString();
+			localApproval.alternative_phone = item.alternative_phone.toString();
+			localApproval.can_number = item.can_number.toString();
+			localApproval.type = item.type.toString();
+			localStaffApproval.push(localApproval);
+		}else if(isAdmin && item.stage.toString() == 'Completed'){
+			completeAdmin.sys_id = item.sys_id.toString();
+			completeAdmin.principal_investigator = item.principal_investigator.name.toString();
+			completeAdmin.alternative_contact = item.alternative_contact.toString();
+			completeAdmin.alternative_phone = item.alternative_phone.toString();
+			completeAdmin.can_number = item.can_number.toString();
+			completeAdmin.type = item.type.toString();
+			data.completedForAdmin.push(completeAdmin);
+		}else if(item.submitted_by.toString() == userId && item.stage.toString() == 'Completed'){
+			complete.sys_id = item.sys_id.toString();
+			complete.principal_investigator = item.principal_investigator.name.toString();
+			complete.alternative_contact = item.alternative_contact.toString();
+			complete.alternative_phone = item.alternative_phone.toString();
+			complete.can_number = item.can_number.toString();
+			complete.type = item.type.toString();
+			data.completed.push(complete);
 		}
-		
 	}
 
 })();]]></script>
@@ -78,7 +149,7 @@
         <sys_created_on>2019-11-14 22:34:25</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>488b85badbc58010b86770c08c96198e</sys_id>
-        <sys_mod_count>74</sys_mod_count>
+        <sys_mod_count>152</sys_mod_count>
         <sys_name>Manager Tissue Resource Request </sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -86,10 +157,10 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_488b85badbc58010b86770c08c96198e</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-15 22:50:48</sys_updated_on>
+        <sys_updated_on>2019-11-19 00:04:27</sys_updated_on>
         <template><![CDATA[<div>
-	<div class="row">
-		<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12">
       <h3>
         Manage Tissue Resource Request(s)
       </h3>
@@ -97,20 +168,92 @@
   </div>
   <hr/>
   <!-- for need more information -->
-  <div class="row panel panel-default" id="moreInfo">
-		<div class="col-md-12 panel-title">
+  <div class="row panel panel-default" ng-show="c.data.needMore.length > 0" id="moreInfo">
+    <div class="col-md-12 panel-title">
       Need More Information
     </div>
   </div>
-  
-
-  
-
   <!-- for wait for Supervisor approval-->
+  <div class="row panel panel-default" ng-show="c.data.supervideApproval.length > 0" id="supervisorApproval">
+    <div style="display: flex">
+      <label style="margin-top: 10px; margin-right:20px;">Search</label> 
+      <input type="text" 
+             class="form-control"  
+             placeholder="Tissue Resource Request Records" 
+             aria-describedby="search record"
+             ng-model="search" 
+             style="width: 300px; margin-top:5px;"/>  
+    </div>
+    <div class="panel-title">
+      Waiting for Supervisor approval
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover mt-3">
+        <tr>
+          <th ng-repeat="column in c.data.table_label" 
+              ng-click="sort(column.key)"
+              style='cursor:pointer'>
+            {{column.label}}
+            <span class="glyphicon sort-icon" ng-show="sortKey==column.key" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th> 
+          <th>Action</th>
+        </tr>
+        <tbody>
+          <tr dir-paginate="record in c.data.supervideApproval | filter:search | orderBy:sortKey:!reverse | itemsPerPage:pageSize">
+            <td ng-repeat="col in c.data.table_label">
+              {{ record[col.key] || 'N/A' }}  
+            </td>
+            <td>
+              <button class="btn btn-primary btn-font" ng-click="c.viewSupervisoe(record.sys_id)" style="padding: 5px 30px;">
+                View
+              </button>
+            </td>
+          </tr>
+        </tbody>        
+      </table>
+    </div>
+   <div style="display:flex;">
+    <span style="margin-right:auto">Total: {{ c.data.supervideApproval.length }}</span>
+    <div style="margin-left:auto">
+      <label class="">Results per Page:</label> 
+      <select class="from-control"
+              ng-init="pageSize = pagination[0]"
+              ng-options="num for num in pagination"
+              ng-model="pageSize">
+      </select>
+    </div>
+    <div style="margin-left: 1.25rem">
+      <dir-pagination-controls></dir-pagination-controls>
+    </div>
+  </div>    
+  </div>
   <!-- for wait for Commmittee approval-->
+  <div class="row panel panel-default" ng-show="c.data.committeeApproval.length > 0" id="committeeApproval">
+    <div class="col-md-12 panel-title">
+      Waiting for Committee Approval
+    </div>
+  </div> 
   <!-- for wait for Assign to local staff-->
+  <div class="row panel panel-default" ng-show="c.data.localStaffApproval.length > 0" id="assignLocalStaff">
+    <div class="col-md-12 panel-title">
+      Assign to PL Staff
+    </div>
+  </div>
   <!-- complete request -->
-  
+  <div class="row panel panel-default" ng-show="c.data.completed.length > 0" id="completed">
+    <div class="col-md-12 panel-title">
+      Completed Request
+    </div>
+  </div>
+  <!-- complted request for admin -->  
+  <div class="row panel panel-default" ng-show="c.data.completedForAdmin.length > 0" id="completedForAdmin">
+    <div class="col-md-12 panel-title">
+      Completed Request
+    </div>
+  </div>
+
+
+
 </div>]]></template>
     </sp_widget>
 </record_update>
