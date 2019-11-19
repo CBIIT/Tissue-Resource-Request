@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Tissue Request Comment" max_length="40" name="x_naci_tissue_requ_tissue_request_comment" type="collection">
+        <element label="Comment" max_length="2000" name="comment" type="string"/>
+        <element label="Tissue Request ID" max_length="32" name="tissue_request_id" reference="x_naci_tissue_requ_tissue_resource_request" type="reference"/>
+        <index name="index">
+            <element name="tissue_request_id"/>
+        </index>
+    </element>
+</database>

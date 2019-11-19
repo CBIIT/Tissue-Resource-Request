@@ -14,17 +14,13 @@
 	
 	c.data.table_label = [
 		{
+			key: 'number',
+			label: 'Request ID'
+		},
+		{
 			key: 'principal_investigator',
 			label: 'Principal Investigator'
 		},
-		{
-			key: 'alternative_contact',
-			label: 'Alternative Contact'
-		}, 
-		{
-			key: 'alternative_phone',
-			label: 'Alternative Phone'
-		}, 
 		{
 			key: 'can_number',
 			label: 'CAN Number'
@@ -32,6 +28,14 @@
 		{
 			key: 'type',
 			label: 'Resource Type'
+		},
+		{
+			key: 'submitted_by',
+			label: 'Submitted By'
+		}, 
+		{
+			key: 'stage',
+			label: 'Status'
 		}
 	];
 	$scope.pagination = [5, 10, 15, 20, 25];
@@ -45,13 +49,42 @@
 	}	
 	spUtil.recordWatch($scope, "x_naci_tissue_requ_tissue_resource_request", "", function(name, data) {  
 			spUtil.update($scope);
-	});	
+	});
+	
+	c.viewSupervisor = function(sys_id){
+		top.window.location = "/ncisp?id=display_tissue_request_cat_item&sys_id=" + sys_id;	
+	}
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>.panel-title{
  background-color: #12416f;
  color:white; 
 }
+
+.p-1 {
+  padding: 0.5rem;
+}
+
+.p-3 {
+  padding: 1.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.br-4 {
+  border-radius: 4px;
+}
+
+.shadow {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.bg-light-gray {
+  background-color: #dadfe1;
+}
+
 </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -81,7 +114,7 @@
 	data.completedForAdmin = []
 	
 	var item = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
-			item.orderByDesc('number');
+			item.orderBy('number');
 			item.query();
 	while(item.next()){
 		var needm = {};
@@ -92,50 +125,56 @@
 		var completeAdmin = {};
 		
 		if(item.assigned_to.toString() == userId && item.stage.toString() == 'More Infromation'){
+			needm.number = item.number.toString();
 			needm.sys_id = item.sys_id.toString();
 			needm.principal_investigator = item.principal_investigator.name.toString();
-			needm.alternative_contact = item.alternative_contact.toString();
-			needm.alternative_phone = item.alternative_phone.toString();
+			needm.submitted_by = item.submitted_by.toString();
+			needm.stage = item.	stage.toString();
 			needm.can_number = item.can_number.toString();
 			needm.type = item.type.toString();
 			data.needMore.push(needm);
 		}else if(item.assigned_to.toString() == userId && item.stage.toString() == 'Waiting for Supervisor Approval'){
+			spApproval.number = item.number.toString();
 			spApproval.sys_id = item.sys_id.toString();
 			spApproval.principal_investigator = item.principal_investigator.name.toString();
-			spApproval.alternative_contact = item.alternative_contact.toString();
-			spApproval.alternative_phone = item.alternative_phone.toString();
+			spApproval.submitted_by = item.submitted_by.name.toString();
+			spApproval.stage = item.	stage.toString();
 			spApproval.can_number = item.can_number.toString();
 			spApproval.type = item.type.toString();
 			data.supervideApproval.push(spApproval);
 		}else if(isAdmin && item.stage.toString() == 'Waiting for Committee Approval'){
+			commApproval.number = item.number.toString();
 			commApproval.sys_id = item.sys_id.toString();
 			commApproval.principal_investigator = item.principal_investigator.name.toString();
-			commApproval.alternative_contact = item.alternative_contact.toString();
-			commApproval.alternative_phone = item.alternative_phone.toString();
+			commApproval.submitted_by = item.submitted_by.name.toString();
+			commApproval.stage = item.	stage.toString();
 			commApproval.can_number = item.can_number.toString();
 			commApproval.type = item.type.toString();
 			committeeApproval.push(commApproval)
 		}else if(isLocalStaff && item.stage.toString() == 'Assigned to Local Staff'){
+			localApproval.number = item.number.toString();
 			localApproval.sys_id = item.sys_id.toString();
 			localApproval.principal_investigator = item.principal_investigator.name.toString();
-			localApproval.alternative_contact = item.alternative_contact.toString();
-			localApproval.alternative_phone = item.alternative_phone.toString();
+			localApproval.submitted_by = item.submitted_by.name.toString();
+			localApproval.stage = item.	stage.toString();
 			localApproval.can_number = item.can_number.toString();
 			localApproval.type = item.type.toString();
 			localStaffApproval.push(localApproval);
 		}else if(isAdmin && item.stage.toString() == 'Completed'){
+			completeAdmin.number = item.number.toString();
 			completeAdmin.sys_id = item.sys_id.toString();
 			completeAdmin.principal_investigator = item.principal_investigator.name.toString();
-			completeAdmin.alternative_contact = item.alternative_contact.toString();
-			completeAdmin.alternative_phone = item.alternative_phone.toString();
+			completeAdmin.submitted_by = item.submitted_by.name.toString();
+			completeAdmin.stage = item.	stage.toString();
 			completeAdmin.can_number = item.can_number.toString();
 			completeAdmin.type = item.type.toString();
 			data.completedForAdmin.push(completeAdmin);
 		}else if(item.submitted_by.toString() == userId && item.stage.toString() == 'Completed'){
+			complete.number = item.number.toString();
 			complete.sys_id = item.sys_id.toString();
 			complete.principal_investigator = item.principal_investigator.name.toString();
-			complete.alternative_contact = item.alternative_contact.toString();
-			complete.alternative_phone = item.alternative_phone.toString();
+			complete.submitted_by = item.submitted_by.name.toString();
+			complete.stage = item.	stage.toString();
 			complete.can_number = item.can_number.toString();
 			complete.type = item.type.toString();
 			data.completed.push(complete);
@@ -149,7 +188,7 @@
         <sys_created_on>2019-11-14 22:34:25</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>488b85badbc58010b86770c08c96198e</sys_id>
-        <sys_mod_count>152</sys_mod_count>
+        <sys_mod_count>179</sys_mod_count>
         <sys_name>Manager Tissue Resource Request </sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -157,7 +196,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_488b85badbc58010b86770c08c96198e</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-19 00:04:27</sys_updated_on>
+        <sys_updated_on>2019-11-19 22:30:18</sys_updated_on>
         <template><![CDATA[<div>
   <div class="row">
     <div class="col-md-12">
@@ -174,7 +213,7 @@
     </div>
   </div>
   <!-- for wait for Supervisor approval-->
-  <div class="row panel panel-default" ng-show="c.data.supervideApproval.length > 0" id="supervisorApproval">
+  <div class="row panel panel-default p-3" ng-show="c.data.supervideApproval.length > 0" id="supervisorApproval">
     <div style="display: flex">
       <label style="margin-top: 10px; margin-right:20px;">Search</label> 
       <input type="text" 
@@ -184,12 +223,13 @@
              ng-model="search" 
              style="width: 300px; margin-top:5px;"/>  
     </div>
-    <div class="panel-title">
+    <div class="panel-title p-1">
       Waiting for Supervisor approval
     </div>
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover mt-3">
-        <tr>
+    <div class="table-responsive shadow mb-2 br-4">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr class="bg-light-gray">
           <th ng-repeat="column in c.data.table_label" 
               ng-click="sort(column.key)"
               style='cursor:pointer'>
@@ -198,13 +238,14 @@
           </th> 
           <th>Action</th>
         </tr>
+				</thead>          
         <tbody>
           <tr dir-paginate="record in c.data.supervideApproval | filter:search | orderBy:sortKey:!reverse | itemsPerPage:pageSize">
             <td ng-repeat="col in c.data.table_label">
               {{ record[col.key] || 'N/A' }}  
             </td>
             <td>
-              <button class="btn btn-primary btn-font" ng-click="c.viewSupervisoe(record.sys_id)" style="padding: 5px 30px;">
+              <button class="btn btn-primary btn-font" ng-click="c.viewSupervisor(record.sys_id)" style="padding: 5px 30px;">
                 View
               </button>
             </td>

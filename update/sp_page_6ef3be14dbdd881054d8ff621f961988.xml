@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css>.form-group &gt; label {&#13;
+	font-size: 16px;&#13;
+  margin-top: 15px;&#13;
+  font-family: montserrat;&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+.state-mandatory input.ng-touched.ng-empty {&#13;
+	border-color: $nci-red;&#13;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);&#13;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);&#13;
+&#13;
+}&#13;
+</css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>display_tissue_request_cat_item</id>
+        <internal>false</internal>
+        <public>false</public>
+        <roles/>
+        <short_description>Display a Catalog Item</short_description>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-11-19 22:01:45</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>6ef3be14dbdd881054d8ff621f961988</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>display_tissue_request_cat_item</sys_name>
+        <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+        <sys_update_name>sp_page_6ef3be14dbdd881054d8ff621f961988</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-11-19 22:04:01</sys_updated_on>
+        <title>Display Tissue Resource Request Service Item</title>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=6ef3be14dbdd881054d8ff621f961988"/>
+</record_update>
