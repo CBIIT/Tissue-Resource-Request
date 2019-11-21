@@ -4,7 +4,7 @@
         <client_script><![CDATA[function($scope, $location, snAttachmentHandler, cabrillo, spUtil) {
 	/* widget controller */
 	var c = this;	
-
+  console.log(c.data.committeeApproval);
 	addStyle('@media (min-width: 1200px){ .container { width: 65% !important; }}')
 	function addStyle(styleText) {
 		var style = document.createElement('style');
@@ -42,18 +42,29 @@
 	$scope.sortKey = null;
 	$scope.reverse = false;	
 	$scope.sort = function(keyname){
-    /*console.log($scope.sortKey);*/
-		/*console.log();*/
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
 		$scope.reverse = !$scope.reverse; //if true make it false and vice versa
 	}	
+	
+	$scope.pagination1 = [5, 10, 15, 20, 25];
+	$scope.sortKey1 = null;
+	$scope.reverse1 = false;	
+	$scope.sort1 = function(keyname){
+		$scope.sortKey1 = keyname;   //set the sortKey to the param passed
+		$scope.reverse1 = !$scope.reverse1; //if true make it false and vice versa
+	}		
+	
 	spUtil.recordWatch($scope, "x_naci_tissue_requ_tissue_resource_request", "", function(name, data) {  
 			spUtil.update($scope);
 	});
 	
 	c.viewSupervisor = function(sys_id){
-		top.window.location = "/ncisp?id=display_tissue_request_cat_item&sys_id=" + sys_id;	
+		top.window.location = "/ncisp?id=display_tissue_request_cat_item&approver=Manager&sys_id=" + sys_id;	
 	}
+	c.viewCommittee = function(sys_id){
+		top.window.location = "/ncisp?id=display_tissue_request_cat_item&approver=Committee&sys_id=" + sys_id;	
+	}	
+	
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>.panel-title{
@@ -103,8 +114,8 @@
   /* populate the 'data' object */
   /* e.g., data.table = $sp.getValue('table'); */
 	var userId = gs.getUserID().toString();
-	var isAdmin = gs.getUser().isMemberOf('Tissue Resource Request LP Committee');
-  var isLocalStaff = gs.getUser().isMemberOf('Tissue Resource Request Local Staff');
+	data.isAdmin = gs.getUser().isMemberOf('Tissue Resource Request LP Committee');
+  data.isLocalStaff = gs.getUser().isMemberOf('Tissue Resource Request Local Staff');
 	
 	data.needMore = [];
 	data.supervideApproval = [];
@@ -142,7 +153,7 @@
 			spApproval.can_number = item.can_number.toString();
 			spApproval.type = item.type.toString();
 			data.supervideApproval.push(spApproval);
-		}else if(isAdmin && item.stage.toString() == 'Waiting for Committee Approval'){
+		}else if(data.isAdmin && item.stage.toString() == 'Waiting for Committee Approval'){
 			commApproval.number = item.number.toString();
 			commApproval.sys_id = item.sys_id.toString();
 			commApproval.principal_investigator = item.principal_investigator.name.toString();
@@ -150,8 +161,8 @@
 			commApproval.stage = item.	stage.toString();
 			commApproval.can_number = item.can_number.toString();
 			commApproval.type = item.type.toString();
-			committeeApproval.push(commApproval)
-		}else if(isLocalStaff && item.stage.toString() == 'Assigned to Local Staff'){
+			data.committeeApproval.push(commApproval)
+		}else if(data.isLocalStaff && item.stage.toString() == 'Assigned to Local Staff'){
 			localApproval.number = item.number.toString();
 			localApproval.sys_id = item.sys_id.toString();
 			localApproval.principal_investigator = item.principal_investigator.name.toString();
@@ -159,8 +170,8 @@
 			localApproval.stage = item.	stage.toString();
 			localApproval.can_number = item.can_number.toString();
 			localApproval.type = item.type.toString();
-			localStaffApproval.push(localApproval);
-		}else if(isAdmin && item.stage.toString() == 'Completed'){
+			data.localStaffApproval.push(localApproval);
+		}else if(data.isAdmin && item.stage.toString() == 'Completed'){
 			completeAdmin.number = item.number.toString();
 			completeAdmin.sys_id = item.sys_id.toString();
 			completeAdmin.principal_investigator = item.principal_investigator.name.toString();
@@ -188,7 +199,7 @@
         <sys_created_on>2019-11-14 22:34:25</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>488b85badbc58010b86770c08c96198e</sys_id>
-        <sys_mod_count>179</sys_mod_count>
+        <sys_mod_count>202</sys_mod_count>
         <sys_name>Manager Tissue Resource Request </sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -196,7 +207,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_488b85badbc58010b86770c08c96198e</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-19 22:30:18</sys_updated_on>
+        <sys_updated_on>2019-11-21 21:43:28</sys_updated_on>
         <template><![CDATA[<div>
   <div class="row">
     <div class="col-md-12">
@@ -229,16 +240,16 @@
     <div class="table-responsive shadow mb-2 br-4">
       <table class="table table-bordered table-hover">
         <thead>
-        <tr class="bg-light-gray">
-          <th ng-repeat="column in c.data.table_label" 
-              ng-click="sort(column.key)"
-              style='cursor:pointer'>
-            {{column.label}}
-            <span class="glyphicon sort-icon" ng-show="sortKey==column.key" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-          </th> 
-          <th>Action</th>
-        </tr>
-				</thead>          
+          <tr class="bg-light-gray">
+            <th ng-repeat="column in c.data.table_label" 
+                ng-click="sort(column.key)"
+                style='cursor:pointer'>
+              {{column.label}}
+              <span class="glyphicon sort-icon" ng-show="sortKey==column.key" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th> 
+            <th>Action</th>
+          </tr>
+        </thead>          
         <tbody>
           <tr dir-paginate="record in c.data.supervideApproval | filter:search | orderBy:sortKey:!reverse | itemsPerPage:pageSize">
             <td ng-repeat="col in c.data.table_label">
@@ -253,26 +264,76 @@
         </tbody>        
       </table>
     </div>
-   <div style="display:flex;">
-    <span style="margin-right:auto">Total: {{ c.data.supervideApproval.length }}</span>
-    <div style="margin-left:auto">
-      <label class="">Results per Page:</label> 
-      <select class="from-control"
-              ng-init="pageSize = pagination[0]"
-              ng-options="num for num in pagination"
-              ng-model="pageSize">
-      </select>
-    </div>
-    <div style="margin-left: 1.25rem">
-      <dir-pagination-controls></dir-pagination-controls>
-    </div>
-  </div>    
+    <div style="display:flex;">
+      <span style="margin-right:auto">Total: {{ c.data.supervideApproval.length }}</span>
+      <div style="margin-left:auto">
+        <label class="">Results per Page:</label> 
+        <select class="from-control"
+                ng-init="pageSize = pagination[0]"
+                ng-options="num for num in pagination"
+                ng-model="pageSize">
+        </select>
+      </div>
+      <div style="margin-left: 1.25rem">
+        <dir-pagination-controls></dir-pagination-controls>
+      </div>
+    </div>    
   </div>
   <!-- for wait for Commmittee approval-->
-  <div class="row panel panel-default" ng-show="c.data.committeeApproval.length > 0" id="committeeApproval">
-    <div class="col-md-12 panel-title">
-      Waiting for Committee Approval
+  <div class="row panel panel-default" ng-show="c.data.committeeApproval.length > 0 && c.data.isAdmin" id="committeeApproval">
+    <div style="display: flex">
+      <label style="margin-top: 10px; margin-right:20px;">Search</label> 
+      <input type="text" 
+             class="form-control"  
+             placeholder="Tissue Resource Request Records" 
+             aria-describedby="search record"
+             ng-model="search1" 
+             style="width: 300px; margin-top:5px;"/>  
     </div>
+    <div class="panel-title p-1">
+      Waiting for Committee approval
+    </div>
+    <div class="table-responsive shadow mb-2 br-4">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="bg-light-gray">
+            <th ng-repeat="column in c.data.table_label" 
+                ng-click="sort1(column.key)"
+                style='cursor:pointer'>
+              {{column.label}}
+              <span class="glyphicon sort-icon" ng-show="sortKey1==column.key" ng-class="{'glyphicon-chevron-up':reverse1,'glyphicon-chevron-down':!reverse1}"></span>
+            </th> 
+            <th>Action</th>
+          </tr>
+        </thead>          
+        <tbody>
+          <tr dir-paginate="record in c.data.committeeApproval | filter:search1 | orderBy:sortKey1:!reverse1 | itemsPerPage:pageSize1">
+            <td ng-repeat="col in c.data.table_label">
+              {{ record[col.key] || 'N/A' }}  
+            </td>
+            <td>
+              <button class="btn btn-primary btn-font" ng-click="c.viewCommittee(record.sys_id)" style="padding: 5px 30px;">
+                View
+              </button>
+            </td>
+          </tr>
+        </tbody>        
+      </table>
+    </div>
+    <div style="display:flex;">
+      <span style="margin-right:auto">Total: {{ c.data.committeeApproval.length }}</span>
+      <div style="margin-left:auto">
+        <label class="">Results per Page:</label> 
+        <select class="from-control"
+                ng-init="pageSize1 = pagination1[0]"
+                ng-options="num for num in pagination1"
+                ng-model="pageSize1">
+        </select>
+      </div>
+      <div style="margin-left: 1.25rem">
+        <dir-pagination-controls></dir-pagination-controls>
+      </div>
+    </div>   
   </div> 
   <!-- for wait for Assign to local staff-->
   <div class="row panel panel-default" ng-show="c.data.localStaffApproval.length > 0" id="assignLocalStaff">

@@ -6,9 +6,9 @@
   var c = this;
 	c.edit = false;
 	c.disabled = "disabled";
-	
+	c.debug = true;
 	c.form = {};
-	
+
 	/* comment section value setting*/
 	c.form.alternative_contact = c.data.item.alternative_contact;
 	c.form.alternative_phone = c.data.item.alternative_phone;
@@ -44,7 +44,7 @@
 		c.form.intent_to_use = c.data.item.intent_to_use;
 	}
 	/* end of type 1 */
-
+  
 	c.editMode = function(){
 		c.edit = true;
 	}
@@ -52,9 +52,11 @@
 		$scope.server.get({
 			action: 'update',
 			record: c.form,
-			sys_id: c.data.sys_id
+			sys_id: c.data.sys_id,
+			comments: ''
 		}).then(function(){
 			c.edit = false;
+			$scope.server.update();
 		});
 	}
 	c.backToHome = function(){
@@ -63,6 +65,44 @@
 	c.cancel = function(){
 		c.edit = false;
 	}
+	c.approve = function(){
+		if(c.data.isAdmin){
+			if(c.form.assignTo == null || !c.form.assignTo){
+					spModal.alert("<br/><center><span><font color='red'>Please select a staff member to assign to</font></span></center>");
+			}else{
+				spModal.open({
+					title: "Warning",
+					message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to approve this request?</b></center>"
+				}).then(function(confirmed) {
+					processRequest('approved');
+				})	
+			}
+		}
+
+	}
+	c.reject = function(){
+		if(c.form.comment == null || c.form.comment.trim().length < 1){
+				spModal.alert("<br/><center><span><font color='red'>Please supply a comment when rejecting a request</font></span></center>");
+		}else{
+			spModal.open({
+				title: "Warning",
+				message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to reject this request?</b></center>"
+			}).then(function(confirmed) {
+				processRequest('rejected');
+			})
+		}
+	}
+	function processRequest(action){
+		$scope.server.get({
+			action: 'process',
+			status: action,
+			sys_id: c.data.sys_id,
+			comments: c.form.comment
+		}).then(function(){
+			top.window.location = "/ncisp?id=manage_tissue_request_cat_item";
+		});
+	}
+	
 	c.uploadAttachment = function(inputId){
 		var files = document.getElementById(inputId).files;
 		console.log(files.length);
@@ -88,6 +128,9 @@
 	}
 	
 	spUtil.recordWatch($scope, "sys_attachment", "", function(name, data) {  
+			spUtil.update($scope);
+	});
+	spUtil.recordWatch($scope, "x_naci_tissue_requ_tissue_request_comment", "", function(name, data) {  
 			spUtil.update($scope);
 	});
 }]]></client_script>
@@ -117,6 +160,25 @@
 
 .mt-20 {
  	margin-top: 20px; 
+}
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.br-4 {
+  border-radius: 4px;
+}
+
+.shadow {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.bg-light-gray {
+  background-color: #dadfe1;
+}
+
+.title-bold {
+  font-weight: bold;
 }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -136,21 +198,79 @@
   /* e.g., data.table = $sp.getValue('table'); */
 	var str = gs.action.getGlideURI();
 	var sys_id = str.get('sys_id');
+	var approver = str.get('approver');
 	data.item = {};
 	data.sys_id = sys_id;
-	
+	data.comment = [];
+  data.isAdmin = gs.getUser().isMemberOf('Tissue Resource Request LP Committee');
+	var approverName = gs.getUserDisplayName().toString();
+	//process request
 	if(input){
-		if(input.action == 'update'){
-			var param = input.record;
-			var rec = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
-			rec.get(input.sys_id);
-			//set common section
-		  for(var key in param){
-				rec.setValue(key, param[key]);
+		if(input.action != null && input.action.trim().length > 0){
+			var comment = '';
+			var status = '';
+			if(input.action == 'update'){
+				var param = input.record;
+				var rec = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
+				rec.get(input.sys_id);
+				//set common section
+				for(var key in param){
+					rec.setValue(key, param[key]);
+				}
+				rec.updateMultiple();
+				status = 'modified';
+			}else if(input.action == 'process'){
+				var proc = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
+				proc.get(input.sys_id);
+				proc.approval_action = input.status;
+				proc.update();
+				status = input.status;
 			}
-			rec.updateMultiple();
+			//add comments
+			if(input.comments != null && input.comments.trim().length > 0){
+				comment = input.comments;
+			}
+			var commen = new GlideRecord('x_naci_tissue_requ_tissue_request_comment');
+			commen.initialize();
+			commen.tissue_request_id = input.sys_id;
+			commen.role = approver;
+			commen.approver = approverName;
+			commen.status = status;
+			commen.comment = comment;
+			commen.insert();
 		}
 	}
+	
+	//load selected request
+	//load local comment
+	var comments = new GlideRecord('x_naci_tissue_requ_tissue_request_comment');
+			comments.addQuery('tissue_request_id', sys_id);
+			comments.orderByDesc('sys_created_on');
+			comments.query();
+	while(comments.next()){
+		var comm = {};
+		comm.role = comments.role.toString();
+		comm.approver = comments.approver.name.toString();
+		comm.status = comments.status.toString();
+		comm.comment = comments.comment.toString();
+		comm.time = comments.sys_created_on.toString();
+		data.comment.push(comm);
+	}
+	//load local staff name list if the user is admin
+	data.staffs = [];
+	if(data.isAdmin){
+		var staff = new GlideRecord('sys_user_grmember');
+				staff.addQuery('group.name', 'Tissue Resource Request Local Staff');
+				staff.orderBy('user.name');
+		staff.query();
+		while(staff.next()){
+			var item = {};
+			item.label = staff.user.name.toString();
+			item.value = staff.user.sys_id.toString();
+			data.staffs.push(item);
+		}
+	}
+	//load request
 	var tissue = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
 	    tissue.get(sys_id);
 	    //set up common section
@@ -298,7 +418,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>165</sys_mod_count>
+        <sys_mod_count>293</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -306,7 +426,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-20 21:51:42</sys_updated_on>
+        <sys_updated_on>2019-11-21 23:10:00</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -492,7 +612,7 @@
         </select>
       </div>      
     </div>
-    <div class="row" ng-show="c.form.material_requested == 'Unstained Slides'">
+    <div class="row" ng-show="c.form.material_being_requested == 'Unstained Slides'">
       <div class="col-md-6" ng-show="!c.edit">
         <label class="label-bold">Number of recuts per slide</label>
         {{c.form.number_of_recuts}}
@@ -510,7 +630,7 @@
         <input class="form-control" ng-model="c.form.requested_thickness"/>
       </div>      
     </div>
-    <div class="row" ng-show="c.form.material_requested == 'Stained Slides'" style="margin-top: 20px;">
+    <div class="row" ng-show="c.form.material_being_requested == 'Stained Slides'" style="margin-top: 20px;">
       <div class="col-md-12" ng-show="!c.edit">
         <input type="checkbox" ng-model="c.form.he" disabled='disabled'> H&E 
       </div>
@@ -518,7 +638,7 @@
         <input type="checkbox" ng-model="c.form.he"> H&E 
       </div>
     </div>
-    <div class="row" ng-show="c.form.material_requested == 'Stained Slides'">
+    <div class="row" ng-show="c.form.material_being_requested == 'Stained Slides'">
       <div class="col-md-12" ng-show="!c.edit">
         <input type="checkbox" ng-model="c.form.special_stains" disabled='disabled'> If Special stains or IHC, must be via collaboration with an LP Pathlogist
       </div> 
@@ -526,7 +646,7 @@
         <input type="checkbox" ng-model="c.form.special_stains"> If Special stains or IHC, must be via collaboration with an LP Pathlogist
       </div>       
     </div>
-    <div class="row" ng-show="c.form.material_requested == 'Tissue Shavings'">
+    <div class="row" ng-show="c.form.material_being_requested == 'Tissue Shavings'">
       <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Specify</label>
         {{c.form.tissue_shaving_text}}
@@ -536,7 +656,7 @@
         <input class="form-control" ng-model="c.form.tissue_shaving_text"/>
       </div>      
     </div>
-    <div class="row" ng-show="c.form.material_requested == 'Slide Signout From LP'">
+    <div class="row" ng-show="c.form.material_being_requested == 'Slide Signout From LP'">
       <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Specify</label>
         {{c.form.slide_signout_from_lp_text}}
@@ -546,7 +666,7 @@
         <input class="form-control" ng-model="c.form.slide_signout_from_lp_text"/>
       </div>        
     </div>
-    <div class="row" ng-show="c.form.material_requested == 'Other Material'">
+    <div class="row" ng-show="c.form.material_being_requested == 'Other Material'">
       <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Specify</label>
         {{c.form.other_material_specify}}
@@ -556,13 +676,13 @@
         <input class="form-control" ng-model="c.form.other_material_specify">
       </div>      
     </div>
-    <div class="row" ng-show="c.form.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+    <div class="row" ng-show="c.form.material_being_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
       <div class="col-md-12">
         <label class="label-bold">Note</label>
         <span>LP does not typically release tissue blocks from the clinical archived biomaterial. On a rare occasion, the LP Medical Director can authorize the temporary release of a clinical tissue block for additional non-LP clinical testing.</span>
       </div>       
     </div>
-    <div class="row" ng-show="c.form.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+    <div class="row" ng-show="c.form.item.material_being_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
       <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Specify</label>
         {{c.form.ffpe_tissue_block_text}}
@@ -606,10 +726,67 @@
     </div>
   </div>
   <!-- end of attachments -->
-  
+  <!-- comments history section -->
+  <div class="mb-2 br-4" style="margin-top:20px; justify-content: right;" ng-show="!c.edit && c.data.comment.length > 0">
+    <div class="title-bold">
+      Approval Status
+    </div>  
+    <div class="table-responsive shadow ">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="bg-light-gray">
+            <th>Role</th>
+            <th>Approver</th>
+            <th>Status</th>
+            <th>Comments</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in c.data.comment">
+            <td>{{item.role}}</td>
+            <td>{{item.approver}}</td>
+            <td>{{item.status}}</td>
+            <td>{{item.comment}}</td>
+            <td>{{item.time}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- end of comments history section -->
+ <!-- comments section -->
+ <div class="mb-2 br-4" style="margin-top:20px; justify-content: right;" ng-show="!c.edit">
+   <div class="title-bold">
+     	Comments
+   </div>
+   <div>
+     <textarea class="form-control" ng-model="c.form.comment" rows="5"></textarea>
+   </div>
+ </div>
+  <!-- end of comments input section -->
+  <!-- assign to local staff section -->
+  <div class="row" style="margin-top:20px;" ng-show="c.data.isAdmin && !c.edit">
+    <div class="col-md-3">
+      <label>Assign To</label> 
+    </div>
+    <div class="col-md-9">
+      <select class="form-control" ng-model="c.form.assignTo">
+        <option value=''>Please select a staff member to assign to</option>
+        <option ng-repeat='item in c.data.staffs' ng-value='item.value'>{{item.label}}</option>
+      </select>
+    </div>
+  </div>
+  <!-- end of assign -->
  <div class="row" style="margin-top:20px; justify-content: right;">
    <div class="col-md-12" style="text-align:right;">
-     <button class="btn btn-primary" style="width:100px;" ng-click="c.editMode()" ng-show="!c.edit">
+     <button class="btn btn-primary" style="width:100px;" ng-click="c.approve()" ng-show="!c.edit">
+       APPROVE
+     </button>
+     <button class="btn btn-primary" style="margin-left:10px;width:100px;" ng-click="c.reject()" ng-show="!c.edit">
+       REJECT
+     </button>
+     <button class="btn btn-primary" style="margin-left:10px; width:100px;" ng-click="c.editMode()" ng-show="!c.edit">
        EDIT
      </button>
      <button class="btn btn-primary" style="margin-left:10px; width:100px;" ng-click="c.saveRecord()" ng-show="c.edit">
@@ -624,7 +801,7 @@
      
    </div>
   </div> 
-  
+  <pre ng-if="c.debug">{{c.form | json}}</pre>
 </div>]]></template>
     </sp_widget>
 </record_update>
