@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope, snAttachmentHandler, spUtil, spModal) {
+        <client_script><![CDATA[function($scope, snAttachmentHandler, spUtil, spModal, styleUtil) {
   /* widget controller */
   var c = this;
+	styleUtil.addStyle('@media (min-width: 1200px){ .container { width: 70% !important; }}')
 	c.edit = false;
 	c.disabled = "disabled";
 	c.debug = true;
@@ -25,9 +26,9 @@
 		c.form.case_block_4 = c.data.item.caseBlock4;
 		c.form.case_block_5 = c.data.item.caseBlock5;
 		c.form.material_being_requested = c.data.item.material_requested; 
-		if(c.form.material_requested == 'Unstained Slides'){
-			c.form.number_of_recuts = c.data.item.number_recuts;
-			c.form.requested_thickness = c.data.item.thickness;
+		if(c.form.material_being_requested == 'Unstained Slides'){
+			c.form.number_of_recuts = c.data.item.number_of_recuts;
+			c.form.requested_thickness = c.data.item.requested_thickness;
 		}else if(c.form.material_being_requested == 'Stained Slides'){
 			c.form.he = c.data.item.he == 'true';
 			c.form.special_stains = c.data.item.special_stains == 'true';
@@ -66,17 +67,15 @@
 		c.edit = false;
 	}
 	c.approve = function(){
-		if(c.data.isAdmin){
-			if(c.form.assignTo == null || !c.form.assignTo){
-					spModal.alert("<br/><center><span><font color='red'>Please select a staff member to assign to</font></span></center>");
-			}else{
-				spModal.open({
-					title: "Warning",
-					message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to approve this request?</b></center>"
-				}).then(function(confirmed) {
-					processRequest('approved');
-				})	
-			}
+		if(c.data.isAdmin && (c.form.assigned_to == null || !c.form.assigned_to)){
+			spModal.alert("<br/><center><span><font color='red'>Please select a staff member to assign to</font></span></center>");
+		}else{
+			spModal.open({
+				title: "Warning",
+				message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to approve this request?</b></center>"
+			}).then(function(confirmed) {
+				processRequest('approved');
+			})	
 		}
 
 	}
@@ -96,6 +95,7 @@
 		$scope.server.get({
 			action: 'process',
 			status: action,
+			assigned_to: c.form.assigned_to,
 			sys_id: c.data.sys_id,
 			comments: c.form.comment
 		}).then(function(){
@@ -126,7 +126,12 @@
 			});
 		})
 	}
-	
+	c.notify = function(){
+		
+	}
+	c.completed = function(){
+		
+	}
 	spUtil.recordWatch($scope, "sys_attachment", "", function(name, data) {  
 			spUtil.update($scope);
 	});
@@ -179,6 +184,11 @@
 
 .title-bold {
   font-weight: bold;
+}
+
+.action-buttons .btn.btn-primary {
+  margin-left: 10px;
+  min-width: 100px;
 }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -203,6 +213,8 @@
 	data.sys_id = sys_id;
 	data.comment = [];
   data.isAdmin = gs.getUser().isMemberOf('Tissue Resource Request LP Committee');
+	data.localStaff = gs.getUser().isMemberOf('Tissue Resource Request Local Staff');
+	
 	var approverName = gs.getUserDisplayName().toString();
 	//process request
 	if(input){
@@ -223,6 +235,9 @@
 				var proc = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
 				proc.get(input.sys_id);
 				proc.approval_action = input.status;
+				if(data.isAdmin){
+					proc.assigned_to = input.assigned_to.toString();
+				}
 				proc.update();
 				status = input.status;
 			}
@@ -274,6 +289,7 @@
 	var tissue = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
 	    tissue.get(sys_id);
 	    //set up common section
+	    data.item.stage = tissue.stage.toString();
 			data.item.number = tissue.number.toString();
 			data.item.piName = tissue.principal_investigator.name.toString();
 	    //get user information
@@ -301,8 +317,8 @@
 					data.item.caseBlock5 = tissue.case_block_5.toString();
 					data.item.material_requested = tissue.material_being_requested.toString();
 				  if(data.item.material_requested == 'Unstained Slides'){
-						data.item.number_recuts = tissue.number_of_recuts.toString();
-						data.item.thickness = tissue.requested_thickness.toString();
+						data.item.number_of_recuts = tissue.number_of_recuts.toString();
+						data.item.requested_thickness = tissue.requested_thickness.toString();
 					}else if(data.item.material_requested == 'Stained Slides'){
 						data.item.he = tissue.he.toString() == 'true';
 						data.item.special_stains = tissue.special_stains.toString() == 'true';
@@ -418,7 +434,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>293</sys_mod_count>
+        <sys_mod_count>336</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -426,7 +442,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-21 23:10:00</sys_updated_on>
+        <sys_updated_on>2019-11-22 22:57:34</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -623,7 +639,7 @@
       </div>
       <div class="col-md-6" ng-show="c.edit">
         <label class="label-bold">Number of recuts per slide</label>
-        <input class="form-control" ng-model="c.data.number_of_recuts"/>
+        <input class="form-control" ng-model="c.form.number_of_recuts"/>
       </div>
       <div class="col-md-6" ng-show="c.edit">
         <label class="label-bold">Requested thickness</label>
@@ -716,8 +732,6 @@
   </div>
   <!-- end of type 1-->
   
-  
-  
   <!-- show attachments -->
   <div class="row" ng-show='c.data.files.length > 0'>
     <div class="col-md-12">
@@ -756,7 +770,7 @@
   </div>
   <!-- end of comments history section -->
  <!-- comments section -->
- <div class="mb-2 br-4" style="margin-top:20px; justify-content: right;" ng-show="!c.edit">
+ <div class="mb-2 br-4" style="margin-top:20px; justify-content: right;" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff'">
    <div class="title-bold">
      	Comments
    </div>
@@ -766,40 +780,45 @@
  </div>
   <!-- end of comments input section -->
   <!-- assign to local staff section -->
-  <div class="row" style="margin-top:20px;" ng-show="c.data.isAdmin && !c.edit">
+  <div class="row" style="margin-top:20px;" ng-show="c.data.isAdmin && !c.edit && c.data.item.stage != 'Assigned to Local Staff'">
     <div class="col-md-3">
       <label>Assign To</label> 
     </div>
     <div class="col-md-9">
-      <select class="form-control" ng-model="c.form.assignTo">
+      <select class="form-control" ng-model="c.form.assigned_to">
         <option value=''>Please select a staff member to assign to</option>
         <option ng-repeat='item in c.data.staffs' ng-value='item.value'>{{item.label}}</option>
       </select>
     </div>
   </div>
   <!-- end of assign -->
- <div class="row" style="margin-top:20px; justify-content: right;">
-   <div class="col-md-12" style="text-align:right;">
-     <button class="btn btn-primary" style="width:100px;" ng-click="c.approve()" ng-show="!c.edit">
-       APPROVE
-     </button>
-     <button class="btn btn-primary" style="margin-left:10px;width:100px;" ng-click="c.reject()" ng-show="!c.edit">
-       REJECT
-     </button>
-     <button class="btn btn-primary" style="margin-left:10px; width:100px;" ng-click="c.editMode()" ng-show="!c.edit">
-       EDIT
-     </button>
-     <button class="btn btn-primary" style="margin-left:10px; width:100px;" ng-click="c.saveRecord()" ng-show="c.edit">
-       SAVE
-     </button>
-			<button class="btn btn-primary" style="margin-left:10px; width:100px;" ng-click="c.cancel()" ng-show="c.edit">
-       CANCEL
-     </button>     
-     <button class="btn btn-primary" style="margin-left:10px; width:100px;" ng-click="c.backToHome()" ng-show="!c.edit">
-       BACK
-     </button>
-     
-   </div>
+  <div class="row" style="margin-top:20px; justify-content: right;">
+    <div class="col-md-12 action-buttons" style="text-align:right;">
+      <button class="btn btn-primary" ng-click="c.approve()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff'">
+        APPROVE
+      </button>
+      <button class="btn btn-primary" ng-click="c.reject()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff'">
+        REJECT
+      </button>
+      <button class="btn btn-primary" ng-click="c.editMode()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff'">
+        EDIT
+      </button>
+      <button class="btn btn-primary" ng-click="c.saveRecord()" ng-show="c.edit">
+        SAVE
+      </button>
+      <button class="btn btn-primary" ng-click="c.cancel()" ng-show="c.edit">
+        CANCEL
+      </button>  
+      <button class="btn btn-primary" ng-click="c.notify()" ng-show="c.data.localStaff && c.data.item.stage == 'Assigned to Local Staff'">
+        NOTIFY TO PICK UP
+      </button>     
+      <button class="btn btn-primary" ng-click="c.complete()" ng-show="c.data.localStaff && c.data.item.stage == 'Assigned to Local Staff'">
+        COMPLETED
+      </button>
+      <button class="btn btn-primary" ng-click="c.backToHome()" ng-show="!c.edit">
+        BACK
+      </button>
+    </div>
   </div> 
   <pre ng-if="c.debug">{{c.form | json}}</pre>
 </div>]]></template>

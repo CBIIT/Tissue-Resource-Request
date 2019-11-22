@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Tissue Note" max_length="40" name="x_naci_tissue_requ_tissue_note" type="collection">
+        <element label="Approver" max_length="100" name="approver" type="string"/>
+        <element label="note" max_length="2000" name="note" type="string"/>
+        <element label="Tissue Request ID" max_length="32" name="tissue_request_id" reference="x_naci_tissue_requ_tissue_resource_request" type="reference"/>
+        <element label="User ID" max_length="32" name="user_id" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="user_id"/>
+        </index>
+        <index name="index2">
+            <element name="tissue_request_id"/>
+        </index>
+    </element>
+</database>
