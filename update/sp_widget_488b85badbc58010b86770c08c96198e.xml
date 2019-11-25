@@ -33,6 +33,14 @@
 			label: 'Status'
 		}
 	];
+
+	c.data.isEmpty = !c.data.needMore.length &&
+		!c.data.supervideApproval.length &&
+		!c.data.committeeApproval.length &&
+		!c.data.localStaffApproval.length &&
+		!c.data.completed.length &&
+		!c.data.completedForAdmin.length;
+	
 	$scope.pagination = [5, 10, 15, 20, 25];
 	$scope.sortKey = null;
 	$scope.reverse = false;	
@@ -56,7 +64,15 @@
 		$scope.sortKey2 = keyname;   //set the sortKey to the param passed
 		$scope.reverse2 = !$scope.reverse2; //if true make it false and vice versa
 	}		
-	
+
+	$scope.pagination3 = [5, 10, 15, 20, 25];
+	$scope.sortKey3 = null;
+	$scope.reverse3 = false;	
+	$scope.sort3 = function(keyname){
+		$scope.sortKey3 = keyname;   //set the sortKey to the param passed
+		$scope.reverse3 = !$scope.reverse3; //if true make it false and vice versa
+	}		
+		
 	spUtil.recordWatch($scope, "x_naci_tissue_requ_tissue_resource_request", "", function(name, data) {  
 			spUtil.update($scope);
 	});
@@ -69,7 +85,11 @@
 	}	
 	c.viewLPStaff = function(sys_id){
 		top.window.location = "/ncisp?id=display_tissue_request_cat_item&approver=LP Staff&sys_id=" + sys_id;	
-	}	
+	}
+	c.viewAdminComplete = function(sys_id){
+		top.window.location = "/ncisp?id=display_tissue_request_cat_item&approver=&sys_id=" + sys_id;	
+	}
+	
 	
 	
 }]]></client_script>
@@ -206,7 +226,7 @@
         <sys_created_on>2019-11-14 22:34:25</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>488b85badbc58010b86770c08c96198e</sys_id>
-        <sys_mod_count>211</sys_mod_count>
+        <sys_mod_count>223</sys_mod_count>
         <sys_name>Manager Tissue Resource Request </sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -214,7 +234,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_488b85badbc58010b86770c08c96198e</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-22 22:58:57</sys_updated_on>
+        <sys_updated_on>2019-11-25 22:24:33</sys_updated_on>
         <template><![CDATA[<div>
   <div class="row">
     <div class="col-md-12">
@@ -406,8 +426,66 @@
   </div>
   <!-- complted request for admin -->  
   <div class="row panel panel-default" ng-show="c.data.completedForAdmin.length > 0" id="completedForAdmin">
-    <div class="col-md-12 panel-title">
+    <div style="display: flex">
+      <label style="margin-top: 10px; margin-right:20px;">Search</label> 
+      <input type="text" 
+             class="form-control"  
+             placeholder="Tissue Resource Request Records" 
+             aria-describedby="search record"
+             ng-model="search3" 
+             style="width: 300px; margin-top:5px;"/>  
+    </div>
+    <div class="panel-title p-1">
       Completed Request
+    </div>
+    <div class="table-responsive shadow mb-2 br-4">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="bg-light-gray">
+            <th ng-repeat="column in c.data.table_label" 
+                ng-click="sort3(column.key)"
+                style='cursor:pointer'>
+              {{column.label}}
+              <span class="glyphicon sort-icon" ng-show="sortKey3==column.key" ng-class="{'glyphicon-chevron-up':reverse3,'glyphicon-chevron-down':!reverse3}"></span>
+            </th> 
+            <th>Action</th>
+          </tr>
+        </thead>          
+        <tbody>
+          <tr dir-paginate="record in c.data.completedForAdmin | filter:search3 | orderBy:sortKey3:!reverse3 | itemsPerPage:pageSize3">
+            <td ng-repeat="col in c.data.table_label">
+              {{ record[col.key] || 'N/A' }}  
+            </td>
+            <td>
+              <button class="btn btn-primary btn-font" ng-click="c.viewAdminComplete(record.sys_id)" style="padding: 5px 30px;">
+                View
+              </button>
+            </td>
+          </tr>
+        </tbody>        
+      </table>
+    </div>
+    <div style="display:flex;">
+      <span style="margin-right:auto">Total: {{ c.data.completedForAdmin.length }}</span>
+      <div style="margin-left:auto">
+        <label class="">Results per Page:</label> 
+        <select class="from-control"
+                ng-init="pageSize3 = pagination3[0]"
+                ng-options="num for num in pagination3"
+                ng-model="pageSize3">
+        </select>
+      </div>
+      <div style="margin-left: 1.25rem">
+        <dir-pagination-controls></dir-pagination-controls>
+      </div>
+    </div>
+  </div>
+  <!-- nothing to show -->
+  <div class="row bg-white" ng-show="c.data.isEmpty">
+    <div class="col-md-12">
+     	<p>
+        No record available
+      </p> 
     </div>
   </div>
 

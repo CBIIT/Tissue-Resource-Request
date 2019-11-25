@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope, snAttachmentHandler, spUtil, spModal, styleUtil) {
+        <client_script><![CDATA[function($scope, snAttachmentHandler, spUtil, spModal, $uibModal, styleUtil) {
   /* widget controller */
   var c = this;
 	styleUtil.addStyle('@media (min-width: 1200px){ .container { width: 70% !important; }}')
@@ -66,6 +66,24 @@
 	c.cancel = function(){
 		c.edit = false;
 	}
+	c.complete = function(){
+		spModal.open({
+				title: "Warning",
+				message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to complete this request?</b></center>"
+			}).then(function(confirmed) {
+					completeRequest();
+			})	
+	}
+	c.notify = function(){
+		openModal();
+	}
+	c.send = function(){
+		c.close();
+	}
+	c.close = function(){
+		c.modal.close();
+	}
+
 	c.approve = function(){
 		if(c.data.isAdmin && (c.form.assigned_to == null || !c.form.assigned_to)){
 			spModal.alert("<br/><center><span><font color='red'>Please select a staff member to assign to</font></span></center>");
@@ -90,6 +108,16 @@
 				processRequest('rejected');
 			})
 		}
+	}
+	function completeRequest(){
+		$scope.server.get({
+			action: 'complete',
+			status: 'Completed',
+			sys_id: c.data.sys_id
+		}).then(function(){
+			top.window.location = "/ncisp?id=manage_tissue_request_cat_item";
+		});
+		
 	}
 	function processRequest(action){
 		$scope.server.get({
@@ -126,11 +154,18 @@
 			});
 		})
 	}
-	c.notify = function(){
-		
-	}
-	c.completed = function(){
-		
+	
+	function openModal() {
+		c.modal = $uibModal.open({
+			template: $('#notification-modal').prop('innerHTML'),
+			scope: $scope,
+			windowClass: '',
+			size: 'lg',
+			backdrop: 'static',
+			controller: function($scope) {
+				this.c = c;
+			}
+		});
 	}
 	spUtil.recordWatch($scope, "sys_attachment", "", function(name, data) {  
 			spUtil.update($scope);
@@ -189,6 +224,10 @@
 .action-buttons .btn.btn-primary {
   margin-left: 10px;
   min-width: 100px;
+}
+
+.d-none {
+  display: none;
 }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -240,6 +279,13 @@
 				}
 				proc.update();
 				status = input.status;
+			}else if(input.action == "complete"){
+				var comp = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
+						comp.get(input.sys_id);
+						comp.stage = input.status;
+						comp.update();
+				status = "Completed";
+				input.comments = "completed";
 			}
 			//add comments
 			if(input.comments != null && input.comments.trim().length > 0){
@@ -434,7 +480,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>336</sys_mod_count>
+        <sys_mod_count>383</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -442,7 +488,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-22 22:57:34</sys_updated_on>
+        <sys_updated_on>2019-11-25 22:33:25</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -770,7 +816,7 @@
   </div>
   <!-- end of comments history section -->
  <!-- comments section -->
- <div class="mb-2 br-4" style="margin-top:20px; justify-content: right;" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff'">
+ <div class="mb-2 br-4" style="margin-top:20px; justify-content: right;" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
    <div class="title-bold">
      	Comments
    </div>
@@ -780,7 +826,7 @@
  </div>
   <!-- end of comments input section -->
   <!-- assign to local staff section -->
-  <div class="row" style="margin-top:20px;" ng-show="c.data.isAdmin && !c.edit && c.data.item.stage != 'Assigned to Local Staff'">
+  <div class="row" style="margin-top:20px;" ng-show="c.data.isAdmin && !c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
     <div class="col-md-3">
       <label>Assign To</label> 
     </div>
@@ -794,13 +840,13 @@
   <!-- end of assign -->
   <div class="row" style="margin-top:20px; justify-content: right;">
     <div class="col-md-12 action-buttons" style="text-align:right;">
-      <button class="btn btn-primary" ng-click="c.approve()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff'">
+      <button class="btn btn-primary" ng-click="c.approve()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
         APPROVE
       </button>
-      <button class="btn btn-primary" ng-click="c.reject()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff'">
+      <button class="btn btn-primary" ng-click="c.reject()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
         REJECT
       </button>
-      <button class="btn btn-primary" ng-click="c.editMode()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff'">
+      <button class="btn btn-primary" ng-click="c.editMode()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
         EDIT
       </button>
       <button class="btn btn-primary" ng-click="c.saveRecord()" ng-show="c.edit">
@@ -813,7 +859,7 @@
         NOTIFY TO PICK UP
       </button>     
       <button class="btn btn-primary" ng-click="c.complete()" ng-show="c.data.localStaff && c.data.item.stage == 'Assigned to Local Staff'">
-        COMPLETED
+        COMPLETE
       </button>
       <button class="btn btn-primary" ng-click="c.backToHome()" ng-show="!c.edit">
         BACK
@@ -821,6 +867,33 @@
     </div>
   </div> 
   <pre ng-if="c.debug">{{c.form | json}}</pre>
+</div>
+
+<div id="notification-modal" class="d-none">
+  <div class="modal-header">
+    <h4 class="modal-title">
+      Pick up Materials
+    </h4>
+  </div>
+  <div class="modal-body" id="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <input type="radio" ng-model="c.form.matierial" vaule='full'>Complete request ready for pickup     
+      </div>
+      <div class="col-md-6">
+        <input type="radio" ng-model="c.form.matierial" value='partial'>Partial ready for pickup (Please specify what are ready below)    
+      </div>
+    </div>
+    <div class="row" style="margin-top: 20px">
+      <div class="col-md-12">
+        <textarea ng-model="description" rows="5" class="form-control" PlaceHolder="Enter your Notes"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer d-flex">
+    <button type="button" class="btn btn-primary" ng-click='c.send()'>Send</button>
+    <button type="button" class="btn btn-default" ng-click="$close()">Cancel</button>
+  </div>  
 </div>]]></template>
     </sp_widget>
 </record_update>
