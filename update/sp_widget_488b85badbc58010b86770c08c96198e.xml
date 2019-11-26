@@ -71,8 +71,22 @@
 	$scope.sort3 = function(keyname){
 		$scope.sortKey3 = keyname;   //set the sortKey to the param passed
 		$scope.reverse3 = !$scope.reverse3; //if true make it false and vice versa
-	}		
-		
+	}	
+	$scope.pagination4 = [5, 10, 15, 20, 25];
+	$scope.sortKey4 = null;
+	$scope.reverse4 = false;	
+	$scope.sort4 = function(keyname){
+		$scope.sortKey4 = keyname;   //set the sortKey to the param passed
+		$scope.reverse4 = !$scope.reverse4; //if true make it false and vice versa
+	}
+	$scope.pagination5 = [5, 10, 15, 20, 25];
+	$scope.sortKey5 = null;
+	$scope.reverse5 = false;	
+	$scope.sort5 = function(keyname){
+		$scope.sortKey5 = keyname;   //set the sortKey to the param passed
+		$scope.reverse5 = !$scope.reverse5; //if true make it false and vice versa
+	}
+				
 	spUtil.recordWatch($scope, "x_naci_tissue_requ_tissue_resource_request", "", function(name, data) {  
 			spUtil.update($scope);
 	});
@@ -89,8 +103,12 @@
 	c.viewAdminComplete = function(sys_id){
 		top.window.location = "/ncisp?id=display_tissue_request_cat_item&approver=&sys_id=" + sys_id;	
 	}
-	
-	
+	c.viewComplete = function(sys_id){
+		top.window.location = "/ncisp?id=display_tissue_request_cat_item&approver=&sys_id=" + sys_id;	
+	}	
+	c.viewMore = function(sys_id){
+		top.window.location = "/ncisp?id=display_tissue_request_cat_item&approver=Requestor&sys_id=" + sys_id;	
+	}
 	
 }]]></client_script>
         <controller_as>c</controller_as>
@@ -166,7 +184,7 @@
 			needm.number = item.number.toString();
 			needm.sys_id = item.sys_id.toString();
 			needm.principal_investigator = item.principal_investigator.name.toString();
-			needm.submitted_by = item.submitted_by.toString();
+			needm.submitted_by = item.submitted_by.name.toString();
 			needm.stage = item.	stage.toString();
 			needm.can_number = item.can_number.toString();
 			needm.type = item.type.toString();
@@ -226,7 +244,7 @@
         <sys_created_on>2019-11-14 22:34:25</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>488b85badbc58010b86770c08c96198e</sys_id>
-        <sys_mod_count>223</sys_mod_count>
+        <sys_mod_count>231</sys_mod_count>
         <sys_name>Manager Tissue Resource Request </sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -234,7 +252,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_488b85badbc58010b86770c08c96198e</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-25 22:24:33</sys_updated_on>
+        <sys_updated_on>2019-11-26 20:19:18</sys_updated_on>
         <template><![CDATA[<div>
   <div class="row">
     <div class="col-md-12">
@@ -246,9 +264,59 @@
   <hr/>
   <!-- for need more information -->
   <div class="row panel panel-default" ng-show="c.data.needMore.length > 0" id="moreInfo">
-    <div class="col-md-12 panel-title">
+    <div style="display: flex">
+      <label style="margin-top: 10px; margin-right:20px;">Search</label> 
+      <input type="text" 
+             class="form-control"  
+             placeholder="Tissue Resource Request Records" 
+             aria-describedby="search record"
+             ng-model="search5" 
+             style="width: 300px; margin-top:5px;"/>  
+    </div>
+    <div class="panel-title p-1">
       Need More Information
     </div>
+    <div class="table-responsive shadow mb-2 br-4">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="bg-light-gray">
+            <th ng-repeat="column in c.data.table_label" 
+                ng-click="sort5(column.key)"
+                style='cursor:pointer'>
+              {{column.label}}
+              <span class="glyphicon sort-icon" ng-show="sortKey5==column.key" ng-class="{'glyphicon-chevron-up':reverse5,'glyphicon-chevron-down':!reverse5}"></span>
+            </th> 
+            <th>Action</th>
+          </tr>
+        </thead>          
+        <tbody>
+          <tr dir-paginate="record in c.data.needMore | filter:search5 | orderBy:sortKey5:!reverse5 | itemsPerPage:pageSize5">
+            <td ng-repeat="col in c.data.table_label">
+              {{ record[col.key] || 'N/A' }}  
+            </td>
+            <td>
+              <button class="btn btn-primary btn-font" ng-click="c.viewMore(record.sys_id)" style="padding: 5px 30px;">
+                View
+              </button>
+            </td>
+          </tr>
+        </tbody>        
+      </table>
+    </div>
+    <div style="display:flex;">
+      <span style="margin-right:auto">Total: {{ c.data.needMore.length }}</span>
+      <div style="margin-left:auto">
+        <label class="">Results per Page:</label> 
+        <select class="from-control"
+                ng-init="pageSize5 = pagination5[0]"
+                ng-options="num for num in pagination5"
+                ng-model="pageSize5">
+        </select>
+      </div>
+      <div style="margin-left: 1.25rem">
+        <dir-pagination-controls></dir-pagination-controls>
+      </div>
+    </div>        
   </div>
   <!-- for wait for Supervisor approval-->
   <div class="row panel panel-default p-3" ng-show="c.data.supervideApproval.length > 0" id="supervisorApproval">
@@ -420,8 +488,58 @@
   </div>
   <!-- complete request -->
   <div class="row panel panel-default" ng-show="c.data.completed.length > 0" id="completed">
-    <div class="col-md-12 panel-title">
+    <div style="display: flex">
+      <label style="margin-top: 10px; margin-right:20px;">Search</label> 
+      <input type="text" 
+             class="form-control"  
+             placeholder="Tissue Resource Request Records" 
+             aria-describedby="search record"
+             ng-model="search4" 
+             style="width: 300px; margin-top:5px;"/>  
+    </div>
+    <div class="panel-title p-1">
       Completed Request
+    </div>
+    <div class="table-responsive shadow mb-2 br-4">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="bg-light-gray">
+            <th ng-repeat="column in c.data.table_label" 
+                ng-click="sort4(column.key)"
+                style='cursor:pointer'>
+              {{column.label}}
+              <span class="glyphicon sort-icon" ng-show="sortKey4==column.key" ng-class="{'glyphicon-chevron-up':reverse4,'glyphicon-chevron-down':!reverse4}"></span>
+            </th> 
+            <th>Action</th>
+          </tr>
+        </thead>          
+        <tbody>
+          <tr dir-paginate="record in c.data.completed | filter:search4 | orderBy:sortKey4:!reverse4 | itemsPerPage:pageSize4">
+            <td ng-repeat="col in c.data.table_label">
+              {{ record[col.key] || 'N/A' }}  
+            </td>
+            <td>
+              <button class="btn btn-primary btn-font" ng-click="c.viewComplete(record.sys_id)" style="padding: 5px 30px;">
+                View
+              </button>
+            </td>
+          </tr>
+        </tbody>        
+      </table>
+    </div>
+    <div style="display:flex;">
+      <span style="margin-right:auto">Total: {{ c.data.completed.length }}</span>
+      <div style="margin-left:auto">
+        <label class="">Results per Page:</label> 
+        <select class="from-control"
+                ng-init="pageSize4 = pagination4[0]"
+                ng-options="num for num in pagination4"
+                ng-model="pageSize4">
+        </select>
+      </div>
+      <div style="margin-left: 1.25rem">
+        <dir-pagination-controls></dir-pagination-controls>
+      </div>
     </div>
   </div>
   <!-- complted request for admin -->  

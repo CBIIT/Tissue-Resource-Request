@@ -45,7 +45,24 @@
 		c.form.intent_to_use = c.data.item.intent_to_use;
 	}
 	/* end of type 1 */
-  
+	/* type 2 section value setting */
+	if(c.form.type == 'Clinical Archives unlinked'){
+		c.form.clinic_archives = c.data.item.clinic_archives;
+		
+	}
+	/* end of type 2 */
+  c.moreInfo = function(){
+		if(c.form.comment == null || c.form.comment.trim().length < 1){
+				spModal.alert("<br/><center><span><font color='red'>Please provide a comment if more information are needed.</font></span></center>");
+		}else{
+			spModal.open({
+				title: "Warning",
+				message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to send this request back to requestor?</b></center>"
+			}).then(function(confirmed) {
+				moreInformationRequest('moreInfo');
+			})
+		}		
+	}
 	c.editMode = function(){
 		c.edit = true;
 	}
@@ -59,6 +76,14 @@
 			c.edit = false;
 			$scope.server.update();
 		});
+	}
+	c.resubmit = function(){
+		spModal.open({
+			title: "Warning",
+			message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to submit this request?</b></center>"
+		}).then(function(confirmed) {
+			resubmitRequest();
+		})	
 	}
 	c.backToHome = function(){
 		top.window.location = "/ncisp?id=manage_tissue_request_cat_item";
@@ -108,6 +133,16 @@
 				processRequest('rejected');
 			})
 		}
+	}        
+	function resubmitRequest(){
+			$scope.server.get({
+			action: 'submit',
+			record: c.form,
+			sys_id: c.data.sys_id,
+			comments: c.form.comment
+		}).then(function(){
+			top.window.location = "/ncisp?id=manage_tissue_request_cat_item";
+		});
 	}
 	function completeRequest(){
 		$scope.server.get({
@@ -118,6 +153,15 @@
 			top.window.location = "/ncisp?id=manage_tissue_request_cat_item";
 		});
 		
+	}
+	function moreInformationRequest(action){
+		$scope.server.get({
+			action: 'moreInfo',
+			sys_id: c.data.sys_id,
+			comments: c.form.comment
+		}).then(function(){
+			top.window.location = "/ncisp?id=manage_tissue_request_cat_item";
+		});
 	}
 	function processRequest(action){
 		$scope.server.get({
@@ -274,7 +318,7 @@
 				var proc = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
 				proc.get(input.sys_id);
 				proc.approval_action = input.status;
-				if(data.isAdmin){
+				if(data.isAdmin && input.status != 'rejected'){
 					proc.assigned_to = input.assigned_to.toString();
 				}
 				proc.update();
@@ -286,6 +330,24 @@
 						comp.update();
 				status = "Completed";
 				input.comments = "completed";
+			}else if(input.action == 'moreInfo'){
+				var more = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
+						more.get(input.sys_id);
+				    more.assigned_to = more.submitted_by.toString();
+						more.approval_action = 'more';
+						more.update();
+						status = "More Infromation";
+			}else if(input.action == 'submit'){
+				var param1 = input.record;
+				var res = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
+				res.get(input.sys_id);
+				res.stage = 'Waiting for Committee Approval';
+				//set common section
+				for(var key1 in param1){
+					res.setValue(key1, param1[key1]);
+				}
+				res.updateMultiple();
+				status = 'submitted';
 			}
 			//add comments
 			if(input.comments != null && input.comments.trim().length > 0){
@@ -480,7 +542,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>383</sys_mod_count>
+        <sys_mod_count>434</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -488,7 +550,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-25 22:33:25</sys_updated_on>
+        <sys_updated_on>2019-11-26 22:24:00</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -777,6 +839,140 @@
     </div>    
   </div>
   <!-- end of type 1-->
+  <!-- type 2 Clinical Archives unlinked -->
+  <div id="type2" ng-show = 'c.data.item.type == "Clinical Archives unlinked"'>
+    <div class="row">
+      <div class="col-md-12" ng-show="!c.edit">
+        <label class="label-bold">Clinical Archives unlinked or Autopsy</label>
+        {{c.data.item.clinic_archives}}
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Clinical Archives unlinked or Autopsy</label>
+        <select class="form-control" ng-model="c.form.clinic_archives">
+           <option label="Clinical Archives" value="Clinical Archives">Clinical Archives</option>
+           <option label="For Autopsy, no IRB exemption required" value="For Autopsy, no IRB exemption required">For Autopsy, no IRB exemption required</option>
+           <option label="Clinical laboratory validation material does not require IRB approval" value="Clinical laboratory validation material does not require IRB approval">Clinical laboratory validation material does not require IRB approval</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.clinic_archives == 'Clinical Archives'">
+      <div class="col-md-12">
+        <label class="label-bold">Clinic Archives Note</label>
+        <ul>
+          <li>Can be email or formal form from IRB for exemption</li>
+          <li>All slides and/or containers will be deidentified for unlinked clinical archived material.</li>
+          <li>There will be no link available</li>
+        </ul>
+      </div>
+    </div>    
+    <div class="row" ng-show="c.data.item.clinic_archives == 'Clinical Archives'">
+      <div class="col-md-12">
+        <label class="label-bold">Provide IRB Exception</label>
+        Please see Attachment(s) section
+      </div>
+    </div>    
+    <div class="row" ng-show="c.data.item.clinic_archives == 'Clinical laboratory validation material does not require IRB approval'">
+      <div class="col-md-12">
+        <label class="label-bold">Laboratory Validation Note</label>
+        Clinical validation material (must provide clinical test being validated in intended use)
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock1}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock2}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock3}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock4}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.data.item.caseBlock5}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.data.item.material_requested}}
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Unstained Slides'">
+      <div class="col-md-6">
+        <label class="label-bold">Number of recuts per slide</label>
+        {{c.data.item.number_recuts}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Requested thickness</label>
+        {{c.data.item.thickness}}
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'" style="margin-top: 20px;">
+      <div class="col-md-12">
+        <input type="checkbox" ng-model="c.data.item.he" disabled='disabled'> H&E 
+      </div>
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'">
+      <div class="col-md-12">
+        <input type="checkbox" ng-model="c.data.item.special_stains" disabled='disabled'> If Special stains or IHC, must be via collaboration with an LP Pathlogist
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Tissue Shavings'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.tissue_shaving_text}}
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Slide Signout from LP'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.slide_signout_from_lp_text}}
+      </div>     
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'Other Material'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.other_material_specify}}
+      </div>      
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        <span>LP does not typically release tissue blocks from the clinical archived biomaterial. On a rare occasion, the LP Medical Director can authorize the temporary release of a clinical tissue block for additional non-LP clinical testing.</span>
+      </div>       
+    </div>
+    <div class="row" ng-show="c.data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+      <div class="col-md-12">
+        <label class="label-bold">Specify</label>
+        {{c.data.item.ffpe_tissue_block_text}}
+      </div>       
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Specify any special processing or handling request (e.g. charged, RNAse free, etc)</label>
+        {{c.data.item.special_processing_or_handling}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Intended use</label>
+        {{c.data.item.intent_to_use}}
+      </div>
+    </div>    
+  </div>
+  <!-- end of type 2-->
   
   <!-- show attachments -->
   <div class="row" ng-show='c.data.files.length > 0'>
@@ -840,13 +1036,19 @@
   <!-- end of assign -->
   <div class="row" style="margin-top:20px; justify-content: right;">
     <div class="col-md-12 action-buttons" style="text-align:right;">
-      <button class="btn btn-primary" ng-click="c.approve()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
+      <button class="btn btn-primary" ng-click="c.moreInfo()" ng-show="!c.edit && c.data.item.stage == 'Waiting for Committee Approval'">
+        MORE INFORMATION
+      </button> 
+      <button class="btn btn-primary" ng-click="c.approve()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed' && c.data.item.stage != 'More Infromation'">
         APPROVE
       </button>
-      <button class="btn btn-primary" ng-click="c.reject()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
+      <button class="btn btn-primary" ng-click="c.reject()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed' && c.data.item.stage != 'More Infromation'">
         REJECT
       </button>
-      <button class="btn btn-primary" ng-click="c.editMode()" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
+      <button class="btn btn-primary" ng-click="c.resubmit()" ng-show="!c.edit && c.data.item.stage == 'More Infromation'">
+        SUBMIT
+      </button>
+      <button class="btn btn-primary" ng-click="c.editMode()" ng-show="!c.edit && c.data.item.stage == 'Waiting for Supervisor Approval'">
         EDIT
       </button>
       <button class="btn btn-primary" ng-click="c.saveRecord()" ng-show="c.edit">
