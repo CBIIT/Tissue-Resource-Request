@@ -48,9 +48,102 @@
 	/* type 2 section value setting */
 	if(c.form.type == 'Clinical Archives unlinked'){
 		c.form.clinic_archives = c.data.item.clinic_archives;
-		
+		c.form.case_block_2_1 = c.data.item.case_block_2_1;
+		c.form.case_block_2_2 = c.data.item.case_block_2_2;
+		c.form.case_block_2_3 = c.data.item.case_block_2_3;
+		c.form.case_block_2_4 = c.data.item.case_block_2_4;
+		c.form.case_block_2_5 = c.data.item.case_block_2_5;
+		c.form.material_being_requested_2 = c.data.item.material_being_requested_2;
+		if(c.form.material_being_requested_2 == 'Unstained Slides'){
+			c.form.number_of_recuts2 = c.data.item.number_of_recuts2;
+			c.form.requested_thinkness2 = c.data.item.requested_thinkness2;
+		}else if(c.form.material_being_requested_2 == 'Stained Slides'){
+			c.form.he2= c.data.item.he2;
+			c.form.special_stains2 = c.data.item.special_stains2;
+		}else if(c.form.material_being_requested_2 == 'Tissue Shavings'){
+			c.form.tissue_shaving_text_2 = c.data.item.tissue_shaving_text_2;
+		}else if(c.form.material_being_requested_2 == 'Slide Signout from LP'){
+			c.form.slide_signout_from_lp_text_2 = c.data.item.slide_signout_from_lp_text_2;
+		}else if(c.form.material_being_requested_2 == 'Other Material'){
+			c.form.other_material_specify_2 = c.data.item.other_material_specify_2;
+		}else if(c.form.material_being_requested_2 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
+			c.form.ffpe_tissue_block_text_2 = c.data.item.ffpe_tissue_block_text_2;
+		}
+		c.form.special_processing_or_handling_2 = c.data.item.special_processing_or_handling_2;
+		c.form.intent_to_use_2 = c.data.item.intent_to_use_2;
 	}
 	/* end of type 2 */
+	//type 3 
+	if(c.form.type=='Formalin - Fixed Paraffin - Embedded Biomedical Waste - Unlinked / Anonymized'){
+		c.form.case_tissue_type = c.data.item.case_tissue_type;
+		c.form.material_being_requested_3 = c.data.item.material_being_requested_3;
+		if(c.form.material_being_requested_3 == 'Unstained Slides'){
+			c.form.number_of_recuts_per_slide_3 = c.data.item.number_of_recuts_per_slide_3;
+			c.form.requested_thickness_3 = c.data.item.requested_thickness_3;
+		}else if(c.form.material_being_requested_3 == 'Stained Slides'){
+			c.form.he3 = c.data.item.he3;
+			c.form.special_stains3 = c.data.item.special_stains3;
+		}else if(c.form.material_being_requested_3 == 'Tissue Shavings'){
+			c.form.tissue_shaving_text_3 = c.data.item.tissue_shaving_text_3;
+		}else if(c.form.material_being_requested_3 == 'Other Material'){
+			c.form.other_material_specify_3 = c.data.item.other_material_specify_3;
+		}else if(c.form.material_being_requested_3 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
+			c.form.ffpe_tissue_block_text_3 = c.data.item.ffpe_tissue_block_text_3;
+		}				
+		c.form.special_processing_or_handling_3 = c.data.item.special_processing_or_handling_3;
+		c.form.intent_to_use_3 = c.data.item.intent_to_use_3;		
+	}
+	//end of type 3
+	//type 4 
+	if(c.form.type=='Fresh Frozen normal non-tumor'){
+		c.form.case_tissue_type_4_1 = c.data.item.case_tissue_type_4_1;
+		c.form.case_tissue_type_4_2 = c.data.item.case_tissue_type_4_2; 
+		c.form.case_tissue_type_4_3 = c.data.item.case_tissue_type_4_3;				
+		c.form.case_tissue_type_4_4 = c.data.item.case_tissue_type_4_4;
+		c.form.case_tissue_type_4_5 = c.data.item.case_tissue_type_4_5;
+		c.form.material_being_requested_4 = c.data.item.material_being_requested_4;
+		c.form.intend_to_use_4 = c.data.item.intend_to_use_4;
+	}
+	//end of type 4
+	//type 5 
+	if(c.form.type=='Fresh Post-Mortem collection'){
+		c.form.case_tissue_type_5_1 = c.data.item.case_tissue_type_5_1;
+		c.form.case_tissue_type_5_2 = c.data.item.case_tissue_type_5_2; 
+		c.form.case_tissue_type_5_3 = c.data.item.case_tissue_type_5_3;				
+		c.form.case_tissue_type_5_4 = c.data.item.case_tissue_type_5_4;
+		c.form.case_tissue_type_5_5 = c.data.item.case_tissue_type_5_5;	
+		c.form.patient_name1 = c.data.item.patient_name_1;
+		c.form.item.patient_name2 = c.data.item.patient_name_2;
+		c.form.patient_name3 = c.data.item.patient_name_3;
+		c.form.item.patient_name4 = c.data.item.patient_name_4;
+		c.form.patient_name5 = c.data.item.patient_name_5;
+		c.form.material_being_requested_5 = c.data.item.material_being_requested_5;
+		c.form.intend_to_use_5 = c.data.item.intend_to_use_5;
+	}
+	//end of type 5
+	//type 6
+	if(c.form.type=='FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration'){
+		c.form.tissue.case_tissue_type_6_1 = c.data.item.case_tissue_type_6_1;
+		c.form.case_tissue_type_6_2 = c.data.item.case_tissue_type_6_2; 
+		c.form.case_tissue_type_6_3 = c.data.item.case_tissue_type_6_3;				
+		c.form.case_tissue_type_6_4 = c.data.item.case_tissue_type_6_4;
+		c.form.case_tissue_type_6_5 = c.data.item.case_tissue_type_6_5;			
+		c.form.material_being_requested_6 = c.data.item.material_being_requested_6;
+		c.form.intend_to_use_6 = c.data.item.intend_to_use_6;
+	}
+	//end of type 6
+	//type 7 
+	if(c.form.type=='Facilitated fresh tissue collection via CCR / WRNMMC Collaboration'){
+		c.form.project_title = c.data.item.project_title;
+		c.form.project_start_date = c.data.item.project_start_date;
+		c.form.project_end_date = c.data.item.project_end_date;
+		c.form.five_key_word = c.data.item.five_key_word;
+		c.form.type_of_research = c.data.item.type_of_research;
+		c.form.disease_or_site = c.data.item.disease_or_site;
+		c.form.abstract_or_summary = c.data.item.abstract_or_summary;
+	}
+	//end of type 7
+	
   c.moreInfo = function(){
 		if(c.form.comment == null || c.form.comment.trim().length < 1){
 				spModal.alert("<br/><center><span><font color='red'>Please provide a comment if more information are needed.</font></span></center>");
@@ -415,7 +508,7 @@
 			data.item.can_number = tissue.can_number.toString();
 			data.item.type = tissue.type.toString();
 	    var type = tissue.type;
-	    if(type == 'Clinical Archives linked to protocol'){
+	    if(type == 'Clinical Archives linked to protocol'){ //type 1
 					data.item.irb_protocol = tissue.irb_protocol_number.toString();
 					data.item.patient_name = tissue.patient_name.toString();
 					data.item.caseBlock1 = tissue.case_block_1.toString();
@@ -441,31 +534,31 @@
 					}
 					data.item.special_processing_or_handling = tissue.special_processing_or_handling.toString();
 					data.item.intent_to_use = tissue.intent_to_use.toString();
-			}else if(type=='Clinical Archives unlinked'){
+			}else if(type=='Clinical Archives unlinked'){        //type 2
 				  data.item.clinic_archives = tissue.clinic_archives.toString();
-					data.item.caseBlock1 = tissue.case_block_2_1.toString();
-					data.item.caseBlock2 = tissue.case_block_2_2.toString(); 
-					data.item.caseBlock3 = tissue.case_block_2_3.toString();				
-					data.item.caseBlock4 = tissue.case_block_2_4.toString();
-					data.item.caseBlock5 = tissue.case_block_2_5.toString();
-					data.item.material_requested = tissue.material_being_requested_2.toString();
-					if(data.item.material_requested == 'Unstained Slides'){
-						data.item.number_recuts = tissue.number_of_recuts2.toString();
-						data.item.thickness = tissue.requested_thinkness2.toString();
-					}else if(data.item.material_requested == 'Stained Slides'){
-						data.item.he = tissue.he2.toString() == 'true';
-						data.item.special_stains = tissue.special_stains2.toString() == 'true';
-					}else if(data.item.material_requested == 'Tissue Shavings'){
-						data.item.tissue_shaving_text = tissue.tissue_shaving_text_2.toString();
-					}else if(data.item.material_requested == 'Slide Signout from LP'){
-						data.item.slide_signout_from_lp_text = tissue.slide_signout_from_lp_text_2.toString();
-					}else if(data.item.material_requested == 'Other Material'){
-						data.item.other_material_specify = tissue.other_material_specify_2.toString();
-					}else if(data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
-						data.item.ffpe_tissue_block_text = tissue.ffpe_tissue_block_text_2.toString();
+					data.item.case_block_2_1 = tissue.case_block_2_1.toString();
+					data.item.case_block_2_2 = tissue.case_block_2_2.toString(); 
+					data.item.case_block_2_3 = tissue.case_block_2_3.toString();				
+					data.item.case_block_2_4 = tissue.case_block_2_4.toString();
+					data.item.case_block_2_5 = tissue.case_block_2_5.toString();
+					data.item.material_being_requested_2 = tissue.material_being_requested_2.toString();
+					if(data.item.material_being_requested_2 == 'Unstained Slides'){
+						data.item.number_of_recuts2 = tissue.number_of_recuts2.toString();
+						data.item.requested_thinkness2 = tissue.requested_thinkness2.toString();
+					}else if(data.item.material_being_requested_2 == 'Stained Slides'){
+						data.item.he2 = tissue.he2.toString() == 'true';
+						data.item.special_stains2 = tissue.special_stains2.toString() == 'true';
+					}else if(data.item.material_being_requested_2 == 'Tissue Shavings'){
+						data.item.tissue_shaving_text_2 = tissue.tissue_shaving_text_2.toString();
+					}else if(data.item.material_being_requested_2 == 'Slide Signout from LP'){
+						data.item.slide_signout_from_lp_text_2 = tissue.slide_signout_from_lp_text_2.toString();
+					}else if(data.item.material_being_requested_2 == 'Other Material'){
+						data.item.other_material_specify_2 = tissue.other_material_specify_2.toString();
+					}else if(data.item.material_being_requested_2 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
+						data.item.ffpe_tissue_block_text_2 = tissue.ffpe_tissue_block_text_2.toString();
 					}
-					data.item.special_processing_or_handling = tissue.special_processing_or_handling_2.toString();
-					data.item.intent_to_use = tissue.intent_to_use_2.toString();				
+					data.item.special_processing_or_handling_2 = tissue.special_processing_or_handling_2.toString();
+					data.item.intent_to_use_2 = tissue.intent_to_use_2.toString();				
 			}else if(type=='Formalin - Fixed Paraffin - Embedded Biomedical Waste - Unlinked / Anonymized'){
 					data.item.case_tissue_type = tissue.case_tissue_type.toString();
 				  data.item.material_requested = tissue.material_being_requested_3.toString();
@@ -542,7 +635,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>434</sys_mod_count>
+        <sys_mod_count>602</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -550,7 +643,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-26 22:24:00</sys_updated_on>
+        <sys_updated_on>2019-11-27 20:52:10</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -840,11 +933,11 @@
   </div>
   <!-- end of type 1-->
   <!-- type 2 Clinical Archives unlinked -->
-  <div id="type2" ng-show = 'c.data.item.type == "Clinical Archives unlinked"'>
+  <div id="type2" ng-show = 'c.form.type == "Clinical Archives unlinked"'>
     <div class="row">
       <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Clinical Archives unlinked or Autopsy</label>
-        {{c.data.item.clinic_archives}}
+        {{c.form.clinic_archives}}
       </div>
       <div class="col-md-12" ng-show="c.edit">
         <label class="label-bold">Clinical Archives unlinked or Autopsy</label>
@@ -855,7 +948,7 @@
         </select>
       </div>
     </div>
-    <div class="row" ng-show="c.data.item.clinic_archives == 'Clinical Archives'">
+    <div class="row" ng-show="c.form.clinic_archives == 'Clinical Archives'">
       <div class="col-md-12">
         <label class="label-bold">Clinic Archives Note</label>
         <ul>
@@ -865,115 +958,332 @@
         </ul>
       </div>
     </div>    
-    <div class="row" ng-show="c.data.item.clinic_archives == 'Clinical Archives'">
-      <div class="col-md-12">
+    <div class="row" ng-show="c.form.clinic_archives == 'Clinical Archives'">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Provide IRB Exception</label>
         Please see Attachment(s) section
       </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Provide IRB Exception</label>
+      </div>
+       <div class="col-md-6" ng-show="c.edit" style="margin-top:30px;">
+        <input type="file" id="upload_file1" style="margin-bottom:5px;">
+        <button class="btn btn-primary" ng-click="c.uploadAttachment('upload_file1')">Add Attachment</button>
+      </div>      
     </div>    
-    <div class="row" ng-show="c.data.item.clinic_archives == 'Clinical laboratory validation material does not require IRB approval'">
+    <div class="row" ng-show="c.form.clinic_archives == 'Clinical laboratory validation material does not require IRB approval'">
       <div class="col-md-12">
         <label class="label-bold">Laboratory Validation Note</label>
         Clinical validation material (must provide clinical test being validated in intended use)
       </div>
     </div>    
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6" ng-show="!c.edit">
         <label class="label-bold">Case #, Block #(s)</label>
-        {{c.data.item.caseBlock1}}
+        {{c.form.case_block_2_1}}
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" ng-show="!c.edit">
         <label class="label-bold">Case #, Block #(s)</label>
-        {{c.data.item.caseBlock2}}
+        {{c.form.case_block_2_2}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case #, Block #(s)</label>
+        <input class="form-control" ng-model="c.form.case_block_2_1"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case #, Block #(s)</label>
+        <input class="form-control" ng-model="c.form.case_block_2_2"/>
+      </div> 
+    </div>
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.form.case_block_2_3}}
+      </div>
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.form.case_block_2_4}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case #, Block #(s)</label>
+        <input class="form-control" ng-model="c.form.case_block_2_3"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case #, Block #(s)</label>
+        <input class="form-control" ng-model="c.form.case_block_2_4"/>
+      </div> 
+    </div>
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Case #, Block #(s)</label>
+        {{c.form.case_block_2_5}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case #, Block #(s)</label>
+        <input class="form-control" ng-model="c.form.case_block_2_5"/>
+      </div> 
+       <div class="col-md-6" ng-show="c.edit" style="margin-top:30px;">
+        <input type="file" id="upload_file2" style="margin-bottom:5px;">
+        <button class="btn btn-primary" ng-click="c.uploadAttachment('upload_file2')">Add Attachment</button>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
-        <label class="label-bold">Case #, Block #(s)</label>
-        {{c.data.item.caseBlock3}}
-      </div>
-      <div class="col-md-6">
-        <label class="label-bold">Case #, Block #(s)</label>
-        {{c.data.item.caseBlock4}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <label class="label-bold">Case #, Block #(s)</label>
-        {{c.data.item.caseBlock5}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Material Being Requested</label>
-        {{c.data.item.material_requested}}
+        {{c.form.material_being_requested_2}}
       </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Material Being Requested</label>
+         <select class="form-control" ng-model="c.form.material_being_requested_2">
+           <option value="Unstained Slides">Unstained Slides</option>
+           <option value="Stained Slides">Stained Slides</option>
+           <option value="Tissue Shavings">Tissue Shavings</option>
+           <option value="Slide Signout From LP">Slide Signout From LP</option>
+           <option value="Other Material">Other Material</option>
+           <option value="FFPE Tissue Block (formalin-fixed, paraffin-embedded)">FFPE Tissue Block (formalin-fixed, paraffin-embedded)</option>
+        </select>
+      </div> 
     </div>
-    <div class="row" ng-show="c.data.item.material_requested == 'Unstained Slides'">
-      <div class="col-md-6">
+    <div class="row" ng-show="c.form.material_being_requested_2 == 'Unstained Slides'">
+      <div class="col-md-6" ng-show="!c.edit">
         <label class="label-bold">Number of recuts per slide</label>
-        {{c.data.item.number_recuts}}
+        {{c.form.number_of_recuts2}}
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" ng-show="!c.edit">
         <label class="label-bold">Requested thickness</label>
-        {{c.data.item.thickness}}
+        {{c.form.requested_thinkness2}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Number of recuts per slide</label>
+        <input class="form-control" ng-model="c.form.number_of_recuts2"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Requested thickness</label>
+        <input class="form-control" ng-model="c.form.requested_thinkness2"/>
+      </div>        
+    </div>
+    <div class="row" ng-show="c.form.material_being_requested_2 == 'Stained Slides'" style="margin-top: 20px;">
+      <div class="col-md-12" ng-show="!c.edit">
+        <input type="checkbox" ng-model="c.form.he2" disabled='disabled'> H&E 
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <input type="checkbox" ng-model="c.form.he2"> H&E 
       </div>
     </div>
-    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'" style="margin-top: 20px;">
-      <div class="col-md-12">
-        <input type="checkbox" ng-model="c.data.item.he" disabled='disabled'> H&E 
+    <div class="row" ng-show="c.form.material_being_requested_2 == 'Stained Slides'">
+      <div class="col-md-12" ng-show="!c.edit">
+        <input type="checkbox" ng-model="c.form.special_stains2" disabled='disabled'> If Special stains or IHC, must be via collaboration with an LP Pathlogist
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <input type="checkbox" ng-model="c.form.special_stains2"> If Special stains or IHC, must be via collaboration with an LP Pathlogist
       </div>
     </div>
-    <div class="row" ng-show="c.data.item.material_requested == 'Stained Slides'">
-      <div class="col-md-12">
-        <input type="checkbox" ng-model="c.data.item.special_stains" disabled='disabled'> If Special stains or IHC, must be via collaboration with an LP Pathlogist
+    <div class="row" ng-show="c.form.material_being_requested_2 == 'Tissue Shavings'">
+      <div class="col-md-12" ng-show="!c.edit">
+        <label class="label-bold">Specify</label>
+        {{c.form.tissue_shaving_text_2}}
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Specify</label>
+        <input class="form-control" ng-model="c.form.tissue_shaving_text_2"/>
+      </div>
+    </div>
+    <div class="row" ng-show="c.form.material_being_requested_2 == 'Slide Signout from LP'">
+      <div class="col-md-12" ng-show="!c.edit">
+        <label class="label-bold">Specify</label>
+        {{c.form.slide_signout_from_lp_text_2}}
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Specify</label>
+         <input class="form-control" ng-model="c.form.slide_signout_from_lp_text_2"/>
       </div>      
     </div>
-    <div class="row" ng-show="c.data.item.material_requested == 'Tissue Shavings'">
-      <div class="col-md-12">
+    <div class="row" ng-show="c.form.material_being_requested_2 == 'Other Material'">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Specify</label>
-        {{c.data.item.tissue_shaving_text}}
+        {{c.form.other_material_specify_2}}
+      </div>      
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Specify</label>
+        <input class="form-control" ng-model="c.form.other_material_specify_2"/>
       </div>      
     </div>
-    <div class="row" ng-show="c.data.item.material_requested == 'Slide Signout from LP'">
-      <div class="col-md-12">
-        <label class="label-bold">Specify</label>
-        {{c.data.item.slide_signout_from_lp_text}}
-      </div>     
-    </div>
-    <div class="row" ng-show="c.data.item.material_requested == 'Other Material'">
-      <div class="col-md-12">
-        <label class="label-bold">Specify</label>
-        {{c.data.item.other_material_specify}}
-      </div>      
-    </div>
-    <div class="row" ng-show="c.data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+    <div class="row" ng-show="c.form.material_being_requested_2 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
       <div class="col-md-12">
         <label class="label-bold">Note</label>
         <span>LP does not typically release tissue blocks from the clinical archived biomaterial. On a rare occasion, the LP Medical Director can authorize the temporary release of a clinical tissue block for additional non-LP clinical testing.</span>
       </div>       
     </div>
-    <div class="row" ng-show="c.data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
-      <div class="col-md-12">
+    <div class="row" ng-show="c.form.material_being_requested_2 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Specify</label>
-        {{c.data.item.ffpe_tissue_block_text}}
-      </div>       
+        {{c.form.ffpe_tissue_block_text_2}}
+      </div>   
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Specify</label>
+         <input class="form-control" ng-model="c.form.ffpe_tissue_block_text_2"/>
+      </div>         
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Specify any special processing or handling request (e.g. charged, RNAse free, etc)</label>
-        {{c.data.item.special_processing_or_handling}}
+        {{c.form.special_processing_or_handling_2}}
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Specify any special processing or handling request (e.g. charged, RNAse free, etc)</label>
+         <input class="form-control" ng-model="c.form.special_processing_or_handling_2"/>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Intended use</label>
-        {{c.data.item.intent_to_use}}
+        {{c.form.intent_to_use_2}}
       </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Intended use</label>
+        <input class="form-control" ng-model="c.form.intent_to_use_2"/>
+      </div>
+      
     </div>    
   </div>
   <!-- end of type 2-->
+  <!-- type 3:  -->
+  <div id="type3" ng-show = 'c.form.type == "Formalin - Fixed Paraffin - Embedded Biomedical Waste - Unlinked / Anonymized"'>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        <ul>
+          <li>All slides and/or containers will be deidentified for unlinked clinical archived material.</li>
+          <li>There will be no link available or kept on file in LP.</li>
+          <li>Complete one request per tissue type.</li>
+        </ul>
+      </div>       
+    </div>  
+    <div class="row">
+      <div class="col-md-12"  ng-show="!c.edit">
+        <label class="label-bold">Case / Tissue Type Being Requested</label>
+        {{c.form.case_tissue_type}}
+      </div>   
+      <div class="col-md-12"  ng-show="c.edit">
+        <label class="label-bold">Case / Tissue Type Being Requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type"/>
+      </div>   
+    </div> 
+    <div class="row">
+      <div class="col-md-12"  ng-show="!c.edit">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.form.material_being_requested_3}}
+      </div>
+      <div class="col-md-12"  ng-show="c.edit">
+        <label class="label-bold">Material Being Requested</label>
+        <select class="form-control" ng-model="c.form.material_being_requested_3">
+           <option value="Unstained Slides">Unstained Slides</option>
+           <option value="Stained Slides">Stained Slides</option>
+           <option value="Tissue Shavings">Tissue Shavings</option>
+           <option value="Slide Signout From LP">Slide Signout From LP</option>
+           <option value="Other Material">Other Material</option>
+           <option value="FFPE Tissue Block (formalin-fixed, paraffin-embedded)">FFPE Tissue Block (formalin-fixed, paraffin-embedded)</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" ng-show="c.form.material_being_requested_3 == 'Unstained Slides'">
+      <div class="col-md-6"  ng-show="!c.edit">
+        <label class="label-bold">Number of recuts per slide</label>
+        {{c.form.number_of_recuts_per_slide_3}}
+      </div>
+      <div class="col-md-6"  ng-show="!c.edit">
+        <label class="label-bold">Requested thickness</label>
+        {{c.form.requested_thickness_3}}
+      </div>
+      <div class="col-md-6"  ng-show="c.edit">
+        <label class="label-bold">Number of recuts per slide</label>
+        <input class="form-control" ng-model="c.form.number_of_recuts_per_slide_3"/>
+      </div>
+      <div class="col-md-6"  ng-show="c.edit">
+        <label class="label-bold">Requested thickness</label>
+     		<input class="form-control" ng-model="c.form.requested_thickness_3"/>
+      </div>      
+    </div>
+    <div class="row" ng-show="c.form.material_being_requested_3 == 'Stained Slides'" style="margin-top: 20px;">
+      <div class="col-md-12"  ng-show="!c.edit">
+        <input type="checkbox" ng-model="c.form.he3" disabled='disabled'> H&E 
+      </div>
+      <div class="col-md-12"  ng-show="c.edit">
+        <input type="checkbox" ng-model="c.form.he3"> H&E 
+      </div>
+    </div>
+    <div class="row" ng-show="c.form.material_being_requested_3 == 'Stained Slides'">
+      <div class="col-md-12"  ng-show="!c.edit">
+        <input type="checkbox" ng-model="c.form.special_stains3" disabled='disabled'> If Special stains or IHC, must be via collaboration with an LP Pathlogist
+      </div>
+      <div class="col-md-12"  ng-show="c.edit">
+        <input type="checkbox" ng-model="c.form.special_stains3"> If Special stains or IHC, must be via collaboration with an LP Pathlogist
+      </div>
+    </div>
+    <div class="row" ng-show="c.form.material_being_requested_3 == 'Tissue Shavings'">
+      <div class="col-md-12"  ng-show="!c.edit">
+        <label class="label-bold">Specify</label>
+        {{c.form.tissue_shaving_text_3}}
+      </div>      
+      <div class="col-md-12"  ng-show="c.edit">
+        <label class="label-bold">Specify</label>
+        <input class="form-control" ng-model="c.form.tissue_shaving_text_3"/>
+      </div>      
+    </div>
+    <div class="row" ng-show="c.form.material_being_requested_3 == 'Other Material'">
+      <div class="col-md-12"  ng-show="!c.edit">
+        <label class="label-bold">Specify</label>
+        {{c.form.other_material_specify_3}}
+      </div>      
+      <div class="col-md-12"  ng-show="c.edit">
+        <label class="label-bold">Specify</label>
+         <input class="form-control" ng-model="c.form.other_material_specify_3"/>
+      </div>      
+    </div>
+    <div class="row" ng-show="c.form.material_being_requested_3 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'">
+      <div class="col-md-12"  ng-show="!c.edit">
+        <label class="label-bold">Specify</label>
+        {{c.form.ffpe_tissue_block_text_3}}
+      </div>       
+      <div class="col-md-12"  ng-show="c.edit">
+        <label class="label-bold">Specify</label>
+        <input class="form-control" ng-model="c.form.ffpe_tissue_block_text_3"/>
+      </div>       
+    </div>
+    <div class="row">
+      <div class="col-md-12"  ng-show="!c.edit">
+        <label class="label-bold">Specify any special processing or handling request (e.g. charged, RNAse free, etc)</label>
+        {{c.form.special_processing_or_handling_3}}
+      </div>
+      <div class="col-md-12"  ng-show="c.edit">
+        <label class="label-bold">Specify any special processing or handling request (e.g. charged, RNAse free, etc)</label>
+        <input class="form-control" ng-model="c.form.special_processing_or_handling_3"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"  ng-show="!c.edit">
+        <label class="label-bold">Intended use</label>
+        {{c.form.intent_to_use_3}}
+      </div>
+      <div class="col-md-12"  ng-show="c.edit">
+        <label class="label-bold">Intended use</label>
+        <input class="form-control" ng-model="c.form.intent_to_use_3"/>
+      </div>      
+    </div>    
+  </div>
+  <!-- end of type 3 -->
+  <!-- type 4:  -->
   
+  <!-- end of type 4 -->
+  <!-- type 5:  -->
+  
+  <!-- end of type 5 -->
+  <!-- type 6:  -->
+  
+  <!-- end of type 6 -->
+  <!-- type 7:  -->
+  
+  <!-- end of type 7 -->
   <!-- show attachments -->
   <div class="row" ng-show='c.data.files.length > 0'>
     <div class="col-md-12">
