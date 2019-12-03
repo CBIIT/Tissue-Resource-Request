@@ -30,8 +30,8 @@
 			c.form.number_of_recuts = c.data.item.number_of_recuts;
 			c.form.requested_thickness = c.data.item.requested_thickness;
 		}else if(c.form.material_being_requested == 'Stained Slides'){
-			c.form.he = c.data.item.he == 'true';
-			c.form.special_stains = c.data.item.special_stains == 'true';
+			c.form.he = c.data.item.he;
+			c.form.special_stains = c.data.item.special_stains;
 		}else if(c.form.material_being_requested == 'Tissue Shavings'){
 			c.form.tissue_shaving_text = c.data.item.tissue_shaving_text;
 		}else if(c.form.material_being_requested == 'Slide Signout From LP'){
@@ -112,18 +112,18 @@
 		c.form.case_tissue_type_5_3 = c.data.item.case_tissue_type_5_3;				
 		c.form.case_tissue_type_5_4 = c.data.item.case_tissue_type_5_4;
 		c.form.case_tissue_type_5_5 = c.data.item.case_tissue_type_5_5;	
-		c.form.patient_name1 = c.data.item.patient_name_1;
-		c.form.item.patient_name2 = c.data.item.patient_name_2;
-		c.form.patient_name3 = c.data.item.patient_name_3;
-		c.form.item.patient_name4 = c.data.item.patient_name_4;
-		c.form.patient_name5 = c.data.item.patient_name_5;
+		c.form.patient_name_1 = c.data.item.patient_name_1;
+		c.form.patient_name_2 = c.data.item.patient_name_2;
+		c.form.patient_name_3 = c.data.item.patient_name_3;
+		c.form.patient_name_4 = c.data.item.patient_name_4;
+		c.form.patient_name_5 = c.data.item.patient_name_5;
 		c.form.material_being_requested_5 = c.data.item.material_being_requested_5;
 		c.form.intend_to_use_5 = c.data.item.intend_to_use_5;
 	}
 	//end of type 5
 	//type 6
 	if(c.form.type=='FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration'){
-		c.form.tissue.case_tissue_type_6_1 = c.data.item.case_tissue_type_6_1;
+		c.form.case_tissue_type_6_1 = c.data.item.case_tissue_type_6_1;
 		c.form.case_tissue_type_6_2 = c.data.item.case_tissue_type_6_2; 
 		c.form.case_tissue_type_6_3 = c.data.item.case_tissue_type_6_3;				
 		c.form.case_tissue_type_6_4 = c.data.item.case_tissue_type_6_4;
@@ -586,26 +586,26 @@
 				  data.item.material_being_requested_4 = tissue.material_being_requested_4.toString();
 				  data.item.intend_to_use_4 = tissue.intend_to_use_4.toString();
 			}else if(type=='Fresh Post-Mortem collection'){
-					data.item.caseBlock1 = tissue.case_tissue_type_5_1.toString();
-					data.item.caseBlock2 = tissue.case_tissue_type_5_2.toString(); 
-					data.item.caseBlock3 = tissue.case_tissue_type_5_3.toString();				
-					data.item.caseBlock4 = tissue.case_tissue_type_5_4.toString();
-					data.item.caseBlock5 = tissue.case_tissue_type_5_5.toString();	
-				  data.item.patient_name1 = tissue.patient_name_1.toString();
-					data.item.patient_name2 = tissue.patient_name_2.toString();
-					data.item.patient_name3 = tissue.patient_name_3.toString();
-					data.item.patient_name4 = tissue.patient_name_4.toString();
-					data.item.patient_name5 = tissue.patient_name_5.toString();
-				  data.item.material_requested = tissue.material_being_requested_5.toString();
-				  data.item.intent_to_use = tissue.intend_to_use_5.toString();
+					data.item.case_tissue_type_5_1 = tissue.case_tissue_type_5_1.toString();
+					data.item.case_tissue_type_5_2 = tissue.case_tissue_type_5_2.toString(); 
+					data.item.case_tissue_type_5_3 = tissue.case_tissue_type_5_3.toString();				
+					data.item.case_tissue_type_5_4 = tissue.case_tissue_type_5_4.toString();
+					data.item.case_tissue_type_5_5 = tissue.case_tissue_type_5_5.toString();	
+				  data.item.patient_name_1 = tissue.patient_name_1.toString();
+					data.item.patient_name_2 = tissue.patient_name_2.toString();
+					data.item.patient_name_3 = tissue.patient_name_3.toString();
+					data.item.patient_name_4 = tissue.patient_name_4.toString();
+					data.item.patient_name_5 = tissue.patient_name_5.toString();
+				  data.item.material_being_requested_5 = tissue.material_being_requested_5.toString();
+				  data.item.intend_to_use_5 = tissue.intend_to_use_5.toString();
 			}else if(type=='FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration'){
-					data.item.caseBlock1 = tissue.case_tissue_type_6_1.toString();
-					data.item.caseBlock2 = tissue.case_tissue_type_6_2.toString(); 
-					data.item.caseBlock3 = tissue.case_tissue_type_6_3.toString();				
-					data.item.caseBlock4 = tissue.case_tissue_type_6_4.toString();
-					data.item.caseBlock5 = tissue.case_tissue_type_6_5.toString();			
-					data.item.material_requested = tissue.material_being_requested_6.toString();
-				  data.item.intent_to_use = tissue.intend_to_use_6.toString();
+					data.item.case_tissue_type_6_1 = tissue.case_tissue_type_6_1.toString();
+					data.item.case_tissue_type_6_2 = tissue.case_tissue_type_6_2.toString(); 
+					data.item.case_tissue_type_6_3 = tissue.case_tissue_type_6_3.toString();				
+					data.item.case_tissue_type_6_4 = tissue.case_tissue_type_6_4.toString();
+					data.item.case_tissue_type_6_5 = tissue.case_tissue_type_6_5.toString();			
+					data.item.material_being_requested_6 = tissue.material_being_requested_6.toString();
+				  data.item.intend_to_use_6 = tissue.intend_to_use_6.toString();
 			}else if(type=='Facilitated fresh tissue collection via CCR / WRNMMC Collaboration'){
 				  data.item.project_title = tissue.project_title.toString();
 				  data.item.project_start_date = tissue.project_start_date.toString();
@@ -635,7 +635,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>623</sys_mod_count>
+        <sys_mod_count>676</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -643,7 +643,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-12-02 21:55:21</sys_updated_on>
+        <sys_updated_on>2019-12-03 22:40:23</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -1141,9 +1141,8 @@
       </div>
       <div class="col-md-12" ng-show="c.edit">
         <label class="label-bold">Intended use</label>
-        <input class="form-control" ng-model="c.form.intent_to_use_2"/>
+        <textarea class="form-control" ng-model="c.form.intent_to_use_2" rows="5"></textarea>
       </div>
-      
     </div>    
   </div>
   <!-- end of type 2-->
@@ -1266,13 +1265,13 @@
       </div>
       <div class="col-md-12"  ng-show="c.edit">
         <label class="label-bold">Intended use</label>
-        <input class="form-control" ng-model="c.form.intent_to_use_3"/>
+        <textarea class="form-control" ng-model="c.form.intent_to_use_3" rows="5"></textarea>
       </div>      
     </div>    
   </div>
   <!-- end of type 3 -->
   <!-- type 4:  -->
-  <div id="type4" ng-show = 'c.data.item.type == "Fresh Frozen normal non-tumor"'>
+  <div id="type4" ng-show = 'c.form.type == "Fresh Frozen normal non-tumor"'>
     <div class="row">
       <div class="col-md-6" ng-show="!c.edit">
         <label class="label-bold">Case / tissue type being requested</label>
@@ -1340,18 +1339,284 @@
       </div>
       <div class="col-md-12" ng-show="c.edit">
         <label class="label-bold">Intended use</label>
-         <input class="form-control" ng-model="c.form.intend_to_use_4"/>
+        <textarea class="form-control" ng-model="c.form.intend_to_use_4" rows="5"></textarea>
       </div>      
     </div>      
   </div>  
   <!-- end of type 4 -->
   <!-- type 5:  -->
-  
+  <div id="type5" ng-show = 'c.form.type == "Fresh Post-Mortem collection"'>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        requesting PI will identify processing/storage media and transport, LP will notify PI when an appropriate case is scheduled, most often short-notice
+      </div>
+    </div>     
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        {{c.form.case_tissue_type_5_1}}
+      </div>
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        {{c.form.case_tissue_type_5_2}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_5_1"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_5_2"/>
+      </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        {{c.form.case_tissue_type_5_3}}
+      </div>
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        {{c.form.case_tissue_type_5_4}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_5_3"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_5_4"/>
+      </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        {{c.form.case_tissue_type_5_5}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Case / tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_5_5"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit" style="margin-top:30px;">
+        <input type="file" id="upload_file4" style="margin-bottom:5px;">
+        <button class="btn btn-primary" ng-click="c.uploadAttachment('upload_file4')">Add Attachment</button>      
+      </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        Specify patient name(s) and medical record number(s) If specific Case(s) being requested
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.form.patient_name_1}}
+      </div>
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.form.patient_name_2}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        <input class="form-control" ng-model="c.form.patient_name_1"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        <input class="form-control" ng-model="c.form.patient_name_2"/>
+      </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.form.patient_name_3}}
+      </div>
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.form.patient_name_4}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        <input class="form-control" ng-model="c.form.patient_name_3"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        <input class="form-control" ng-model="c.form.patient_name_4"/>
+      </div>       
+    </div>
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        {{c.form.patient_name_5}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Patient Name & Medical record Number(s)</label>
+        <input class="form-control" ng-model="c.form.patient_name_5"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit" style="margin-top:30px;">
+        <input type="file" id="upload_file5" style="margin-bottom:5px;">
+        <button class="btn btn-primary" ng-click="c.uploadAttachment('upload_file5')">Add Attachment</button>      
+      </div>        
+    </div>    
+    <div class="row">
+      <div class="col-md-12" ng-show="!c.edit">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.data.item.material_being_requested_5}}
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Material Being Requested</label>
+        <input class="form-control" ng-model="c.form.material_being_requested_5"/>
+      </div>      
+    </div>    
+    <div class="row">
+      <div class="col-md-12" ng-show="!c.edit">
+        <label class="label-bold">Intended use</label>
+        {{c.data.item.intend_to_use_5}}
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Intended use</label>
+        <textarea class="form-control" ng-model="c.form.intend_to_use_5" rows="5"></textarea>
+      </div>      
+    </div>     
+  </div>
   <!-- end of type 5 -->
   <!-- type 6:  -->
-  
+  <div id="type6" ng-show = 'c.form.type == "FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration"'>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        <ul>
+          <li>These tissues are collected via a research collaboration between NCI and WRNMMC.</li>
+          <li>All biomaterial are unlinked and anonymized, issued as FFPE tissue block and/or snap frozen.</li>
+          <li>Clinical information might include: Age, Sex, Ethnicity, Demongraphics, Clinical History and Diagnostic/Laboratory Data.</li>
+        </ul>
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        {{c.form.case_tissue_type_6_1}}
+      </div>
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        {{c.form.case_tissue_type_6_2}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_6_1"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_6_2"/>
+      </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        {{c.form.case_tissue_type_6_3}}
+      </div>
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        {{c.form.case_tissue_type_6_4}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_6_3"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_6_4"/>
+      </div>        
+    </div>
+    <div class="row">
+      <div class="col-md-6" ng-show="!c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        {{c.form.case_tissue_type_6_5}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Tissue type being requested</label>
+        <input class="form-control" ng-model="c.form.case_tissue_type_6_5"/>
+      </div>
+      <div class="col-md-6" ng-show="c.edit" style="margin-top:30px;">
+        <input type="file" id="upload_file6" style="margin-bottom:5px;">
+        <button class="btn btn-primary" ng-click="c.uploadAttachment('upload_file6')">Add Attachment</button>      
+      </div>  
+    </div>
+    <div class="row">
+      <div class="col-md-12" ng-show="!c.edit">
+        <label class="label-bold">Material Being Requested</label>
+        {{c.form.material_being_requested_6}}
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Material Being Requested</label>
+        <input class="form-control" ng-model="c.form.material_being_requested_6"/>
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12" ng-show="!c.edit">
+        <label class="label-bold">Intended use</label>
+        {{c.form.intend_to_use_6}}
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Intended use</label>
+        <textarea class="form-control" ng-model="c.form.intend_to_use_6" rows="5"></textarea>
+      </div>      
+    </div>     
+  </div>  
   <!-- end of type 6 -->
   <!-- type 7:  -->
+
+  <!--div id="type7" ng-show = 'c.data.item.type == "Facilitated fresh tissue collection via CCR / WRNMMC Collaboration"'>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Note</label>
+        can be fresh collection, LP will facilitate through CCR medical liaison to link NIH PI with WR clinicians.
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Title of Project</label>
+        {{c.data.item.project_title}}
+      </div>
+    </div>        
+    <div class="row">
+      <div class="col-md-6">
+        <label class="label-bold">Estimated Project Start Date</label>
+        {{c.data.item.project_start_date}}
+      </div>
+      <div class="col-md-6">
+        <label class="label-bold">Estimated Project Complete Date</label>
+        {{c.data.item.project_complete_date}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Provide up to 5 Key Words that Identify the Broad Topic(s)/Expertise of Your Study</label>
+        {{c.data.item.five_words}}
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">What Type of Research Collaboration is Rquested</label>
+        {{c.data.item.type_research}}
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">What is the Disease/Site</label>
+        {{c.data.item.disease_site}}
+      </div>
+    </div>     
+    <div class="row">
+      <div class="col-md-12">
+        <label class="label-bold">Abstract/Summary (Briefly Describe the Purpose, Subject Population, Study's Design Type and Procedures)</label>
+        {{c.data.item.summary}}
+      </div>
+    </div>     
+  </div -->
+  
+  
+  
   
   <!-- end of type 7 -->
   <!-- show attachments -->
@@ -1402,7 +1667,7 @@
  </div>
   <!-- end of comments input section -->
   <!-- assign to local staff section -->
-  <div class="row" style="margin-top:20px;" ng-show="c.data.isAdmin && !c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
+  <div class="row" style="margin-top:20px;" ng-show="c.data.isAdmin && !c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed' && c.data.item.stage != 'More Infromation'">
     <div class="col-md-3">
       <label>Assign To</label> 
     </div>
