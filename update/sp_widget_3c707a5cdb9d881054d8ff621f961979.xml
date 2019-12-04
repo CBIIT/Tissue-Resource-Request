@@ -141,9 +141,31 @@
 		c.form.type_of_research = c.data.item.type_of_research;
 		c.form.disease_or_site = c.data.item.disease_or_site;
 		c.form.abstract_or_summary = c.data.item.abstract_or_summary;
+		$('#datetimepicker1').datetimepicker({
+			defaultDate: c.form.project_start_date,
+			 format: 'L'
+		});
+		$('#datetimepicker2').datetimepicker({
+			defaultDate: c.form.project_end_date,
+			 format: 'L'
+		});
+		$("#datetimepicker1").on("dp.change", function(e){
+			var date = dateToMDY(new Date(e.date));
+			c.form.project_start_date = date;
+		});
+		$("#datetimepicker2").on("dp.change", function(e){
+			var date = dateToMDY(new Date(e.date));
+			c.form.project_end_date = date;
+		});
 	}
 	//end of type 7
-	
+	function dateToMDY(date) {
+		var d = date.getDate();
+		var m = date.getMonth() + 1; //Month from 0 to 11
+		var y = date.getFullYear();
+		//return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+		return '' + (m<=9 ? '0' + m : m) + "/" + (d <= 9 ? '0' + d : d) + "/" + y;
+	}
   c.moreInfo = function(){
 		if(c.form.comment == null || c.form.comment.trim().length < 1){
 				spModal.alert("<br/><center><span><font color='red'>Please provide a comment if more information are needed.</font></span></center>");
@@ -403,6 +425,10 @@
 				rec.get(input.sys_id);
 				//set common section
 				for(var key in param){
+					if(key == 'project_start_date' || key == 'project_end_date'){
+						var date = param[key].split('/');
+						param[key] = new GlideDateTime(date[2]+'-'+date[0]+"-"+date[1]);
+					}
 					rec.setValue(key, param[key]);
 				}
 				rec.updateMultiple();
@@ -608,12 +634,14 @@
 				  data.item.intend_to_use_6 = tissue.intend_to_use_6.toString();
 			}else if(type=='Facilitated fresh tissue collection via CCR / WRNMMC Collaboration'){
 				  data.item.project_title = tissue.project_title.toString();
-				  data.item.project_start_date = tissue.project_start_date.toString();
-				  data.item.project_complete_date = tissue.project_end_date.toString();
-				  data.item.five_words = tissue.five_key_word.toString();
-				  data.item.type_research = tissue.type_of_research.toString();
-					data.item.disease_site = tissue.disease_or_site.toString();
-				  data.item.summary = tissue.abstract_or_summary.toString();
+				  var startDate = tissue.project_start_date.toString().split('-');
+				  data.item.project_start_date = startDate[1]+"/"+startDate[2]+"/"+startDate[0];
+				  var endDate = tissue.project_end_date.toString().split('-');
+				  data.item.project_end_date = endDate[1]+"/"+endDate[2]+"/"+endDate[0];
+				  data.item.five_key_word = tissue.five_key_word.toString();
+				  data.item.type_of_research = tissue.type_of_research.toString();
+					data.item.disease_or_site = tissue.disease_or_site.toString();
+				  data.item.abstract_or_summary = tissue.abstract_or_summary.toString();
 			}
 	    data.files = [];
 			//find all attachments
@@ -635,7 +663,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>676</sys_mod_count>
+        <sys_mod_count>727</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -643,7 +671,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-12-03 22:40:23</sys_updated_on>
+        <sys_updated_on>2019-12-04 22:45:17</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -1565,8 +1593,7 @@
   </div>  
   <!-- end of type 6 -->
   <!-- type 7:  -->
-
-  <!--div id="type7" ng-show = 'c.data.item.type == "Facilitated fresh tissue collection via CCR / WRNMMC Collaboration"'>
+  <div id="type7" ng-show = 'c.form.type == "Facilitated fresh tissue collection via CCR / WRNMMC Collaboration"'>
     <div class="row">
       <div class="col-md-12">
         <label class="label-bold">Note</label>
@@ -1574,50 +1601,84 @@
       </div>
     </div>    
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Title of Project</label>
-        {{c.data.item.project_title}}
+        {{c.form.project_title}}
       </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Title of Project</label>
+        <input class="form-control" ng-model="c.form.project_title"/>
+      </div>      
     </div>        
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6" ng-show="!c.edit">
         <label class="label-bold">Estimated Project Start Date</label>
-        {{c.data.item.project_start_date}}
+        {{c.form.project_start_date}}
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" ng-show="!c.edit">
         <label class="label-bold">Estimated Project Complete Date</label>
-        {{c.data.item.project_complete_date}}
+        {{c.form.project_end_date}}
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Estimated Project Start Date</label>
+        <div class='input-group date' id='datetimepicker1'>
+          <input type='text' class="form-control" readonly='true'/>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-6" ng-show="c.edit">
+        <label class="label-bold">Estimated Project Complete Date</label>
+        <div class='input-group date' id='datetimepicker2'>
+          <input type='text' class="form-control" readonly='true'/>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Provide up to 5 Key Words that Identify the Broad Topic(s)/Expertise of Your Study</label>
-        {{c.data.item.five_words}}
+        {{c.form.five_key_word}}
       </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Provide up to 5 Key Words that Identify the Broad Topic(s)/Expertise of Your Study</label>
+        <input class="form-control" ng-model="c.form.five_key_word"/>
+      </div>        
     </div>    
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">What Type of Research Collaboration is Rquested</label>
-        {{c.data.item.type_research}}
+        {{c.form.type_of_research}}
       </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">What Type of Research Collaboration is Rquested</label>
+        <input class="form-control" ng-model="c.form.type_of_research"/>
+      </div>      
     </div> 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">What is the Disease/Site</label>
-        {{c.data.item.disease_site}}
+        {{c.form.disease_or_site}}
+      </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">What is the Disease/Site</label>
+         <input class="form-control" ng-model="c.form.disease_or_site"/>
       </div>
     </div>     
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" ng-show="!c.edit">
         <label class="label-bold">Abstract/Summary (Briefly Describe the Purpose, Subject Population, Study's Design Type and Procedures)</label>
-        {{c.data.item.summary}}
+        {{c.form.abstract_or_summary}}
       </div>
+      <div class="col-md-12" ng-show="c.edit">
+        <label class="label-bold">Abstract/Summary (Briefly Describe the Purpose, Subject Population, Study's Design Type and Procedures)</label>
+        <textarea class="form-control" ng-model="c.form.abstract_or_summary" rows="5"></textarea>
+      </div>      
     </div>     
-  </div -->
-  
-  
-  
-  
+  </div>
   <!-- end of type 7 -->
   <!-- show attachments -->
   <div class="row" ng-show='c.data.files.length > 0'>
