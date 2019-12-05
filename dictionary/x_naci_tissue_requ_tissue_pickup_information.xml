@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Tissue Pickup Information" max_length="40" name="x_naci_tissue_requ_tissue_pickup_information" type="collection">
+        <element label="Comments" max_length="2000" name="comments" type="string"/>
+        <element label="Material issued" max_length="200" name="material_issued" type="string"/>
+        <element label="Number of Material" max_length="300" name="number_of_material" type="string"/>
+        <element label="Retrieved by" max_length="32" name="retrieved_by" reference="sys_user" type="reference"/>
+        <element label="Tissue Request ID" max_length="32" name="tissue_request_id" reference="x_naci_tissue_requ_tissue_resource_request" type="reference"/>
+        <index name="index">
+            <element name="tissue_request_id"/>
+        </index>
+        <index name="index2">
+            <element name="retrieved_by"/>
+        </index>
+    </element>
+</database>

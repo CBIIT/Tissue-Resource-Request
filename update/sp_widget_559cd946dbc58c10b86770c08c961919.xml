@@ -68,8 +68,16 @@
 				data.item.phone = gr_user.getValue('phone');
 				data.item.email = gr_user.getValue('email');
 			}
-	    data.item.alternative_contact = tissue.alternative_contact.toString();
-			data.item.alternative_phone = tissue.alternative_phone.toString();
+	    data.item.alternative_contact = tissue.alternative_contact.name.toString();
+			var gr_user1 = new GlideRecord('sys_user');
+			if (gr_user1.get(tissue.alternative_contact.toString())) {
+				data.item.institution1 = gr_user1.getValue('u_org_');
+				data.item.branch1 = gr_user1.department.name.toString();
+				data.item.building1 = gr_user1.getValue('u_building_name');
+				data.item.room1 = gr_user1.getValue('u_room');
+				data.item.phone1 = gr_user1.getValue('phone');
+				data.item.email1 = gr_user1.getValue('email');
+			}
 			data.item.can_number = tissue.can_number.toString();
 			data.item.type = tissue.type.toString();
 	    var type = tissue.type;
@@ -200,7 +208,7 @@
         <sys_created_on>2019-11-12 15:53:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>559cd946dbc58c10b86770c08c961919</sys_id>
-        <sys_mod_count>240</sys_mod_count>
+        <sys_mod_count>243</sys_mod_count>
         <sys_name>Review Tissue Request Submission</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -208,7 +216,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_559cd946dbc58c10b86770c08c961919</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-12-02 21:46:49</sys_updated_on>
+        <sys_updated_on>2019-12-05 15:40:43</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <div class="text-success mb-3">Your Request has been submitted successfully</div>
   <h2>Tissue Resource Request</h2>  
@@ -258,13 +266,39 @@
     </div> 
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <label class="label-bold">Alternative Contact</label>
       {{data.item.alternative_contact}}
     </div>  
+  </div>
+  <div class="row">
     <div class="col-md-6">
-      <label class="label-bold">Alternative Phone</label>
-      {{data.item.alternative_phone}}
+      <label class="label-bold">Institution</label>
+      {{data.item.institution1}}
+    </div>  
+    <div class="col-md-6">
+      <label class="label-bold">Branch</label>
+      {{data.item.branch1}}		
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-bold">Building</label>
+      {{data.item.building1}}
+    </div>  
+    <div class="col-md-6">
+      <label class="label-bold">Room</label>
+      {{data.item.room1}}
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-bold">Phone</label>
+      {{data.item.phone1}}
+    </div>  
+    <div class="col-md-6">
+      <label class="label-bold">Email</label>
+      {{data.item.email1}}
     </div> 
   </div>
   <div class="row">

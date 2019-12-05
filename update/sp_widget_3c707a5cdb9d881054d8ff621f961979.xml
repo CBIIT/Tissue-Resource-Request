@@ -9,7 +9,7 @@
 	c.disabled = "disabled";
 	c.debug = true;
 	c.form = {};
-
+  c.info = {matierial: 'full'};
 	/* comment section value setting*/
 	c.form.alternative_contact = c.data.item.alternative_contact;
 	c.form.alternative_phone = c.data.item.alternative_phone;
@@ -221,6 +221,8 @@
 		c.close();
 	}
 	c.close = function(){
+		c.info.description = null;
+		c.info.matierial = 'full';
 		c.modal.close();
 	}
 
@@ -387,7 +389,8 @@
 
 .d-none {
   display: none;
-}</css>
+}
+</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
         <description/>
@@ -529,8 +532,16 @@
 				data.item.phone = gr_user.getValue('phone');
 				data.item.email = gr_user.getValue('email');
 			}
-	    data.item.alternative_contact = tissue.alternative_contact.toString();
-			data.item.alternative_phone = tissue.alternative_phone.toString();
+	    data.item.alternative_contact = tissue.alternative_contact.name.toString();
+			var gr_user1 = new GlideRecord('sys_user');
+			if (gr_user1.get(tissue.alternative_contact.toString())) {
+				data.item.institution1 = gr_user1.getValue('u_org_');
+				data.item.branch1 = gr_user1.department.name.toString();
+				data.item.building1 = gr_user1.getValue('u_building_name');
+				data.item.room1 = gr_user1.getValue('u_room');
+				data.item.phone1 = gr_user1.getValue('phone');
+				data.item.email1 = gr_user1.getValue('email');
+			}	
 			data.item.can_number = tissue.can_number.toString();
 			data.item.type = tissue.type.toString();
 	    var type = tissue.type;
@@ -663,7 +674,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>727</sys_mod_count>
+        <sys_mod_count>755</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -671,7 +682,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-12-04 22:45:17</sys_updated_on>
+        <sys_updated_on>2019-12-05 22:45:57</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -719,23 +730,41 @@
     </div> 
   </div>
   <div class="row">
-    <div class="col-md-6" ng-show="!c.edit">
+    <div class="col-md-12">
       <label class="label-bold">Alternative Contact</label>
       {{c.form.alternative_contact}}
     </div>  
-    <div class="col-md-6" ng-show="c.edit">
-      <label class="label-bold">Alternative Contact</label>
-      <input class="form-control" ng-model="c.form.alternative_contact"/>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-bold">Institution</label>
+      {{c.data.item.institution1}}
     </div>  
-    <div class="col-md-6" ng-show="!c.edit">
-      <label class="label-bold">Alternative Phone</label>
-      {{c.form.alternative_phone}}
-    </div> 
-    <div class="col-md-6" ng-show="c.edit">
-      <label class="label-bold">Alternative Phone</label>
-      <input class="form-control" ng-model="c.form.alternative_phone"/>
+    <div class="col-md-6">
+      <label class="label-bold">Branch</label>
+      {{c.data.item.branch1}}		
     </div> 
   </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-bold">Building</label>
+      {{c.data.item.building1}}
+    </div>  
+    <div class="col-md-6">
+      <label class="label-bold">Room</label>
+      {{c.data.item.room1}}
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label-bold">Phone</label>
+      {{c.data.item.phone1}}
+    </div>  
+    <div class="col-md-6">
+      <label class="label-bold">Email</label>
+      {{c.data.item.email1}}
+    </div> 
+  </div>  
   <div class="row">
     <div class="col-md-12" ng-show="!c.edit">
       <label class="label-bold">CAN Number</label>
@@ -1774,8 +1803,12 @@
       </button>
     </div>
   </div> 
-  <pre ng-if="c.debug">{{c.form | json}}</pre>
-</div>
+  <pre ng-if="c.debug">
+  	{{c.form  | json}}
+    -----------------
+    {{c.info  | json}}
+    </pre>
+ </div>
 
 <div id="notification-modal" class="d-none">
   <div class="modal-header">
@@ -1783,24 +1816,30 @@
       Pick up Materials
     </h4>
   </div>
-  <div class="modal-body" id="modal-body">
+  <form class="modal-body" id="modal-body">
     <div class="row">
-      <div class="col-md-6">
-        <input type="radio" ng-model="c.form.matierial" vaule='full'>Complete request ready for pickup     
+      <div class="col-md-4">
+        <label style="cursor: pointer" for="pickup-full">
+          <input type="radio" id="pickup-full" name="request-pickup" ng-model="c.info.matierial" value='full'>
+          Complete request ready for pickup     
+        </label>
       </div>
-      <div class="col-md-6">
-        <input type="radio" ng-model="c.form.matierial" value='partial'>Partial ready for pickup (Please specify what are ready below)    
+      <div class="col-md-8">
+        <label style="cursor: pointer" for="pickup-partial">
+          <input type="radio" id="pickup-partial" name="request-pickup" ng-model="c.info.matierial" value='partial'>
+          Partial ready for pickup (Please specify below what are ready)            
+        </label>
       </div>
     </div>
     <div class="row" style="margin-top: 20px">
       <div class="col-md-12">
-        <textarea ng-model="description" rows="5" class="form-control" PlaceHolder="Enter your Notes"></textarea>
+        <textarea ng-model="c.info.description" rows="5" class="form-control" PlaceHolder="Enter your Notes"></textarea>
       </div>
     </div>
-  </div>
+  </form>
   <div class="modal-footer d-flex">
-    <button type="button" class="btn btn-primary" ng-click='c.send()'>Send</button>
-    <button type="button" class="btn btn-default" ng-click="$close()">Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click='c.send();'>Send</button>
+    <button type="button" class="btn btn-default" ng-click="c.close();">Cancel</button>
   </div>  
 </div>]]></template>
     </sp_widget>

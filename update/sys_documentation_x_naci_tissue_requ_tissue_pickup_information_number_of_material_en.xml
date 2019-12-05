@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_documentation element="alternative_phone" label="Alternative Phone" language="en" table="x_naci_tissue_requ_tissue_resource_request">
+    <sys_documentation element="number_of_material" label="Number of Material" language="en" table="x_naci_tissue_requ_tissue_pickup_information">
         <sys_documentation action="INSERT_OR_UPDATE">
-            <element>alternative_phone</element>
+            <element>number_of_material</element>
             <help/>
             <hint/>
-            <label>Alternative Phone</label>
+            <label>Number of Material</label>
             <language>en</language>
-            <name>x_naci_tissue_requ_tissue_resource_request</name>
-            <plural>Alternative Phones</plural>
+            <name>x_naci_tissue_requ_tissue_pickup_information</name>
+            <plural>Number of Materials</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>zhoujim@nih.gov</sys_created_by>
-            <sys_created_on>2019-10-29 21:18:50</sys_created_on>
+            <sys_created_on>2019-12-05 22:55:44</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
-            <sys_id>8dc0a629dbf4845054d8ff621f9619f0</sys_id>
+            <sys_id>69c951eddb21c09054d8ff621f961917</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_name>Alternative Phone</sys_name>
+            <sys_name>Number of Material</sys_name>
             <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
             <sys_policy/>
             <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
             <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-            <sys_update_name>sys_documentation_x_naci_tissue_requ_tissue_resource_request_alternative_phone_en</sys_update_name>
+            <sys_update_name>sys_documentation_x_naci_tissue_requ_tissue_pickup_information_number_of_material_en</sys_update_name>
             <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-            <sys_updated_on>2019-10-29 21:18:50</sys_updated_on>
+            <sys_updated_on>2019-12-05 22:55:44</sys_updated_on>
             <url/>
             <url_target/>
         </sys_documentation>
