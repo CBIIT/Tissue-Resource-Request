@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_form_sections form_id="54861671dba9049054d8ff621f9619d3" sys_domain="global" table="x_naci_tissue_requ_tissue_pickup_information" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-12-06 21:59:34</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>5c861671dba9049054d8ff621f9619d5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_naci_tissue_requ_tissue_pickup_information" name="x_naci_tissue_requ_tissue_pickup_information" sys_domain="global" view="c11e2502db498c10b86770c08c9619bd">54861671dba9049054d8ff621f9619d3</sys_ui_form>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_tissue_requ_tissue_pickup_information" sys_domain="global" view="c11e2502db498c10b86770c08c9619bd">d4861671dba9049054d8ff621f96196d</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-12-06 21:59:34</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>x_naci_tissue_requ_tissue_pickup_information</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2019-12-06 21:59:34</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_id>54861671dba9049054d8ff621f9619d3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_naci_tissue_requ_tissue_pickup_information</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+            <sys_update_name>sys_ui_form_sections_54861671dba9049054d8ff621f9619d3</sys_update_name>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2019-12-06 21:59:34</sys_updated_on>
+            <sys_user/>
+            <view display_value="Form1" name="Form1">c11e2502db498c10b86770c08c9619bd</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>

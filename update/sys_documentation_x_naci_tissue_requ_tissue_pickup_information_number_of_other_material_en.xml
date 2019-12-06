@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_documentation element="material_issued" label="Material issued" language="en" table="x_naci_tissue_requ_tissue_pickup_information">
+    <sys_documentation element="number_of_other_material" label="Other Material" language="en" table="x_naci_tissue_requ_tissue_pickup_information">
         <sys_documentation action="INSERT_OR_UPDATE">
-            <element>material_issued</element>
+            <element>number_of_other_material</element>
             <help/>
             <hint/>
-            <label>Material issued</label>
+            <label>Other Material</label>
             <language>en</language>
             <name>x_naci_tissue_requ_tissue_pickup_information</name>
-            <plural>Material issued</plural>
+            <plural>Other Materials</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>zhoujim@nih.gov</sys_created_by>
-            <sys_created_on>2019-12-05 22:55:22</sys_created_on>
+            <sys_created_on>2019-12-06 21:00:45</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
-            <sys_id>c0b99daddb21c09054d8ff621f961957</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_name>Material issued</sys_name>
+            <sys_id>fa09ca31db69049054d8ff621f9619d5</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>Other Material</sys_name>
             <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
             <sys_policy/>
             <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
             <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
-            <sys_update_name>sys_documentation_x_naci_tissue_requ_tissue_pickup_information_material_issued_en</sys_update_name>
+            <sys_update_name>sys_documentation_x_naci_tissue_requ_tissue_pickup_information_number_of_other_material_en</sys_update_name>
             <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-            <sys_updated_on>2019-12-05 22:55:22</sys_updated_on>
+            <sys_updated_on>2019-12-06 21:59:35</sys_updated_on>
             <url/>
             <url_target/>
         </sys_documentation>

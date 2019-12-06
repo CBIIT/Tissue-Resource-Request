@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope, snAttachmentHandler, spUtil, spModal, $uibModal, styleUtil) {
+        <client_script><![CDATA[function($rootScope, $scope, snAttachmentHandler, spUtil, spModal, $uibModal, styleUtil) {
   /* widget controller */
   var c = this;
 	styleUtil.addStyle('@media (min-width: 1200px){ .container { width: 70% !important; }}')
@@ -10,6 +10,7 @@
 	c.debug = true;
 	c.form = {};
   c.info = {matierial: 'full'};
+	c.pickup = {number: c.data.item.number};
 	/* comment section value setting*/
 	c.form.alternative_contact = c.data.item.alternative_contact;
 	c.form.alternative_phone = c.data.item.alternative_phone;
@@ -328,6 +329,36 @@
 			}
 		});
 	}
+  
+	function openPickupModal() {
+		
+		$('#pickup-complete-modal').modal('show');
+		spUtil.get('widget-form', {
+			"sys_id": -1,
+			"table": "x_naci_tissue_requ_tissue_pickup_information",
+			"view": "Form1"
+		}).then(function(widget) {
+			c.data.widget_add = widget;
+		})
+	}
+
+	/*	$rootScope.$on('spModel.fields.rendered', function(e) {
+			$('#pickup-form .panel-heading').hide();
+			$('#pickup-form .panel-footer').hide();
+			setTimeout(function() {
+				$('#tissue_request_id').html("<lable><b>TRC Number</b></lable>          " + c.data.item.number);
+				$('#pickup-form legend')[0].remove();
+			}, 0);
+		})*/
+	
+	c.readyComplete = function() {
+		openPickupModal();
+	}
+	
+	c.close_pickup = function(){
+		c.pmodal.close();
+	}
+	
 	spUtil.recordWatch($scope, "sys_attachment", "", function(name, data) {  
 			spUtil.update($scope);
 	});
@@ -390,6 +421,7 @@
 .d-none {
   display: none;
 }
+
 </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -415,7 +447,7 @@
 	data.comment = [];
   data.isAdmin = gs.getUser().isMemberOf('Tissue Resource Request LP Committee');
 	data.localStaff = gs.getUser().isMemberOf('Tissue Resource Request Local Staff');
-	
+
 	var approverName = gs.getUserDisplayName().toString();
 	//process request
 	if(input){
@@ -674,7 +706,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>755</sys_mod_count>
+        <sys_mod_count>915</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -682,7 +714,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-12-05 22:45:57</sys_updated_on>
+        <sys_updated_on>2019-12-06 23:16:04</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -1795,7 +1827,7 @@
       <button class="btn btn-primary" ng-click="c.notify()" ng-show="c.data.localStaff && c.data.item.stage == 'Assigned to Local Staff'">
         NOTIFY TO PICK UP
       </button>     
-      <button class="btn btn-primary" ng-click="c.complete()" ng-show="c.data.localStaff && c.data.item.stage == 'Assigned to Local Staff'">
+      <button class="btn btn-primary" ng-click="c.readyComplete()" ng-show="c.data.localStaff && c.data.item.stage == 'Assigned to Local Staff'">
         COMPLETE
       </button>
       <button class="btn btn-primary" ng-click="c.backToHome()" ng-show="!c.edit">
@@ -1807,6 +1839,8 @@
   	{{c.form  | json}}
     -----------------
     {{c.info  | json}}
+     -----------------
+    {{c.pickup  | json}}
     </pre>
  </div>
 
@@ -1831,7 +1865,7 @@
         </label>
       </div>
     </div>
-    <div class="row" style="margin-top: 20px">
+    <div class="row mb-10" >
       <div class="col-md-12">
         <textarea ng-model="c.info.description" rows="5" class="form-control" PlaceHolder="Enter your Notes"></textarea>
       </div>
@@ -1840,6 +1874,26 @@
   <div class="modal-footer d-flex">
     <button type="button" class="btn btn-primary" ng-click='c.send();'>Send</button>
     <button type="button" class="btn btn-default" ng-click="c.close();">Cancel</button>
+  </div>  
+</div>
+
+<div id="pickup-complete-modal" class="d-none">
+  <div class="modal-header">
+    <h4 class="modal-title">
+      Partial Pick up or Complete
+    </h4>
+  </div>
+  <div class="modal-body" id="modal-body">
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-md-12" id="pickup-form">
+        <sp-widget widget="c.data.widget_add">Loading...</sp-widget>
+      </div>
+    </div>   
+  </div>
+  <div class="modal-footer d-flex">
+    <button type="button" class="btn btn-primary" ng-click='c.partialPickup();'>Partial Pick Up</button>
+    <button type="button" class="btn btn-primary" ng-click='c.complete()'>Complete</button>
+    <button type="button" class="btn btn-default" ng-click="c.close_pickup();">Cancel</button>
   </div>  
 </div>]]></template>
     </sp_widget>
