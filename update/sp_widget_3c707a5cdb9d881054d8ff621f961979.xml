@@ -16,6 +16,7 @@
 	c.form.alternative_phone = c.data.item.alternative_phone;
 	c.form.can_number = c.data.item.can_number;
 	c.form.type = c.data.item.type;
+		$('#error').hide();
 	
 	/* type 1 section value setting */
 	if(c.form.type == 'Clinical Archives linked to protocol'){
@@ -208,17 +209,23 @@
 		c.edit = false;
 	}
 	c.complete = function(){
-		spModal.open({
-				title: "Warning",
-				message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to complete this request?</b></center>"
-			}).then(function(confirmed) {
-					completeRequest();
-			})	
+		if(validate()){
+			$('#error').show();
+		}else{
+			completeRequest();
+		}
 	}
 	c.notify = function(){
 		openModal();
 	}
 	c.send = function(){
+		$scope.server.get({
+			action: 'notification',
+			data: JSON.stringify(c.info),
+			sys_id: c.data.sys_id
+		}).then(function(){
+			spModal.alert("<br/><center><span><font color='green'>The Notification has been sent to requestor successfully.</font></span></center>");
+		});
 		c.close();
 	}
 	c.close = function(){
@@ -263,14 +270,30 @@
 		});
 	}
 	function completeRequest(){
-		$scope.server.get({
-			action: 'complete',
-			status: 'Completed',
-			sys_id: c.data.sys_id
-		}).then(function(){
-			top.window.location = "/ncisp?id=manage_tissue_request_cat_item";
+		$('#pickup-complete-modal').css('z-index', '1040');
+		spModal.open({
+			title: "Warning",
+			message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to complete Pick Up ?</b></center>"
+		}).then(function(confirmed) {
+			var fields = c.g_form.getFieldNames();
+			var record = {};
+			fields.forEach(function(field) {
+				var f = c.g_form.getField(field);
+				record[field] = c.g_form.getValue(field);
+			});
+			record.tissue_request_id = c.data.sys_id;
+			$scope.server.get({
+				action: 'complete',
+				status: 'Completed',
+				sys_id: c.data.sys_id,
+				data: record
+			}).then(function(){
+				c.g_form.$private.userState.clearModifiedFields();
+				top.window.location = "/ncisp?id=manage_tissue_request_cat_item";
+			});
+		},function(){
+			$('#pickup-complete-modal').css('z-index', '1050')
 		});
-		
 	}
 	function moreInformationRequest(action){
 		$scope.server.get({
@@ -329,34 +352,112 @@
 			}
 		});
 	}
-  
+
 	function openPickupModal() {
-		
 		$('#pickup-complete-modal').modal('show');
 		spUtil.get('widget-form', {
-			"sys_id": -1,
+			"sys_id": "-1",
 			"table": "x_naci_tissue_requ_tissue_pickup_information",
 			"view": "Form1"
 		}).then(function(widget) {
 			c.data.widget_add = widget;
-		})
-	}
-
-	/*	$rootScope.$on('spModel.fields.rendered', function(e) {
-			$('#pickup-form .panel-heading').hide();
-			$('#pickup-form .panel-footer').hide();
+			widget.data.hideRelatedLists = true;
+		});
+		$rootScope.$on('spModel.fields.rendered', function(e) {
+			$('#pickup-complete-modal .panel-heading').hide();
+			$('#pickup-complete-modal .panel-footer').hide();
 			setTimeout(function() {
 				$('#tissue_request_id').html("<lable><b>TRC Number</b></lable>          " + c.data.item.number);
-				$('#pickup-form legend')[0].remove();
+				c.g_form = e.targetScope.getGlideForm();
+				if($('#pickup-complete-modal legend')[0])
+					$('#pickup-complete-modal legend')[0].remove();
 			}, 0);
-		})*/
+		});
+	}
 	
 	c.readyComplete = function() {
+		$('#error').hide();
 		openPickupModal();
 	}
 	
 	c.close_pickup = function(){
-		c.pmodal.close();
+		$('#pickup-complete-modal').modal('hide');
+	}
+
+	c.partialPickup = function(){
+		if(validate()){
+			$('#error').show();
+		}else{
+			$('#pickup-complete-modal').css('z-index', '1040')
+			spModal.open({
+				title: "Warning",
+				message: "<center><i class='fa fa-warning' aria-hidden='true'></i>  <b>Are you sure you want to complete partial Pick Up ?</b></center>"
+			}).then(function(confirmed) {
+				storePickupInfo();
+			},function(){
+				$('#pickup-complete-modal').css('z-index', '1050')
+			});
+		}
+	}
+	
+	function validate(){
+		if(c.g_form.getValue('retrieved_by') == null || c.g_form.getValue('retrieved_by').length == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	function storePickupInfo(){
+		var fields = c.g_form.getFieldNames();
+		var record = {};
+		fields.forEach(function(field) {
+			var f = c.g_form.getField(field);
+			record[field] = c.g_form.getValue(field);
+		});
+		record.tissue_request_id = c.data.sys_id;
+
+		$scope.server.get({
+			action: 'partialPickup',
+			sys_id: c.data.sys_id,
+			data: record 
+		}).then(function(){
+			c.close_pickup();
+		});		
+	}
+  
+	c.displayPickupInfo = function(id){
+		$('#pickup-info').modal('show');
+		spUtil.get('widget-form', {
+			"sys_id": id,
+			"table": "x_naci_tissue_requ_tissue_pickup_information",
+			"view": "Form1"
+		}).then(function(widget) {
+			c.data.widget_pickup = widget;
+			widget.data.hideRelatedLists = true;
+		});
+		$rootScope.$on('spModel.fields.rendered', function(e) {
+			$('#pickup-info .panel-heading').hide();
+			$('#pickup-info .panel-footer').hide();
+			setTimeout(function() {
+				c.g_form = e.targetScope.getGlideForm();
+				if($('#pickup-info legend')[0]){
+					$('#pickup-info legend')[0].remove();
+				}
+				var fields = c.g_form.getFieldNames();
+				fields.forEach(function(field){
+					c.g_form.setReadOnly(field, true);
+				});
+			}, 0);
+		});
+	}
+	
+	c.close_pickup_info = function(){
+		var fields = c.g_form.getFieldNames();
+		fields.forEach(function(field){
+			c.g_form.setValue(field, '');
+		});
+		$('#pickup-info').modal('hide');
 	}
 	
 	spUtil.recordWatch($scope, "sys_attachment", "", function(name, data) {  
@@ -421,7 +522,6 @@
 .d-none {
   display: none;
 }
-
 </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -437,20 +537,21 @@
         <public>false</public>
         <roles/>
         <script><![CDATA[(function() {
-  /* populate the 'data' object */
-  /* e.g., data.table = $sp.getValue('table'); */
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
 	var str = gs.action.getGlideURI();
 	var sys_id = str.get('sys_id');
 	var approver = str.get('approver');
 	data.item = {};
 	data.sys_id = sys_id;
 	data.comment = [];
-  data.isAdmin = gs.getUser().isMemberOf('Tissue Resource Request LP Committee');
+	data.isAdmin = gs.getUser().isMemberOf('Tissue Resource Request LP Committee');
 	data.localStaff = gs.getUser().isMemberOf('Tissue Resource Request Local Staff');
 
 	var approverName = gs.getUserDisplayName().toString();
 	//process request
 	if(input){
+
 		if(input.action != null && input.action.trim().length > 0){
 			var comment = '';
 			var status = '';
@@ -478,19 +579,27 @@
 				proc.update();
 				status = input.status;
 			}else if(input.action == "complete"){
+				var record1 = input.data;
+				comment = record1.comments;
+				var gr2 = new GlideRecord('x_naci_tissue_requ_tissue_pickup_information');
+				gr2.newRecord();
+				for (var key3 in record1) {
+					gr2.setValue(key3, record1[key3]);
+				}
+				gr2.insert();
 				var comp = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
-						comp.get(input.sys_id);
-						comp.stage = input.status;
-						comp.update();
+				comp.get(input.sys_id);
+				comp.stage = input.status;
+				comp.update();
 				status = "Completed";
 				input.comments = "completed";
 			}else if(input.action == 'moreInfo'){
 				var more = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
-						more.get(input.sys_id);
-				    more.assigned_to = more.submitted_by.toString();
-						more.approval_action = 'more';
-						more.update();
-						status = "More Infromation";
+				more.get(input.sys_id);
+				more.assigned_to = more.submitted_by.toString();
+				more.approval_action = 'more';
+				more.update();
+				status = "More Infromation";
 			}else if(input.action == 'submit'){
 				var param1 = input.record;
 				var res = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
@@ -502,6 +611,22 @@
 				}
 				res.updateMultiple();
 				status = 'submitted';
+			}else if(input.action == 'partialPickup'){
+				var record = input.data;
+				comment = record.comments;
+				var gr1 = new GlideRecord('x_naci_tissue_requ_tissue_pickup_information');
+				gr1.newRecord();
+				for (var key2 in record) {
+					gr1.setValue(key2, record[key2]);
+				}
+				gr1.insert();
+				status = 'Assigned';
+			}else if(input.action == 'notification'){
+				var noti = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
+				noti.get(input.sys_id);
+				gs.eventQueue('x_naci_tissue_requ.Tissue Notification',noti, noti.submitted_by.toString(), input.data);
+				comment = "Pickup Notification Sent";
+				status = "Assigned";
 			}
 			//add comments
 			if(input.comments != null && input.comments.trim().length > 0){
@@ -514,16 +639,16 @@
 			commen.approver = approverName;
 			commen.status = status;
 			commen.comment = comment;
-			commen.insert();
+			commen.insert(); 
 		}
 	}
-	
+
 	//load selected request
 	//load local comment
 	var comments = new GlideRecord('x_naci_tissue_requ_tissue_request_comment');
-			comments.addQuery('tissue_request_id', sys_id);
-			comments.orderByDesc('sys_created_on');
-			comments.query();
+	comments.addQuery('tissue_request_id', sys_id);
+	comments.orderByDesc('sys_created_on');
+	comments.query();
 	while(comments.next()){
 		var comm = {};
 		comm.role = comments.role.toString();
@@ -537,8 +662,8 @@
 	data.staffs = [];
 	if(data.isAdmin){
 		var staff = new GlideRecord('sys_user_grmember');
-				staff.addQuery('group.name', 'Tissue Resource Request Local Staff');
-				staff.orderBy('user.name');
+		staff.addQuery('group.name', 'Tissue Resource Request Local Staff');
+		staff.orderBy('user.name');
 		staff.query();
 		while(staff.next()){
 			var item = {};
@@ -549,156 +674,175 @@
 	}
 	//load request
 	var tissue = new GlideRecord('x_naci_tissue_requ_tissue_resource_request');
-	    tissue.get(sys_id);
-	    //set up common section
-	    data.item.stage = tissue.stage.toString();
-			data.item.number = tissue.number.toString();
-			data.item.piName = tissue.principal_investigator.name.toString();
-	    //get user information
-			var gr_user = new GlideRecord('sys_user');
-			if (gr_user.get(tissue.principal_investigator.toString())) {
-				data.item.institution = gr_user.getValue('u_org_');
-				data.item.branch = gr_user.department.name.toString();
-				data.item.building = gr_user.getValue('u_building_name');
-				data.item.room = gr_user.getValue('u_room');
-				data.item.phone = gr_user.getValue('phone');
-				data.item.email = gr_user.getValue('email');
-			}
-	    data.item.alternative_contact = tissue.alternative_contact.name.toString();
-			var gr_user1 = new GlideRecord('sys_user');
-			if (gr_user1.get(tissue.alternative_contact.toString())) {
-				data.item.institution1 = gr_user1.getValue('u_org_');
-				data.item.branch1 = gr_user1.department.name.toString();
-				data.item.building1 = gr_user1.getValue('u_building_name');
-				data.item.room1 = gr_user1.getValue('u_room');
-				data.item.phone1 = gr_user1.getValue('phone');
-				data.item.email1 = gr_user1.getValue('email');
-			}	
-			data.item.can_number = tissue.can_number.toString();
-			data.item.type = tissue.type.toString();
-	    var type = tissue.type;
-	    if(type == 'Clinical Archives linked to protocol'){ //type 1
-					data.item.irb_protocol = tissue.irb_protocol_number.toString();
-					data.item.patient_name = tissue.patient_name.toString();
-					data.item.caseBlock1 = tissue.case_block_1.toString();
-					data.item.caseBlock2 = tissue.case_block_2.toString(); 
-					data.item.caseBlock3 = tissue.case_block_3.toString();				
-					data.item.caseBlock4 = tissue.case_block_4.toString();
-					data.item.caseBlock5 = tissue.case_block_5.toString();
-					data.item.material_requested = tissue.material_being_requested.toString();
-				  if(data.item.material_requested == 'Unstained Slides'){
-						data.item.number_of_recuts = tissue.number_of_recuts.toString();
-						data.item.requested_thickness = tissue.requested_thickness.toString();
-					}else if(data.item.material_requested == 'Stained Slides'){
-						data.item.he = tissue.he.toString() == 'true';
-						data.item.special_stains = tissue.special_stains.toString() == 'true';
-					}else if(data.item.material_requested == 'Tissue Shavings'){
-						data.item.tissue_shaving_text = tissue.tissue_shaving_text.toString();
-					}else if(data.item.material_requested == 'Slide Signout From LP'){
-						data.item.slide_signout_from_lp_text = tissue.slide_signout_from_lp_text.toString();
-					}else if(data.item.material_requested == 'Other Material'){
-						data.item.other_material_specify = tissue.other_material_specify.toString();
-					}else if(data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
-						data.item.ffpe_tissue_block_text = tissue.ffpe_tissue_block_text.toString();
-					}
-					data.item.special_processing_or_handling = tissue.special_processing_or_handling.toString();
-					data.item.intent_to_use = tissue.intent_to_use.toString();
-			}else if(type=='Clinical Archives unlinked'){        //type 2
-				  data.item.clinic_archives = tissue.clinic_archives.toString();
-					data.item.case_block_2_1 = tissue.case_block_2_1.toString();
-					data.item.case_block_2_2 = tissue.case_block_2_2.toString(); 
-					data.item.case_block_2_3 = tissue.case_block_2_3.toString();				
-					data.item.case_block_2_4 = tissue.case_block_2_4.toString();
-					data.item.case_block_2_5 = tissue.case_block_2_5.toString();
-					data.item.material_being_requested_2 = tissue.material_being_requested_2.toString();
-					if(data.item.material_being_requested_2 == 'Unstained Slides'){
-						data.item.number_of_recuts2 = tissue.number_of_recuts2.toString();
-						data.item.requested_thinkness2 = tissue.requested_thinkness2.toString();
-					}else if(data.item.material_being_requested_2 == 'Stained Slides'){
-						data.item.he2 = tissue.he2.toString() == 'true';
-						data.item.special_stains2 = tissue.special_stains2.toString() == 'true';
-					}else if(data.item.material_being_requested_2 == 'Tissue Shavings'){
-						data.item.tissue_shaving_text_2 = tissue.tissue_shaving_text_2.toString();
-					}else if(data.item.material_being_requested_2 == 'Slide Signout from LP'){
-						data.item.slide_signout_from_lp_text_2 = tissue.slide_signout_from_lp_text_2.toString();
-					}else if(data.item.material_being_requested_2 == 'Other Material'){
-						data.item.other_material_specify_2 = tissue.other_material_specify_2.toString();
-					}else if(data.item.material_being_requested_2 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
-						data.item.ffpe_tissue_block_text_2 = tissue.ffpe_tissue_block_text_2.toString();
-					}
-					data.item.special_processing_or_handling_2 = tissue.special_processing_or_handling_2.toString();
-					data.item.intent_to_use_2 = tissue.intent_to_use_2.toString();				
-			}else if(type=='Formalin - Fixed Paraffin - Embedded Biomedical Waste - Unlinked / Anonymized'){
-					data.item.case_tissue_type = tissue.case_tissue_type.toString();
-				  data.item.material_being_requested_3 = tissue.material_being_requested_3.toString();
-					if(data.item.material_being_requested_3 == 'Unstained Slides'){
-						data.item.number_of_recuts_per_slide_3 = tissue.number_of_recuts_per_slide_3.toString();
-						data.item.requested_thickness_3 = tissue.requested_thickness_3.toString();
-					}else if(data.item.material_being_requested_3 == 'Stained Slides'){
-						data.item.he3 = tissue.he3.toString() == 'true';
-						data.item.special_stains3 = tissue.special_stains3.toString() == 'true';
-					}else if(data.item.material_being_requested_3 == 'Tissue Shavings'){
-						data.item.tissue_shaving_text_3 = tissue.tissue_shaving_text_3.toString();
-					}else if(data.item.material_being_requested_3 == 'Other Material'){
-						data.item.other_material_specify_3 = tissue.other_material_specify_3.toString();
-					}else if(data.item.material_being_requested_3 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
-						data.item.ffpe_tissue_block_text_3 = tissue.ffpe_tissue_block_text_3.toString();
-					}				
-					data.item.special_processing_or_handling_3 = tissue.special_processing_or_handling_3.toString();
-					data.item.intent_to_use_3 = tissue.intent_to_use_3.toString();
-			}else if(type=='Fresh Frozen normal non-tumor'){
-					data.item.case_tissue_type_4_1 = tissue.case_tissue_type_4_1.toString();
-					data.item.case_tissue_type_4_2 = tissue.case_tissue_type_4_2.toString(); 
-					data.item.case_tissue_type_4_3 = tissue.case_tissue_type_4_3.toString();				
-					data.item.case_tissue_type_4_4 = tissue.case_tissue_type_4_4.toString();
-					data.item.case_tissue_type_4_5 = tissue.case_tissue_type_4_5.toString();
-				  data.item.material_being_requested_4 = tissue.material_being_requested_4.toString();
-				  data.item.intend_to_use_4 = tissue.intend_to_use_4.toString();
-			}else if(type=='Fresh Post-Mortem collection'){
-					data.item.case_tissue_type_5_1 = tissue.case_tissue_type_5_1.toString();
-					data.item.case_tissue_type_5_2 = tissue.case_tissue_type_5_2.toString(); 
-					data.item.case_tissue_type_5_3 = tissue.case_tissue_type_5_3.toString();				
-					data.item.case_tissue_type_5_4 = tissue.case_tissue_type_5_4.toString();
-					data.item.case_tissue_type_5_5 = tissue.case_tissue_type_5_5.toString();	
-				  data.item.patient_name_1 = tissue.patient_name_1.toString();
-					data.item.patient_name_2 = tissue.patient_name_2.toString();
-					data.item.patient_name_3 = tissue.patient_name_3.toString();
-					data.item.patient_name_4 = tissue.patient_name_4.toString();
-					data.item.patient_name_5 = tissue.patient_name_5.toString();
-				  data.item.material_being_requested_5 = tissue.material_being_requested_5.toString();
-				  data.item.intend_to_use_5 = tissue.intend_to_use_5.toString();
-			}else if(type=='FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration'){
-					data.item.case_tissue_type_6_1 = tissue.case_tissue_type_6_1.toString();
-					data.item.case_tissue_type_6_2 = tissue.case_tissue_type_6_2.toString(); 
-					data.item.case_tissue_type_6_3 = tissue.case_tissue_type_6_3.toString();				
-					data.item.case_tissue_type_6_4 = tissue.case_tissue_type_6_4.toString();
-					data.item.case_tissue_type_6_5 = tissue.case_tissue_type_6_5.toString();			
-					data.item.material_being_requested_6 = tissue.material_being_requested_6.toString();
-				  data.item.intend_to_use_6 = tissue.intend_to_use_6.toString();
-			}else if(type=='Facilitated fresh tissue collection via CCR / WRNMMC Collaboration'){
-				  data.item.project_title = tissue.project_title.toString();
-				  var startDate = tissue.project_start_date.toString().split('-');
-				  data.item.project_start_date = startDate[1]+"/"+startDate[2]+"/"+startDate[0];
-				  var endDate = tissue.project_end_date.toString().split('-');
-				  data.item.project_end_date = endDate[1]+"/"+endDate[2]+"/"+endDate[0];
-				  data.item.five_key_word = tissue.five_key_word.toString();
-				  data.item.type_of_research = tissue.type_of_research.toString();
-					data.item.disease_or_site = tissue.disease_or_site.toString();
-				  data.item.abstract_or_summary = tissue.abstract_or_summary.toString();
-			}
-	    data.files = [];
-			//find all attachments
-			var attach = new GlideRecord('sys_attachment');
-			attach.addQuery('table_name', 'x_naci_tissue_requ_tissue_resource_request');
-			attach.addQuery('table_sys_id', sys_id);
-			attach.orderByDesc('sys_created_on');
-			attach.query();
-			while(attach.next()){
-				var file ={};
-				file.name = attach.file_name.toString();
-				file.sys_id = attach.sys_id.toString();
-				data.files.push(file);
-			}
+	tissue.get(sys_id);
+	//set up common section
+	data.item.stage = tissue.stage.toString();
+	data.item.number = tissue.number.toString();
+	data.item.piName = tissue.principal_investigator.name.toString();
+	//get user information
+	var gr_user = new GlideRecord('sys_user');
+	if (gr_user.get(tissue.principal_investigator.toString())) {
+		data.item.institution = gr_user.getValue('u_org_');
+		data.item.branch = gr_user.department.name.toString();
+		data.item.building = gr_user.getValue('u_building_name');
+		data.item.room = gr_user.getValue('u_room');
+		data.item.phone = gr_user.getValue('phone');
+		data.item.email = gr_user.getValue('email');
+	}
+	data.item.alternative_contact = tissue.alternative_contact.name.toString();
+	var gr_user1 = new GlideRecord('sys_user');
+	if (gr_user1.get(tissue.alternative_contact.toString())) {
+		data.item.institution1 = gr_user1.getValue('u_org_');
+		data.item.branch1 = gr_user1.department.name.toString();
+		data.item.building1 = gr_user1.getValue('u_building_name');
+		data.item.room1 = gr_user1.getValue('u_room');
+		data.item.phone1 = gr_user1.getValue('phone');
+		data.item.email1 = gr_user1.getValue('email');
+	}	
+	data.item.can_number = tissue.can_number.toString();
+	data.item.type = tissue.type.toString();
+	var type = tissue.type;
+	if(type == 'Clinical Archives linked to protocol'){ //type 1
+		data.item.irb_protocol = tissue.irb_protocol_number.toString();
+		data.item.patient_name = tissue.patient_name.toString();
+		data.item.caseBlock1 = tissue.case_block_1.toString();
+		data.item.caseBlock2 = tissue.case_block_2.toString(); 
+		data.item.caseBlock3 = tissue.case_block_3.toString();				
+		data.item.caseBlock4 = tissue.case_block_4.toString();
+		data.item.caseBlock5 = tissue.case_block_5.toString();
+		data.item.material_requested = tissue.material_being_requested.toString();
+		if(data.item.material_requested == 'Unstained Slides'){
+			data.item.number_of_recuts = tissue.number_of_recuts.toString();
+			data.item.requested_thickness = tissue.requested_thickness.toString();
+		}else if(data.item.material_requested == 'Stained Slides'){
+			data.item.he = tissue.he.toString() == 'true';
+			data.item.special_stains = tissue.special_stains.toString() == 'true';
+		}else if(data.item.material_requested == 'Tissue Shavings'){
+			data.item.tissue_shaving_text = tissue.tissue_shaving_text.toString();
+		}else if(data.item.material_requested == 'Slide Signout From LP'){
+			data.item.slide_signout_from_lp_text = tissue.slide_signout_from_lp_text.toString();
+		}else if(data.item.material_requested == 'Other Material'){
+			data.item.other_material_specify = tissue.other_material_specify.toString();
+		}else if(data.item.material_requested == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
+			data.item.ffpe_tissue_block_text = tissue.ffpe_tissue_block_text.toString();
+		}
+		data.item.special_processing_or_handling = tissue.special_processing_or_handling.toString();
+		data.item.intent_to_use = tissue.intent_to_use.toString();
+	}else if(type=='Clinical Archives unlinked'){        //type 2
+		data.item.clinic_archives = tissue.clinic_archives.toString();
+		data.item.case_block_2_1 = tissue.case_block_2_1.toString();
+		data.item.case_block_2_2 = tissue.case_block_2_2.toString(); 
+		data.item.case_block_2_3 = tissue.case_block_2_3.toString();				
+		data.item.case_block_2_4 = tissue.case_block_2_4.toString();
+		data.item.case_block_2_5 = tissue.case_block_2_5.toString();
+		data.item.material_being_requested_2 = tissue.material_being_requested_2.toString();
+		if(data.item.material_being_requested_2 == 'Unstained Slides'){
+			data.item.number_of_recuts2 = tissue.number_of_recuts2.toString();
+			data.item.requested_thinkness2 = tissue.requested_thinkness2.toString();
+		}else if(data.item.material_being_requested_2 == 'Stained Slides'){
+			data.item.he2 = tissue.he2.toString() == 'true';
+			data.item.special_stains2 = tissue.special_stains2.toString() == 'true';
+		}else if(data.item.material_being_requested_2 == 'Tissue Shavings'){
+			data.item.tissue_shaving_text_2 = tissue.tissue_shaving_text_2.toString();
+		}else if(data.item.material_being_requested_2 == 'Slide Signout from LP'){
+			data.item.slide_signout_from_lp_text_2 = tissue.slide_signout_from_lp_text_2.toString();
+		}else if(data.item.material_being_requested_2 == 'Other Material'){
+			data.item.other_material_specify_2 = tissue.other_material_specify_2.toString();
+		}else if(data.item.material_being_requested_2 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
+			data.item.ffpe_tissue_block_text_2 = tissue.ffpe_tissue_block_text_2.toString();
+		}
+		data.item.special_processing_or_handling_2 = tissue.special_processing_or_handling_2.toString();
+		data.item.intent_to_use_2 = tissue.intent_to_use_2.toString();				
+	}else if(type=='Formalin - Fixed Paraffin - Embedded Biomedical Waste - Unlinked / Anonymized'){
+		data.item.case_tissue_type = tissue.case_tissue_type.toString();
+		data.item.material_being_requested_3 = tissue.material_being_requested_3.toString();
+		if(data.item.material_being_requested_3 == 'Unstained Slides'){
+			data.item.number_of_recuts_per_slide_3 = tissue.number_of_recuts_per_slide_3.toString();
+			data.item.requested_thickness_3 = tissue.requested_thickness_3.toString();
+		}else if(data.item.material_being_requested_3 == 'Stained Slides'){
+			data.item.he3 = tissue.he3.toString() == 'true';
+			data.item.special_stains3 = tissue.special_stains3.toString() == 'true';
+		}else if(data.item.material_being_requested_3 == 'Tissue Shavings'){
+			data.item.tissue_shaving_text_3 = tissue.tissue_shaving_text_3.toString();
+		}else if(data.item.material_being_requested_3 == 'Other Material'){
+			data.item.other_material_specify_3 = tissue.other_material_specify_3.toString();
+		}else if(data.item.material_being_requested_3 == 'FFPE Tissue Block (formalin-fixed, paraffin-embedded)'){
+			data.item.ffpe_tissue_block_text_3 = tissue.ffpe_tissue_block_text_3.toString();
+		}				
+		data.item.special_processing_or_handling_3 = tissue.special_processing_or_handling_3.toString();
+		data.item.intent_to_use_3 = tissue.intent_to_use_3.toString();
+	}else if(type=='Fresh Frozen normal non-tumor'){
+		data.item.case_tissue_type_4_1 = tissue.case_tissue_type_4_1.toString();
+		data.item.case_tissue_type_4_2 = tissue.case_tissue_type_4_2.toString(); 
+		data.item.case_tissue_type_4_3 = tissue.case_tissue_type_4_3.toString();				
+		data.item.case_tissue_type_4_4 = tissue.case_tissue_type_4_4.toString();
+		data.item.case_tissue_type_4_5 = tissue.case_tissue_type_4_5.toString();
+		data.item.material_being_requested_4 = tissue.material_being_requested_4.toString();
+		data.item.intend_to_use_4 = tissue.intend_to_use_4.toString();
+	}else if(type=='Fresh Post-Mortem collection'){
+		data.item.case_tissue_type_5_1 = tissue.case_tissue_type_5_1.toString();
+		data.item.case_tissue_type_5_2 = tissue.case_tissue_type_5_2.toString(); 
+		data.item.case_tissue_type_5_3 = tissue.case_tissue_type_5_3.toString();				
+		data.item.case_tissue_type_5_4 = tissue.case_tissue_type_5_4.toString();
+		data.item.case_tissue_type_5_5 = tissue.case_tissue_type_5_5.toString();	
+		data.item.patient_name_1 = tissue.patient_name_1.toString();
+		data.item.patient_name_2 = tissue.patient_name_2.toString();
+		data.item.patient_name_3 = tissue.patient_name_3.toString();
+		data.item.patient_name_4 = tissue.patient_name_4.toString();
+		data.item.patient_name_5 = tissue.patient_name_5.toString();
+		data.item.material_being_requested_5 = tissue.material_being_requested_5.toString();
+		data.item.intend_to_use_5 = tissue.intend_to_use_5.toString();
+	}else if(type=='FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration'){
+		data.item.case_tissue_type_6_1 = tissue.case_tissue_type_6_1.toString();
+		data.item.case_tissue_type_6_2 = tissue.case_tissue_type_6_2.toString(); 
+		data.item.case_tissue_type_6_3 = tissue.case_tissue_type_6_3.toString();				
+		data.item.case_tissue_type_6_4 = tissue.case_tissue_type_6_4.toString();
+		data.item.case_tissue_type_6_5 = tissue.case_tissue_type_6_5.toString();			
+		data.item.material_being_requested_6 = tissue.material_being_requested_6.toString();
+		data.item.intend_to_use_6 = tissue.intend_to_use_6.toString();
+	}else if(type=='Facilitated fresh tissue collection via CCR / WRNMMC Collaboration'){
+		data.item.project_title = tissue.project_title.toString();
+		var startDate = tissue.project_start_date.toString().split('-');
+		data.item.project_start_date = startDate[1]+"/"+startDate[2]+"/"+startDate[0];
+		var endDate = tissue.project_end_date.toString().split('-');
+		data.item.project_end_date = endDate[1]+"/"+endDate[2]+"/"+endDate[0];
+		data.item.five_key_word = tissue.five_key_word.toString();
+		data.item.type_of_research = tissue.type_of_research.toString();
+		data.item.disease_or_site = tissue.disease_or_site.toString();
+		data.item.abstract_or_summary = tissue.abstract_or_summary.toString();
+	}
+	data.files = [];
+	//find all attachments
+	var attach = new GlideRecord('sys_attachment');
+	attach.addQuery('table_name', 'x_naci_tissue_requ_tissue_resource_request');
+	attach.addQuery('table_sys_id', sys_id);
+	attach.orderByDesc('sys_created_on');
+	attach.query();
+	while(attach.next()){
+		var file ={};
+		file.name = attach.file_name.toString();
+		file.sys_id = attach.sys_id.toString();
+		data.files.push(file);
+	}
+
+	data.pickupInfo = [];
+	var pickup = new GlideRecord('x_naci_tissue_requ_tissue_pickup_information');
+			pickup.addQuery('tissue_request_id', data.sys_id);
+			pickup.orderByDesc('sys_created_on');
+	pickup.query();
+	while(pickup.next()){
+		var item1 = {};
+		item1.sys_id = pickup.sys_id.toString();
+		item1.retrievedBy = pickup.retrieved_by.name.toString();
+		item1.unstainedSlide = pickup.number_of_unstained_slides.toString();
+		item1.stainedSlides = pickup.	number_of_stained_slides.toString();
+		item1.tissueShaving = pickup.	number_of_tissue_shavings.toString();
+		item1.ffpe = pickup.number_of_ffpe.toString();
+		item1.otherMaterial = pickup.number_of_other_material.toString();
+		item1.pickupTime = pickup.sys_created_on.toString();
+		data.pickupInfo.push(item1);
+	}
+	
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
@@ -706,7 +850,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>915</sys_mod_count>
+        <sys_mod_count>1145</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -714,7 +858,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-12-06 23:16:04</sys_updated_on>
+        <sys_updated_on>2019-12-09 22:18:13</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -1778,6 +1922,41 @@
     </div>
   </div>
   <!-- end of comments history section -->
+  <!-- pickup Information -->
+  <div class="mb-2 br-4" style="margin-top:20px; justify-content: right;" ng-show="c.data.pickupInfo.length > 0">
+    <div class="title-bold">
+      Pick Up Information
+    </div>  
+    <div class="table-responsive shadow ">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr class="bg-light-gray">
+            <th>Retrieved By</th>
+            <th># unstained Slides</th>
+            <th># Stained Slides</th>
+            <th># Tissue Shavings</th>
+            <th># FFPE Tissue Block</th>
+            <th>Other Material</th>
+            <th>Pick Up Time</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in c.data.pickupInfo">
+            <td>{{item.retrievedBy}}</td>
+            <td>{{item.unstainedSlide}}</td>
+            <td>{{item.stainedSlides}}</td>
+            <td>{{item.tissueShaving}}</td>
+            <td>{{item.ffpe}}</td>
+            <td>{{item.otherMaterial}}</td>
+            <td>{{item.pickupTime}}</td>
+            <td><a href="" ng-click="c.displayPickupInfo(item.sys_id)">Details</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- end of pickup information -->
  <!-- comments section -->
  <div class="mb-2 br-4" style="margin-top:20px; justify-content: right;" ng-show="!c.edit && c.data.item.stage != 'Assigned to Local Staff' && c.data.item.stage != 'Completed'">
    <div class="title-bold">
@@ -1877,24 +2056,49 @@
   </div>  
 </div>
 
-<div id="pickup-complete-modal" class="d-none">
-  <div class="modal-header">
-    <h4 class="modal-title">
-      Partial Pick up or Complete
-    </h4>
-  </div>
-  <div class="modal-body" id="modal-body">
-    <div class="row" style="margin-bottom: 10px;">
-      <div class="col-md-12" id="pickup-form">
-        <sp-widget widget="c.data.widget_add">Loading...</sp-widget>
+<div id="pickup-complete-modal" class="modal fade" data-keyborad="false" data-backdrop="static">
+  <div class="modal-dialog modal-lg" style="width:1400px;">
+    <div class="modal-content" style="min-height:400px; overflow-y:hidden; overflow-x: hidden;">
+      <div class="modal-header">
+        <h4  class="modal-title"><b>Pick up Information</b></h4>
+      </div>      
+      <div class="modal-body" style="padding-bottom:0px;">
+        <div id="error" style="display:none;"><font color='red'>Retrieved by is required.</font></div>
+        <div style="box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);">
+          <sp-widget widget="c.data.widget_add">
+            <i class="fa fa-cog fa-spin fa-10x fa-fw"></i>
+            Loading...
+          </sp-widget>
+        </div>
+        <div class="form-section mb-3" style="text-align:center; padding-top: 15px;border-top: 1px solid #e5e5e5;display:block;">
+          <button type="button" class="btn btn-primary" ng-click='c.partialPickup();'>Partial Pick Up</button>
+          <button type="button" class="btn btn-primary" ng-click='c.complete()'>Complete</button>
+          <button type="button" class="btn btn-default" ng-click="c.close_pickup();">Cancel</button>
+        </div>
       </div>
-    </div>   
+    </div>
   </div>
-  <div class="modal-footer d-flex">
-    <button type="button" class="btn btn-primary" ng-click='c.partialPickup();'>Partial Pick Up</button>
-    <button type="button" class="btn btn-primary" ng-click='c.complete()'>Complete</button>
-    <button type="button" class="btn btn-default" ng-click="c.close_pickup();">Cancel</button>
-  </div>  
+</div>
+
+<div id="pickup-info" class="modal fade" data-keyborad="false" data-backdrop="static">
+  <div class="modal-dialog modal-lg" style="width:1400px;">
+    <div class="modal-content" style="min-height:400px; overflow-y:hidden; overflow-x: hidden;">
+      <div class="modal-header">
+        <h4  class="modal-title"><b>Pick up Information</b></h4>
+      </div>      
+      <div class="modal-body" style="padding-bottom:0px;">
+        <div style="box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);">
+          <sp-widget widget="c.data.widget_pickup">
+            <i class="fa fa-cog fa-spin fa-10x fa-fw"></i>
+            Loading...
+          </sp-widget>
+        </div>
+        <div class="form-section mb-3" style="text-align:center; padding-top: 15px;border-top: 1px solid #e5e5e5;display:block;">
+          <button type="button" class="btn btn-primary" style="width:100px;" ng-click="c.close_pickup_info();">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>]]></template>
     </sp_widget>
 </record_update>

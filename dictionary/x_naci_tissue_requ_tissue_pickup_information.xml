@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Tissue Pickup Information" max_length="40" name="x_naci_tissue_requ_tissue_pickup_information" type="collection">
         <element label="Comments" max_length="2000" name="comments" type="string"/>
-        <element label="FFPE Tissue Block" max_length="100" name="number_of_ffpe" type="string"/>
+        <element label="# Slide of FFPE Tissue Block" max_length="100" name="number_of_ffpe" type="string"/>
         <element label="Other Material" max_length="500" name="number_of_other_material" type="string"/>
-        <element label="Stained Slides" max_length="100" name="number_of_stained_slides" type="string"/>
-        <element label="Tissue Shavings" max_length="100" name="number_of_tissue_shavings" type="string"/>
-        <element label="Unstained Slides" max_length="100" name="number_of_unstained_slides" type="string"/>
-        <element label="Retrieved by" max_length="32" name="retrieved_by" reference="sys_user" type="reference"/>
+        <element label="# Slide of Stained Slides" max_length="100" name="number_of_stained_slides" type="string"/>
+        <element label="# Vlials of Tissue Shavings" max_length="100" name="number_of_tissue_shavings" type="string"/>
+        <element label="# Slides of Unstained Slides" max_length="100" name="number_of_unstained_slides" type="string"/>
+        <element label="Retrieved by" mandatory="true" max_length="32" name="retrieved_by" reference="sys_user" type="reference"/>
         <element label="Tissue Request Number" max_length="32" name="tissue_request_id" reference="x_naci_tissue_requ_tissue_resource_request" type="reference"/>
         <index name="index">
             <element name="tissue_request_id"/>
