@@ -208,7 +208,7 @@
         <sys_created_on>2019-11-12 15:53:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>559cd946dbc58c10b86770c08c961919</sys_id>
-        <sys_mod_count>243</sys_mod_count>
+        <sys_mod_count>247</sys_mod_count>
         <sys_name>Review Tissue Request Submission</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -216,7 +216,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_559cd946dbc58c10b86770c08c961919</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-12-05 15:40:43</sys_updated_on>
+        <sys_updated_on>2019-12-11 18:01:42</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <div class="text-success mb-3">Your Request has been submitted successfully</div>
   <h2>Tissue Resource Request</h2>  
@@ -423,7 +423,7 @@
     <div class="row">
       <div class="col-md-12">
         <label class="label-bold">Intended use</label>
-        {{c.data.item.intent_to_use}}
+        <span style="white-space: pre-wrap">{{c.data.item.intent_to_use}}</span>
       </div>
     </div>    
   </div>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_naci_tissue_requ.Tissue Expoert JS</name>
+        <script><![CDATA[function exportHTML() {
+    var content = $('<div/>');
+    var docTitle = $('h3:first-child').text().trim();
+    $('<div/>')
+        .text(docTitle)
+        .css('font-size', '30px')
+        .css('margin-bottom', '20px')
+        .appendTo(content);
+
+    $('[data-table]').each(function(index) {
+        var title = $(this)
+            .closest('.collapse')
+            .siblings('.panel-title')
+            .text().trim();
+
+        if (title.length) {
+            var header = $('<div/>')
+                .css('background-color', '#221F5A')
+                .css('color', 'white')
+                .css('font-size', '20px')
+                .css('padding', '10px')
+                .text(title)
+                .appendTo(content);
+        }
+
+        // check if we have multiple root tables
+        var rootTables = $(this)
+            .closest('.collapse')
+            .children('table');
+
+        // if we do, add the first one
+        if (rootTables.length > 1) {
+            var table = $(rootTables[0]).clone()
+                .attr('width', '100%')
+                .attr('border', '0')
+
+            // remove first row (empty spacer)
+            table.find('tr:first-child').remove();
+            content.append(table);
+        }
+
+        var table = $(this).clone();
+        table
+            .attr('width', '100%')
+            .attr('border', '1')
+            .css('border-collapse', 'collapse')
+            .removeAttr('cellpadding')
+            .removeAttr('cellspacing');
+
+        // replace radio inputs with textual equivalents
+        table.find('td,th').each(function() {
+          var cell = $(this);
+          if ($(this).children('input[type="radio"]').length) {
+            var contents = $(this).contents();
+            // jquery operations are not supported on text nodes, so we must iterate manually
+            var checkedIndex = -1;
+            for (var i = 0; i < contents.length; i ++) {
+              var el = contents[i];
+              if (el.checked) {
+                var text = contents[i + 1].textContent.trim();
+                cell.html(text);
+              }
+            }
+          }
+        });
+
+        content
+            .append(table)
+            .append('<br>');
+    });
+
+    return content.html();
+}
+
+$('[name="exportToPDF"]').click(function(e) {
+	alert('export');
+    var htmlElements = $(exportHTML());
+    var doc = {
+        pageOrientation: 'landscape',
+        content: [],
+        defaultStyle: {
+            fontSize: 10,
+        },
+        styles: {
+            header: {
+                fontSize: 14,
+                bold: true,
+                margin: [0, 0, 0, 0]
+            },
+            subheader: {
+                fontSize: 12,
+                bold: true,
+                margin: [0, 20, 0, 5],
+                color: '#34495e',
+            },
+            bold: {
+                bold: true,
+            },
+            tableCell: {
+                bold: false,
+            },
+        }
+    };
+
+    function parseTable(table) {
+        var tableBody = [];
+        $(table).children('tbody').children('tr').each(function(rowIndex, row) {
+            tableBody[rowIndex] = [];
+
+            // iterate over each value
+            var cells = $(row).children('td', 'th');
+            cells.each(function(index, item) {
+                var text = $(item).text();
+                var colSpan = item.colSpan || 1;
+                var isHeader = $(item).hasClass('subTitle');
+                var isBold = $(item).hasClass('subTitle') || $(item).children('b').length === 1;
+                var isCentered = $(item).attr('align') == 'center';
+
+                if ($(item).find('input').length) {
+                    // if the item is an input element, use the checked value (todo: use the adjacent text node's innerText)
+                    text = $(item).find('input:checked').val();
+                }
+
+                // if we have a child table, recursively parse it
+                var childTable = $(item).children('table');
+                if (childTable.length) {
+                    tableBody[rowIndex].push(parseTable(childTable[0]));
+                } else {
+                    tableBody[rowIndex].push({
+                        colSpan: colSpan,
+                        text: text,
+                        alignment: isCentered ? 'center' : 'left',
+                        style: isBold ? 'bold' : 'tableCell'
+                    });
+                }
+            });
+        });
+
+        return {
+            table: {
+                widths: tableBody[0].map(function(e) { return 'auto'}),
+                body: tableBody,
+            },
+            layout: 'lightHorizontalLines'
+        };
+    }
+
+    var tableIndex = 0;
+    htmlElements.each(function(index) {
+        var tag = $(this)[0].tagName;
+        var text = $(this).text();
+
+        switch(tag) {
+            case 'DIV':
+            	tableIndex ++;
+            	var content = {
+	                text: text,
+	                style: index === 0 ? 'header' : 'subheader',
+	            };
+            	if (tableIndex > 3 && tableIndex % 2 == 0)
+            		content.pageBreak = 'before';
+                doc.content.push(content);
+                break;
+
+            case 'TABLE':
+                // if (index < 14)
+                doc.content.push(parseTable(this));
+                break;
+        }
+    })
+
+
+    pdfMake
+        .createPdf(doc)
+        .download('IGEMS Export.pdf');
+});
+
+$('[name="exportToWord"]').click(function(e) {
+    saveAs(
+        htmlDocx.asBlob(exportHTML(), {orientation: 'landscape'}),
+        'IGEMS Export.docx'
+    );
+});]]></script>
+        <script_name>Tissue Expoert JS</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-12-10 17:09:24</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>df4af9c7dbe9889054d8ff621f9619b6</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_naci_tissue_requ.Tissue Expoert JS</sys_name>
+        <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+        <sys_update_name>sys_ui_script_df4af9c7dbe9889054d8ff621f9619b6</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-12-10 17:17:01</sys_updated_on>
+        <ui_type>0</ui_type>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>
