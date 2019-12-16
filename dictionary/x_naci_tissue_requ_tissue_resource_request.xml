@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element audit="true" extends="task" label="Tissue Resource Request" max_length="40" name="x_naci_tissue_requ_tissue_resource_request" sizeclass="6" type="collection">
+    <element audit="true" extends="task" label="Tissue Resource Request" max_length="40" name="x_naci_tissue_requ_tissue_resource_request" sizeclass="3" type="collection">
         <element label="Abstract or Summary" max_length="2000" name="abstract_or_summary" type="string"/>
         <element label="Alternative Contact" max_length="200" name="alternative_contact" reference="sys_user" type="reference"/>
         <element label="Approval Action" max_length="100" name="approval_action" type="string"/>
