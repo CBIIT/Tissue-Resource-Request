@@ -717,7 +717,33 @@
 			gap = gap + 40;
 			doc.text(tmp2, 45, gap,  {width:550, 'elementHandlers': specialElementHandlers});			
 		}else if(c.form.type == 'Fresh Frozen normal non-tumor'){ //type 4
+			doc.fromHTML("<b>Case / tissue type being requested</b>", 40, 510,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML("<b>Case / tissue type being requested</b>", 300, 510,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML(c.form.case_tissue_type_4_1, 40, 530,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML(c.form.case_tissue_type_4_2, 300, 530,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML("<b>Case / tissue type being requested</b>", 40, 550,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML("<b>Case / tissue type being requested</b>", 300, 550,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML(c.form.case_tissue_type_4_3, 40, 570,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML(c.form.case_tissue_type_4_4, 300, 570,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML("<b>Case / tissue type being requested</b>", 40, 590,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML(c.form.case_tissue_type_4_5, 40, 610,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML("<b>Material Being Requested</b>", 40, 630,  {width:550, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML(c.form.material_being_requested_4, 40, 650,  {width:550, 'elementHandlers': specialElementHandlers});
+			doc.addPage();
+			gap = 40;
+			doc.fromHTML("<b>Intended use</b>", 40, gap,  {width:550, 'elementHandlers': specialElementHandlers});
+			var tmp3 = '';
+			tmp3 = doc.splitTextToSize(c.form.intend_to_use_4, 540);
+			var high3 = tmp3.length;
+			gap = gap + high3 * 10;
+			doc.text(tmp3, 45, gap,  {width:550, 'elementHandlers': specialElementHandlers});			
+		}else if(c.form.type == 'Fresh Post-Mortem collection'){ //type 5
+			//doc.fromHTML("<b>Case / tissue type being requested</b>", 40, 510,  {width:255, 'elementHandlers': specialElementHandlers});
 			
+		}else if(c.form.type == 'FFPE & Snap Frozen tumor w/ associated clinical data – WRNMMC Collaboration'){ //type 6
+		
+		}else if(c.form.type == 'Facilitated fresh tissue collection via CCR / WRNMMC Collaboration'){ //type 7
+		
 		}
 		doc.save(c.data.item.number + '.pdf');
 	}
@@ -1110,7 +1136,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>1499</sys_mod_count>
+        <sys_mod_count>1520</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -1118,7 +1144,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-12-16 22:17:12</sys_updated_on>
+        <sys_updated_on>2019-12-17 16:47:17</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
