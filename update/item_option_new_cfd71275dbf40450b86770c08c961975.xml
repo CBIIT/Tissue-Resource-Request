@@ -20,8 +20,8 @@
         <example_text/>
         <field>patient_name</field>
         <global>false</global>
-        <help_tag>More information</help_tag>
-        <help_text/>
+        <help_tag>Note</help_tag>
+        <help_text>This is a test</help_text>
         <include_none>false</include_none>
         <instructions/>
         <layout>normal</layout>
@@ -40,7 +40,7 @@
         <order>155</order>
         <price_if_checked>0</price_if_checked>
         <pricing_implications>false</pricing_implications>
-        <question_text>Patient Name</question_text>
+        <question_text>Patient Name &amp; Medical Record Number</question_text>
         <read_roles/>
         <rec_lookup_price/>
         <rec_price_if_checked>0</rec_price_if_checked>
@@ -60,15 +60,15 @@
         <sys_created_on>2019-10-30 15:19:15</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>cfd71275dbf40450b86770c08c961975</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_name>Patient Name</sys_name>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>Patient Name &amp; Medical Record Number</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>item_option_new_cfd71275dbf40450b86770c08c961975</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-10-30 17:29:06</sys_updated_on>
+        <sys_updated_on>2019-12-18 21:22:40</sys_updated_on>
         <table/>
         <tooltip/>
         <type>6</type>

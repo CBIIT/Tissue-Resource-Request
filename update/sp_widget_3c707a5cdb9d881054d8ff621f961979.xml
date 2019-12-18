@@ -7,7 +7,7 @@
 	styleUtil.addStyle('@media (min-width: 1200px){ .container { width: 70% !important; }}')
 	c.edit = false;
 	c.disabled = "disabled";
-	c.debug = true;
+	c.debug = false;
 	c.form = {};
   c.info = {matierial: 'full'};
 	c.pickup = {number: c.data.item.number};
@@ -526,7 +526,7 @@
 		console.log("====", c.form.type);
 		if(c.form.type == 'Clinical Archives linked to protocol'){
 			doc.fromHTML("<b>Provide IRB Protocol #</b>", 40, 510,  {width:255, 'elementHandlers': specialElementHandlers});
-			doc.fromHTML("<b>Patient Name</b>", 300, 510,  {width:255, 'elementHandlers': specialElementHandlers});
+			doc.fromHTML("<b>Patient Name & Medical Record Number</b>", 300, 510,  {width:255, 'elementHandlers': specialElementHandlers});
 			doc.fromHTML(c.form.irb_protocol_number, 40, 530,  {width:255, 'elementHandlers': specialElementHandlers});
 			doc.fromHTML(c.form.patient_name, 300, 530,  {width:255, 'elementHandlers': specialElementHandlers});
 			doc.fromHTML("<b>Surgical Pathology or Cytology Case #(s)</b>", 40, 550,  {width:550, 'elementHandlers': specialElementHandlers});
@@ -547,8 +547,8 @@
 			doc.fromHTML(c.form.material_being_requested, 40, 60,  {width:550, 'elementHandlers': specialElementHandlers});
 			gap = 130;
 			if(c.form.material_being_requested == 'Unstained Slides'){
-				doc.fromHTML("<b>Number of recuts per slide</b>", 40, 80,  {width:255, 'elementHandlers': specialElementHandlers});
-				doc.fromHTML("<b>Requested thickness</b>", 300, 80,  {width:255, 'elementHandlers': specialElementHandlers});
+				doc.fromHTML("<b>Number of Slides per Block</b>", 40, 80,  {width:255, 'elementHandlers': specialElementHandlers});
+				doc.fromHTML("<b>Requested thickness in Micro</b>", 300, 80,  {width:255, 'elementHandlers': specialElementHandlers});
 				doc.fromHTML(c.form.number_of_recuts, 40, 100,  {width:255, 'elementHandlers': specialElementHandlers});
 				doc.fromHTML(c.form.requested_thickness, 300, 100,  {width:255, 'elementHandlers': specialElementHandlers});
 			}else if(c.form.material_being_requested == 'Stained Slides'){
@@ -624,8 +624,8 @@
 			var tmp1 = '';
 			gap = 130;
 			if(c.form.material_being_requested_2 == 'Unstained Slides'){
-				doc.fromHTML("<b>Number of recuts per slide</b>", 40, 80,  {width:255, 'elementHandlers': specialElementHandlers});
-				doc.fromHTML("<b>Requested thickness</b>", 300, 80,  {width:255, 'elementHandlers': specialElementHandlers});
+				doc.fromHTML("<b>Number of Slides per Block</b>", 40, 80,  {width:255, 'elementHandlers': specialElementHandlers});
+				doc.fromHTML("<b>Requested thickness in Micro</b>", 300, 80,  {width:255, 'elementHandlers': specialElementHandlers});
 				doc.fromHTML(c.form.number_of_recuts2, 40, 100,  {width:255, 'elementHandlers': specialElementHandlers});
 				doc.fromHTML(c.form.requested_thinkness2, 300, 100,  {width:255, 'elementHandlers': specialElementHandlers});
 			}else if(c.form.material_being_requested_2 == 'Stained Slides'){
@@ -678,8 +678,8 @@
 			doc.fromHTML(c.form.material_being_requested_3, 40, 650, {width:550, 'elementHandlers': specialElementHandlers}); 
 			var tmp2 = '';
 			if(c.form.material_being_requested_3 == 'Unstained Slides'){
-				doc.fromHTML("<b>Number of recuts per slide</b>", 40, 670,  {width:255, 'elementHandlers': specialElementHandlers});
-				doc.fromHTML("<b>Requested thickness</b>", 300, 670,  {width:255, 'elementHandlers': specialElementHandlers});
+				doc.fromHTML("<b>Number of Slides per Block</b>", 40, 670,  {width:255, 'elementHandlers': specialElementHandlers});
+				doc.fromHTML("<b>Requested thickness in Micro</b>", 300, 670,  {width:255, 'elementHandlers': specialElementHandlers});
 				doc.fromHTML(c.form.number_of_recuts_per_slide_3, 40, 690,  {width:255, 'elementHandlers': specialElementHandlers});
 				doc.fromHTML(c.form.requested_thickness_3, 300, 690,  {width:255, 'elementHandlers': specialElementHandlers});
 			}else if(c.form.material_being_requested_3 == 'Stained Slides'){
@@ -1218,7 +1218,7 @@
         <sys_created_on>2019-11-19 21:46:20</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3c707a5cdb9d881054d8ff621f961979</sys_id>
-        <sys_mod_count>1604</sys_mod_count>
+        <sys_mod_count>1627</sys_mod_count>
         <sys_name>Approve Tissue Request</sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -1226,7 +1226,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_3c707a5cdb9d881054d8ff621f961979</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-12-17 22:31:57</sys_updated_on>
+        <sys_updated_on>2019-12-18 20:12:20</sys_updated_on>
         <template><![CDATA[<div style="margin-bottom: 100px;" class="bg-white p-5">
   <h2>Tissue Resource Request</h2>  
   <hr>
@@ -1345,7 +1345,7 @@
         {{c.form.irb_protocol_number}}
       </div>      
       <div class="col-md-6" ng-show="!c.edit">
-        <label class="label-bold">Patient Name</label>
+        <label class="label-bold">Patient Name & Medical Record Number</label>
         {{c.form.patient_name}}
       </div>    
       <div class="col-md-6" ng-show="c.edit">
@@ -1432,19 +1432,19 @@
     </div>
     <div class="row" ng-show="c.form.material_being_requested == 'Unstained Slides'">
       <div class="col-md-6" ng-show="!c.edit">
-        <label class="label-bold">Number of recuts per slide</label>
+        <label class="label-bold">Number Slides per Block</label>
         {{c.form.number_of_recuts}}
       </div>
       <div class="col-md-6" ng-show="!c.edit">
-        <label class="label-bold">Requested thickness</label>
+        <label class="label-bold">Requested thickness in Micro</label>
         {{c.form.requested_thickness}}
       </div>
       <div class="col-md-6" ng-show="c.edit">
-        <label class="label-bold">Number of recuts per slide</label>
+        <label class="label-bold">Number of Slides per Block</label>
         <input class="form-control" ng-model="c.form.number_of_recuts"/>
       </div>
       <div class="col-md-6" ng-show="c.edit">
-        <label class="label-bold">Requested thickness</label>
+        <label class="label-bold">Requested thickness in Micro</label>
         <input class="form-control" ng-model="c.form.requested_thickness"/>
       </div>      
     </div>
@@ -1647,19 +1647,19 @@
     </div>
     <div class="row" ng-show="c.form.material_being_requested_2 == 'Unstained Slides'">
       <div class="col-md-6" ng-show="!c.edit">
-        <label class="label-bold">Number of recuts per slide</label>
+        <label class="label-bold">Number of Slides per Block</label>
         {{c.form.number_of_recuts2}}
       </div>
       <div class="col-md-6" ng-show="!c.edit">
-        <label class="label-bold">Requested thickness</label>
+        <label class="label-bold">Requested thickness in Micro</label>
         {{c.form.requested_thinkness2}}
       </div>
       <div class="col-md-6" ng-show="c.edit">
-        <label class="label-bold">Number of recuts per slide</label>
+        <label class="label-bold">Number of Slides per Block</label>
         <input class="form-control" ng-model="c.form.number_of_recuts2"/>
       </div>
       <div class="col-md-6" ng-show="c.edit">
-        <label class="label-bold">Requested thickness</label>
+        <label class="label-bold">Requested thickness in Micro</label>
         <input class="form-control" ng-model="c.form.requested_thinkness2"/>
       </div>        
     </div>
@@ -1787,19 +1787,19 @@
     </div>
     <div class="row" ng-show="c.form.material_being_requested_3 == 'Unstained Slides'">
       <div class="col-md-6"  ng-show="!c.edit">
-        <label class="label-bold">Number of recuts per slide</label>
+        <label class="label-bold">Number of Slides per Block</label>
         {{c.form.number_of_recuts_per_slide_3}}
       </div>
       <div class="col-md-6"  ng-show="!c.edit">
-        <label class="label-bold">Requested thickness</label>
+        <label class="label-bold">Requested thickness in Micro</label>
         {{c.form.requested_thickness_3}}
       </div>
       <div class="col-md-6"  ng-show="c.edit">
-        <label class="label-bold">Number of recuts per slide</label>
+        <label class="label-bold">Number of Slides per Block</label>
         <input class="form-control" ng-model="c.form.number_of_recuts_per_slide_3"/>
       </div>
       <div class="col-md-6"  ng-show="c.edit">
-        <label class="label-bold">Requested thickness</label>
+        <label class="label-bold">Requested thickness in Micro</label>
      		<input class="form-control" ng-model="c.form.requested_thickness_3"/>
       </div>      
     </div>

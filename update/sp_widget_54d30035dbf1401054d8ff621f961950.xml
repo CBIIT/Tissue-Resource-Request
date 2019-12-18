@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+	/* widget controller */
+	var c = this;
+	console.log('LOADED MACRO')
+	setTimeout(function() {
+		$('#help').hide();
+		$('[for="sp_formfield_patient_name"]').append(
+			$('<i class="glyphicon glyphicon-question-sign"></i>')
+			.css('margin-left', '5px')
+			.css('cursor', 'pointer')
+			.popover({
+				placement: 'top',
+				html: true,
+				trigger: 'hover',
+				content: '<div style="width: 400px">Explanation of this field</div>'
+			})
+		)	
+
+		$('[for="sp_formfield_patient_name_1"]').append(
+			$('<i class="glyphicon glyphicon-question-sign"></i>')
+			.css('margin-left', '5px')
+			.css('cursor', 'pointer')
+			.popover({
+				placement: 'top',
+				html: true,
+				trigger: 'hover',
+				content: '<div style="width: 400px">Explanation of this field 2</div>'
+			})
+		)	
+
+	
+	}, 10);
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>tissue_patient_name_help</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Tissue Patient Name Help</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2019-12-18 21:34:22</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>54d30035dbf1401054d8ff621f961950</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>Tissue Patient Name Help</sys_name>
+        <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
+        <sys_update_name>sp_widget_54d30035dbf1401054d8ff621f961950</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-12-18 21:47:19</sys_updated_on>
+        <template><![CDATA[<div><!-- your widget template --></div>]]></template>
+    </sp_widget>
+</record_update>

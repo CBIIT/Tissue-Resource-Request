@@ -140,7 +140,6 @@
 .bg-light-gray {
   background-color: #dadfe1;
 }
-
 </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -244,7 +243,7 @@
         <sys_created_on>2019-11-14 22:34:25</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>488b85badbc58010b86770c08c96198e</sys_id>
-        <sys_mod_count>231</sys_mod_count>
+        <sys_mod_count>245</sys_mod_count>
         <sys_name>Manager Tissue Resource Request </sys_name>
         <sys_package display_value="Tissue Resource Request" source="x_naci_tissue_requ">80f86cc4dbf08c1054d8ff621f96197d</sys_package>
         <sys_policy/>
@@ -252,7 +251,7 @@
         <sys_scope display_value="Tissue Resource Request">80f86cc4dbf08c1054d8ff621f96197d</sys_scope>
         <sys_update_name>sp_widget_488b85badbc58010b86770c08c96198e</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2019-11-26 20:19:18</sys_updated_on>
+        <sys_updated_on>2019-12-18 16:30:59</sys_updated_on>
         <template><![CDATA[<div>
   <div class="row">
     <div class="col-md-12">
@@ -290,7 +289,7 @@
           </tr>
         </thead>          
         <tbody>
-          <tr dir-paginate="record in c.data.needMore | filter:search5 | orderBy:sortKey5:!reverse5 | itemsPerPage:pageSize5">
+          <tr pagination-id="moreinfo-page" dir-paginate="record in c.data.needMore | filter:search5 | orderBy:sortKey5:!reverse5 | itemsPerPage:pageSize5">
             <td ng-repeat="col in c.data.table_label">
               {{ record[col.key] || 'N/A' }}  
             </td>
@@ -314,7 +313,7 @@
         </select>
       </div>
       <div style="margin-left: 1.25rem">
-        <dir-pagination-controls></dir-pagination-controls>
+        <dir-pagination-controls pagination-id="moreinfo-page"></dir-pagination-controls>
       </div>
     </div>        
   </div>
@@ -346,7 +345,7 @@
           </tr>
         </thead>          
         <tbody>
-          <tr dir-paginate="record in c.data.supervideApproval | filter:search | orderBy:sortKey:!reverse | itemsPerPage:pageSize">
+          <tr pagination-id="supervisor-page" dir-paginate="record in c.data.supervideApproval | filter:search | orderBy:sortKey:!reverse | itemsPerPage:pageSize">
             <td ng-repeat="col in c.data.table_label">
               {{ record[col.key] || 'N/A' }}  
             </td>
@@ -370,7 +369,7 @@
         </select>
       </div>
       <div style="margin-left: 1.25rem">
-        <dir-pagination-controls></dir-pagination-controls>
+        <dir-pagination-controls pagination-id="supervisor-page"></dir-pagination-controls>
       </div>
     </div>    
   </div>
@@ -402,7 +401,7 @@
           </tr>
         </thead>          
         <tbody>
-          <tr dir-paginate="record in c.data.committeeApproval | filter:search1 | orderBy:sortKey1:!reverse1 | itemsPerPage:pageSize1">
+          <tr pagination-id="committee-page" dir-paginate="record in c.data.committeeApproval | filter:search1 | orderBy:sortKey1:!reverse1 | itemsPerPage:pageSize1">
             <td ng-repeat="col in c.data.table_label">
               {{ record[col.key] || 'N/A' }}  
             </td>
@@ -426,7 +425,7 @@
         </select>
       </div>
       <div style="margin-left: 1.25rem">
-        <dir-pagination-controls></dir-pagination-controls>
+        <dir-pagination-controls pagination-id="committee-page"></dir-pagination-controls>
       </div>
     </div>   
   </div> 
@@ -458,7 +457,7 @@
           </tr>
         </thead>          
         <tbody>
-          <tr dir-paginate="record in c.data.localStaffApproval | filter:search2 | orderBy:sortKey2:!reverse2 | itemsPerPage:pageSize2">
+          <tr pagination-id="staff-page" dir-paginate="record in c.data.localStaffApproval | filter:search2 | orderBy:sortKey2:!reverse2 | itemsPerPage:pageSize2">
             <td ng-repeat="col in c.data.table_label">
               {{ record[col.key] || 'N/A' }}  
             </td>
@@ -482,7 +481,7 @@
         </select>
       </div>
       <div style="margin-left: 1.25rem">
-        <dir-pagination-controls></dir-pagination-controls>
+        <dir-pagination-controls pagination-id="staff-page"></dir-pagination-controls>
       </div>
     </div>
   </div>
@@ -514,7 +513,7 @@
           </tr>
         </thead>          
         <tbody>
-          <tr dir-paginate="record in c.data.completed | filter:search4 | orderBy:sortKey4:!reverse4 | itemsPerPage:pageSize4">
+          <tr pagination-id="completed-page" dir-paginate="record in c.data.completed | filter:search4 | orderBy:sortKey4:!reverse4 | itemsPerPage:pageSize4">
             <td ng-repeat="col in c.data.table_label">
               {{ record[col.key] || 'N/A' }}  
             </td>
@@ -538,7 +537,7 @@
         </select>
       </div>
       <div style="margin-left: 1.25rem">
-        <dir-pagination-controls></dir-pagination-controls>
+        <dir-pagination-controls pagination-id="completed-page"></dir-pagination-controls>
       </div>
     </div>
   </div>
@@ -570,7 +569,7 @@
           </tr>
         </thead>          
         <tbody>
-          <tr dir-paginate="record in c.data.completedForAdmin | filter:search3 | orderBy:sortKey3:!reverse3 | itemsPerPage:pageSize3">
+          <tr pagination-id="admincompleted-page" dir-paginate="record in c.data.completedForAdmin | filter:search3 | orderBy:sortKey3:!reverse3 | itemsPerPage:pageSize3">
             <td ng-repeat="col in c.data.table_label">
               {{ record[col.key] || 'N/A' }}  
             </td>
@@ -594,7 +593,7 @@
         </select>
       </div>
       <div style="margin-left: 1.25rem">
-        <dir-pagination-controls></dir-pagination-controls>
+        <dir-pagination-controls  pagination-id="admincompleted-page"></dir-pagination-controls>
       </div>
     </div>
   </div>
